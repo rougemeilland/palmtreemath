@@ -17,32 +17,32 @@ using Palmtree.Math.Round;
 namespace Palmtree.Math
 {
     /// <summary>
-    /// �����揜�ɂ�萸�x�����Ȃ��Ȃ����̃N���X�ł��B
+    /// 加減乗除により精度が損なわれない数のクラスです。
     /// </summary>
     [Serializable]
     public partial struct RationalNumber
         : ISerializable
     {
-        #region �p�u���b�N�t�B�[���h
+        #region パブリックフィールド
 
         /// <summary>
-        /// 0������C���X�^���X�ł��B
+        /// 0を示すインスタンスです。
         /// </summary>
         public static readonly RationalNumber Zero;
 
         /// <summary>
-        /// 1������C���X�^���X�ł��B
+        /// 1を示すインスタンスです。
         /// </summary>
         public static readonly RationalNumber One;
 
         /// <summary>
-        /// -1������C���X�^���X�ł��B
+        /// -1を示すインスタンスです。
         /// </summary>
         public static readonly RationalNumber MinusOne;
 
         #endregion
 
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private static string _member_name = "Value";
         private const ulong _nagated_long_min_value = 9223372036854775808UL;
@@ -54,7 +54,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �v���C�x�[�g�v���p�e�B
+        #region プライベートプロパティ
 
         private LongLongInteger _InternalNumerator
         {
@@ -88,7 +88,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         static RationalNumber()
         {
@@ -105,7 +105,7 @@ namespace Palmtree.Math
 
 #if false
         /// <summary>
-        /// �f�t�H���g�R���X�g���N�^�ł��B
+        /// デフォルトコンストラクタです。
         /// </summary>
         public RationalNumber()
             : this(LongLongInteger.Zero, UnsignedLongLongInteger.One)
@@ -114,11 +114,11 @@ namespace Palmtree.Math
 #endif
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
-        /// �w�肳�ꂽ�����̒l����C���X�^���X��쐬���܂��B
+        /// コンストラクタです。
+        /// 指定された整数の値を持つインスタンスを作成します。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���l�ł��B
+        /// 初期値となる整数値です。
         /// </param>
         public RationalNumber(int value)
             : this((long)value)
@@ -126,11 +126,11 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
-        /// �w�肳�ꂽ�����̒l����C���X�^���X��쐬���܂��B
+        /// コンストラクタです。
+        /// 指定された整数の値を持つインスタンスを作成します。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���l�ł��B
+        /// 初期値となる整数値です。
         /// </param>
         public RationalNumber(long value)
         {
@@ -139,11 +139,11 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
-        /// �w�肳�ꂽ�����̒l����C���X�^���X��쐬���܂��B
+        /// コンストラクタです。
+        /// 指定された整数の値を持つインスタンスを作成します。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���l�ł��B
+        /// 初期値となる整数値です。
         /// </param>
         [CLSCompliant(false)]
         public RationalNumber(uint value)
@@ -152,11 +152,11 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
-        /// �w�肳�ꂽ�����̒l����C���X�^���X��쐬���܂��B
+        /// コンストラクタです。
+        /// 指定された整数の値を持つインスタンスを作成します。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���l�ł��B
+        /// 初期値となる整数値です。
         /// </param>
         [CLSCompliant(false)]
         public RationalNumber(ulong value)
@@ -166,11 +166,11 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
-        /// �w�肳�ꂽ�����̒l����C���X�^���X��쐬���܂��B
+        /// コンストラクタです。
+        /// 指定された整数の値を持つインスタンスを作成します。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ镪���l�ł��B
+        /// 初期値となる分数値です。
         /// </param>
         public RationalNumber(UnsignedLongLongInteger value)
         {
@@ -179,11 +179,11 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
-        /// �w�肳�ꂽ�����̒l����C���X�^���X��쐬���܂��B
+        /// コンストラクタです。
+        /// 指定された整数の値を持つインスタンスを作成します。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ镪���l�ł��B
+        /// 初期値となる分数値です。
         /// </param>
         public RationalNumber(LongLongInteger value)
         {
@@ -192,11 +192,11 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
-        /// �w�肳�ꂽ�����̒l����C���X�^���X��쐬���܂��B
+        /// コンストラクタです。
+        /// 指定された整数の値を持つインスタンスを作成します。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ镪���l�ł��B
+        /// 初期値となる分数値です。
         /// </param>
         public RationalNumber(float value)
             : this((double)value)
@@ -204,16 +204,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
-        /// �w�肳�ꂽ�����̒l����C���X�^���X��쐬���܂��B
+        /// コンストラクタです。
+        /// 指定された整数の値を持つインスタンスを作成します。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ镪���l�ł��B
+        /// 初期値となる分数値です。
         /// </param>
         public RationalNumber(double value)
         {
             if (double.IsInfinity(value) || double.IsNaN(value))
-                throw (new ArgumentException(@"LongLongInteger�ŕ\���ł��Ȃ��l���w�肳��܂����B", "value"));
+                throw (new ArgumentException(@"LongLongIntegerで表現できない値が指定されました。", "value"));
             bool negative = false;
             if (value < 0)
             {
@@ -269,11 +269,11 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
-        /// �w�肳�ꂽ�����̒l����C���X�^���X��쐬���܂��B
+        /// コンストラクタです。
+        /// 指定された整数の値を持つインスタンスを作成します。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ镪���l�ł��B
+        /// 初期値となる分数値です。
         /// </param>
         public RationalNumber(decimal value)
         {
@@ -330,7 +330,7 @@ namespace Palmtree.Math
             LongLongInteger result_numerator;
             UnsignedLongLongInteger result_denominator;
             if (!TryParseImp(s, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out result_numerator, out result_denominator))
-                throw (new FormatException(string.Format("������'{0}'��RationalNumber�̌`���ł͂���܂���B", s)));
+                throw (new FormatException(string.Format("文字列'{0}'はRationalNumberの形式ではありません。", s)));
             __InternalNumerator = result_numerator;
             __InternalDenominator = result_denominator;
             Reduce();
@@ -339,7 +339,7 @@ namespace Palmtree.Math
         private RationalNumber(LongLongInteger numerator, UnsignedLongLongInteger denominator)
         {
             if (denominator.IsZero)
-                throw (new ArgumentException("����Ƃ���0���^�����܂����B", "denominator"));
+                throw (new ArgumentException("分母として0が与えられました。", "denominator"));
             __InternalNumerator = numerator;
             __InternalDenominator = denominator;
             Reduce();
@@ -347,17 +347,17 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
         /// <summary>
-        /// �I�u�W�F�N�g�𕪐��ŕ\�������ꍇ�̕��q�ƕ����擾���܂��B
-        /// �擾����镪�q�ƕ���͊���ł��B
+        /// オブジェクトを分数で表現した場合の分子と分母を取得します。
+        /// 取得される分子と分母は既約です。
         /// </summary>
         /// <param name="denominator">
-        /// �I�u�W�F�N�g�𕪐��ŕ\�������ꍇ�̕���v�f�̒l�ł��B
+        /// オブジェクトを分数で表現した場合の分母要素の値です。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g�𕪐��ŕ\�������ꍇ�̕��q�v�f�̒l�ł��B
+        /// オブジェクトを分数で表現した場合の分子要素の値です。
         /// </returns>
         public LongLongInteger ToFraction(out UnsignedLongLongInteger denominator)
         {
@@ -368,13 +368,13 @@ namespace Palmtree.Math
 #if DEBUG
 
         /// <summary>
-        /// �e�X�g�f�[�^����<see cref="RationalNumber"/>�I�u�W�F�N�g�𐶐����܂��B
+        /// テストデータから<see cref="RationalNumber"/>オブジェクトを生成します。
         /// </summary>
         /// <param name="data">
-        /// �e�X�g�f�[�^�ł��B
+        /// テストデータです。
         /// </param>
         /// <returns>
-        /// �������ꂽ<see cref="RationalNumber"/>�I�u�W�F�N�g�ł��B
+        /// 生成された<see cref="RationalNumber"/>オブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber FromTestData(ushort[] data)
@@ -387,7 +387,7 @@ namespace Palmtree.Math
             else if (header == 4)
                 data_sign = SignType.Negative;
             else
-                throw (new ArgumentException("�e�X�g�f�[�^�̌`���Ɍ�肪����܂��B", "data"));
+                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
             ArraySegment<ushort> data_numerator = reader.GetSegment();
             ArraySegment<ushort> data_denominator = reader.GetSegment();
             reader.AssertEndOfData();
@@ -398,13 +398,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�̓�e��������܂��B
+        /// オブジェクトの内容を検査します。
         /// </summary>
         /// <param name="data">
-        /// �I�u�W�F�N�g�̓�e��������邽�߂̔�r�f�[�^�ł��B
+        /// オブジェクトの内容を検査するための比較データです。
         /// </param>
         /// <returns>
-        /// �����ɐ��������true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 検査に成功すればtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public bool EqualsInternally(ushort[] data)
@@ -417,7 +417,7 @@ namespace Palmtree.Math
             else if (header == 4)
                 data_sign = SignType.Negative;
             else
-                throw (new ArgumentException("�e�X�g�f�[�^�̌`���Ɍ�肪����܂��B", "data"));
+                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
             ArraySegment<ushort> data_numerator = reader.GetSegment();
             ArraySegment<ushort> data_denominator = reader.GetSegment();
             reader.AssertEndOfData();
@@ -430,10 +430,10 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N�v���p�e�B
+        #region パブリックプロパティ
 
         /// <summary>
-        /// �l�����Ȃ琳�̐����A�l��0�Ȃ��0�A�l�����Ȃ�Ε��̐����ł��B
+        /// 値が正なら正の整数、値が0ならば0、値が負ならば負の整数です。
         /// </summary>
         public int Sign
         {
@@ -444,7 +444,7 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �l��0�Ȃ�true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 値が0ならtrue、そうではないのならfalseです。
         /// </summary>
         public bool IsZero
         {
@@ -455,7 +455,7 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �l��1�Ȃ�true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 値が1ならtrue、そうではないのならfalseです。
         /// </summary>
         public bool IsOne
         {
@@ -466,7 +466,7 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �l��-1�Ȃ�true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 値が-1ならtrue、そうではないのならfalseです。
         /// </summary>
         public bool IsMinusOne
         {
@@ -478,7 +478,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �v���C�x�[�g���\�b�h
+        #region プライベートメソッド
 
         private void Reduce()
         {
@@ -492,16 +492,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region object ����p�����ꂽ�����o
+        #region object から継承されたメンバ
 
         /// <summary>
-        /// �I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// オブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="o">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// オブジェクトが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public override bool Equals(object o)
         {
@@ -522,10 +522,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�̃n�b�V���R�[�h��v�Z���܂��B
+        /// オブジェクトのハッシュコードを計算します。
         /// </summary>
         /// <returns>
-        /// �v�Z���ʂ̃n�b�V���R�[�h�ł��B
+        /// 計算結果のハッシュコードです。
         /// </returns>
         public override int GetHashCode()
         {
@@ -533,10 +533,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g��\�����镶�����쐬���܂��B
+        /// オブジェクトを表現する文字列を作成します。
         /// </summary>
         /// <returns>
-        /// �I�u�W�F�N�g��\�����镶����ł��B
+        /// オブジェクトを表現する文字列です。
         /// </returns>
         public override string ToString()
         {
@@ -545,7 +545,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region ISerializable �����o
+        #region ISerializable メンバ
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {

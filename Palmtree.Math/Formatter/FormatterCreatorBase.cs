@@ -1,4 +1,4 @@
-/*
+﻿/*
   FormatterCreatorBase.cs
 
   Copyright (c) 2017 Palmtree Software
@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math.Formatter
 {
@@ -89,6 +90,7 @@ namespace Palmtree.Math.Formatter
         {
             #region プライベートフィールド
 
+            private static ImplementOfUnsignedLongLongInteger _imp;
             private IBaseNumberInfo _base_number_info;
             private byte[] _digits;
             private byte _most_significant_padding_digit;
@@ -96,6 +98,11 @@ namespace Palmtree.Math.Formatter
             #endregion
 
             #region コンストラクタ
+
+            static ParserOfHexaDecimalInteger()
+            {
+                _imp = new ImplementOfUnsignedLongLongInteger();
+            }
 
             public ParserOfHexaDecimalInteger(IBaseNumberInfo base_number_info, bool negative, ushort[] value)
             {
@@ -205,6 +212,7 @@ namespace Palmtree.Math.Formatter
         {
             #region プライベートフィールド
 
+            private static ImplementOfUnsignedLongLongInteger _imp;
             private IBaseNumberInfo _base_number_info;
             private byte[] _integer_part_digits;
             private ushort[] _fraction_part_numerator;
@@ -213,6 +221,11 @@ namespace Palmtree.Math.Formatter
             #endregion
 
             #region コンストラクタ
+
+            static ParserOfRationalNumber()
+            {
+                _imp = new ImplementOfUnsignedLongLongInteger();
+            }
 
             public ParserOfRationalNumber(IBaseNumberInfo base_number_info, ushort[] value_numerator, ushort[] value_denominator)
             {
@@ -410,6 +423,7 @@ namespace Palmtree.Math.Formatter
 
         #region プライベートフィールド
 
+        private static ImplementOfUnsignedLongLongInteger _imp;
         private IFormattingTypeInfo _formatting_type_info;
         private IBaseNumberInfo _decimal_base_number_info;
         private IBaseNumberInfo _upper_case_hexadecimal_base_number_info;
@@ -419,6 +433,11 @@ namespace Palmtree.Math.Formatter
         #endregion
 
         #region コンストラクタ
+
+        static FormatterCreatorBase()
+        {
+            _imp = new ImplementOfUnsignedLongLongInteger();
+        }
 
         public FormatterCreatorBase()
         {
@@ -474,15 +493,15 @@ namespace Palmtree.Math.Formatter
             return (result);
         }
 
-        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out bool negative, out NativeUnsignedInteger numerator, out NativeUnsignedInteger denominator)
+        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out bool negative, out ushort[] numerator, out ushort[] denominator)
         {
             negative = false;
             NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
             IParserOfNumber parser = StringParser.CreateInstance(s, style, provider, out negative);
             if (parser == null)
             {
-                numerator = NativeUnsignedInteger.Zero;
-                denominator = NativeUnsignedInteger.One;
+                numerator = new ushort[0];
+                denominator = new ushort[] { 1 };
                 return (false);
             }
             INumberSequence sequence = parser.NumberSequence;
@@ -491,14 +510,14 @@ namespace Palmtree.Math.Formatter
             {
                 if (negative)
                 {
-                    numerator = NativeUnsignedInteger.Zero;
-                    denominator = NativeUnsignedInteger.One;
+                    numerator = new ushort[0];
+                    denominator = new ushort[] { 1 };
                     return (false);
                 }
                 bool msb;
                 int digits;
                 TryParseImp(base_number_info, sequence, parser.Offset, out numerator, out denominator, out msb, out digits);
-                if (msb && !numerator.IsZero)
+                if (msb && numerator.Length > 0)
                 {
                     negative = true;
                     numerator = _imp.Negate(numerator, digits * 4);
@@ -715,10 +734,10 @@ namespace Palmtree.Math.Formatter
             throw (new ArgumentException(string.Format("未知の書式指定文字列\"{0}\"が与えられました。", format), "format"));
         }
 
-        private static void TryParseImp(IBaseNumberInfo base_number_info, INumberSequence sequence, int exp, out NativeUnsignedInteger numerator, out NativeUnsignedInteger denominator, out bool msb, out int digits)
+        private static void TryParseImp(IBaseNumberInfo base_number_info, INumberSequence sequence, int exp, out ushort[] numerator, out ushort[] denominator, out bool msb, out int digits)
         {
-            numerator = NativeUnsignedInteger.Zero;
-            denominator = NativeUnsignedInteger.One;
+            numerator = new ushort[0];
+            denominator = new ushort[] { 1 };
             msb = false;
             digits = 0;/*numeratorに返される数値の桁数*/
             int least_ZEROs = 0;

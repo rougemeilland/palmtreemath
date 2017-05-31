@@ -16,7 +16,7 @@ namespace Palmtree.Math.Formatter
     internal class StringParser
         : IParserOfNumber
     {
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private class NumberSequence
             : INumberSequence
@@ -27,7 +27,7 @@ namespace Palmtree.Math.Formatter
 
             #endregion
 
-            #region �v���C�x�[�g�t�B�[���h
+            #region プライベートフィールド
 
             private byte[] _integer_part;
             private byte[] _fraction_part;
@@ -36,7 +36,7 @@ namespace Palmtree.Math.Formatter
 
             #endregion
 
-            #region �R���X�g���N�^
+            #region コンストラクタ
 
             public NumberSequence(byte[] integer_part, byte[] fraction_part)
             {
@@ -48,7 +48,7 @@ namespace Palmtree.Math.Formatter
 
             #endregion
 
-            #region INumberSequence �����o
+            #region INumberSequence メンバ
 
             bool INumberSequence.IsZero
             {
@@ -87,7 +87,7 @@ namespace Palmtree.Math.Formatter
                         }
                         //break;
                     default:
-                        throw (new ApplicationException("�T�|�[�g����Ă��Ȃ�SequenceType���w�肳��܂����B"));
+                        throw (new ApplicationException("サポートされていないSequenceTypeが指定されました。"));
                 }
             }
 
@@ -96,7 +96,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private static IBaseNumberInfo _decimal_base_number_info;
         private static IBaseNumberInfo _hexadecimal_base_number_info;
@@ -107,7 +107,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         static StringParser()
         {
@@ -125,7 +125,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
         public static IParserOfNumber CreateInstance(string s, NumberStyles style, IFormatProvider provider, out bool negative)
         {
@@ -137,7 +137,7 @@ namespace Palmtree.Math.Formatter
                 flag = (flag & ~NumberStyles.AllowLeadingWhite);
                 flag = (flag & ~NumberStyles.AllowTrailingWhite);
                 if (flag != NumberStyles.None)
-                    throw (new ArgumentException("�g�ݍ��킹���ł��Ȃ��t���O���w�肳��܂����B", "style"));
+                    throw (new ArgumentException("組み合わせができないフラグが指定されました。", "style"));
             }
             NumberFormatInfo number_format_info = NumberFormatInfo.GetInstance(provider);
             CultureInfo culture = provider as CultureInfo;
@@ -161,7 +161,7 @@ namespace Palmtree.Math.Formatter
             bool found_leading_bracket = false;
             bool found_trailing_bracket = false;
             int index = 0;
-            // ��s����󔒂̉��
+            // 先行する空白の解析
             if (index < s.Length && DefinedStyle(style, NumberStyles.AllowLeadingWhite))
             {
                 for (; index < s.Length; ++index)
@@ -170,14 +170,14 @@ namespace Palmtree.Math.Formatter
                         break;
                 }
             }
-            // ��s����J�����ʂ̉��
+            // 先行する開き括弧の解析
             if (index < s.Length && DefinedStyle(style, NumberStyles.AllowParentheses) && IsMatch(s, index, leading_bracket_s))
             {
                 found_leading_bracket = true;
                 negative = true;
                 index += leading_bracket_s.Length;
             }
-            // �ʉ݋L���ƕ����̉��
+            // 通貨記号と符号の解析
             while (index < s.Length && (IsMatch(s, index, plus_s) || IsMatch(s, index, minus_s) || IsMatch(s, index, currency_s)))
             {
                 if (DefinedStyle(style, NumberStyles.AllowLeadingSign) && IsMatch(s, index, plus_s))
@@ -215,10 +215,10 @@ namespace Palmtree.Math.Formatter
             }
             if (index < s.Length && base_number_info.IsValidChar(s[index]))
             {
-                // �������̍ŏ��̐����̉��
+                // 整数部の最初の数字の解析
                 integer_part.Add(base_number_info.ParseChar(s[index]));
                 ++index;
-                // �������̌㑱�̐�����̉��
+                // 整数部の後続の数字列の解析
                 while (index < s.Length)
                 {
                     if (base_number_info.IsValidChar(s[index]))
@@ -232,7 +232,7 @@ namespace Palmtree.Math.Formatter
                         break;
                 }
             }
-            // �������̉��
+            // 小数部の解析
             if (index < s.Length && DefinedStyle(style, NumberStyles.AllowDecimalPoint) && IsMatch(s, index, period_s))
             {
                 index += period_s.Length;
@@ -247,7 +247,7 @@ namespace Palmtree.Math.Formatter
                         break;
                 }
             }
-            // �w�����̉��
+            // 指数部の解析
             if (index < s.Length && DefinedStyle(style, NumberStyles.AllowExponent) && (s[index] == 'E' || s[index] == 'e'))
             {
                 ++index;
@@ -282,7 +282,7 @@ namespace Palmtree.Math.Formatter
                 if (exp_digits == 0)
                     return (null);
             }
-            // �ʉ݋L���ƕ����̉��
+            // 通貨記号と符号の解析
             while (index < s.Length)
             {
                 int index2 = index;
@@ -319,13 +319,13 @@ namespace Palmtree.Math.Formatter
                 else
                     break;
             }
-            // �㑱�̕����ʂ̉��
+            // 後続の閉じ括弧の解析
             if (index < s.Length && DefinedStyle(style, NumberStyles.AllowParentheses) && IsMatch(s, index, traling_bracket_s))
             {
                 found_trailing_bracket = true;
                 index += traling_bracket_s.Length;
             }
-            // �㑱�̋󔒂̉��
+            // 後続の空白の解析
             if (index < s.Length && DefinedStyle(style, NumberStyles.AllowTrailingWhite))
             {
                 for (; index < s.Length; ++index)
@@ -375,7 +375,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region IParserOfNumber �����o
+        #region IParserOfNumber メンバ
 
         int IParserOfNumber.Offset
         {

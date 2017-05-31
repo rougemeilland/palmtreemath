@@ -9,7 +9,7 @@
 
 using System;
 
-// ���Z�q�̃I�[�o�[���[�h�Ɋւ���K�C�h���C��:
+// 演算子のオーバーロードに関するガイドライン:
 //   http://msdn.microsoft.com/ja-jp/library/ms229032.aspx
 
 namespace Palmtree.Math
@@ -17,23 +17,23 @@ namespace Palmtree.Math
     partial struct UnsignedLongLongInteger
         : IComparable, IComparable<UnsignedLongLongInteger>
     {
-        #region ���Z�q
+        #region 演算子
 
 #if !CONCEAL_OPERATORS
 
-        #region < �̃I�[�o�[���[�h
+        #region < のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y��菬�����Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより小さいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator <(ulong x, UnsignedLongLongInteger y)
@@ -42,16 +42,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y��菬�����Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより小さいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator <(UnsignedLongLongInteger x, ulong y)
@@ -60,16 +60,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y��菬�����Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより小さいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator <(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -78,19 +78,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region <= �̃I�[�o�[���[�h
+        #region <= のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y��菬�����܂��͓������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより小さいまたは等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator <=(ulong x, UnsignedLongLongInteger y)
@@ -99,16 +99,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y��菬�����܂��͓������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより小さいまたは等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator <=(UnsignedLongLongInteger x, ulong y)
@@ -117,16 +117,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y��菬�����܂��͓������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより小さいまたは等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator <=(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -135,19 +135,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region > �̃I�[�o�[���[�h
+        #region > のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���傫���Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより大きいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator >(ulong x, UnsignedLongLongInteger y)
@@ -156,16 +156,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���傫���Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより大きいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator >(UnsignedLongLongInteger x, ulong y)
@@ -174,16 +174,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���傫���Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより大きいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator >(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -192,19 +192,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region >= �̃I�[�o�[���[�h
+        #region >= のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���傫���܂��͓������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより大きいまたは等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator >=(ulong x, UnsignedLongLongInteger y)
@@ -213,16 +213,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���傫���܂��͓������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより大きいまたは等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator >=(UnsignedLongLongInteger x, ulong y)
@@ -231,16 +231,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̑召�֌W�𒲂ׂ܂��B
+        /// 二つのオブジェクトの大小関係を調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���傫���܂��͓������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xがyより大きいまたは等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator >=(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -253,18 +253,18 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
-        #region CompareTo �̃I�[�o�[���[�h
+        #region CompareTo のオーバーロード
 
         /// <summary>
-        /// �I�u�W�F�N�g�̘_���I�ȑ召�֌W����߂܂��B
+        /// オブジェクトの論理的な大小関係を求めます。
         /// </summary>
         /// <param name="o">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g��o��菬�����Ȃ�Ε��̐��A�I�u�W�F�N�g��o�Ɠ������Ȃ��0�A�I�u�W�F�N�g��o���傫���Ȃ�ΐ��̐��ł��B
+        /// オブジェクトがoより小さいならば負の数、オブジェクトがoと等しいならば0、オブジェクトがoより大きいならば正の数です。
         /// </returns>
         [CLSCompliant(false)]
         public int CompareTo(ulong o)
@@ -274,19 +274,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Compare �̃I�[�o�[���[�h
+        #region Compare のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̘_���I�ȑ召�֌W����߂܂��B
+        /// 二つのオブジェクトの論理的な大小関係を求めます。
         /// </summary>
         /// <param name="x">
-        /// ��r����I�u�W�F�N�g�ł��B
+        /// 比較するオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r����I�u�W�F�N�g�ł��B
+        /// 比較するオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y��菬�����Ȃ�Ε��̐��Ax��y�Ɠ������Ȃ��0�Ax��y���傫���Ȃ�ΐ��̐��ł��B
+        /// xがyより小さいならば負の数、xがyと等しいならば0、xがyより大きいならば正の数です。
         /// </returns>
         [CLSCompliant(false)]
         public static int Compare(UnsignedLongLongInteger x, ulong y)
@@ -302,16 +302,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̘_���I�ȑ召�֌W����߂܂��B
+        /// 二つのオブジェクトの論理的な大小関係を求めます。
         /// </summary>
         /// <param name="x">
-        /// ��r����I�u�W�F�N�g�ł��B
+        /// 比較するオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r����I�u�W�F�N�g�ł��B
+        /// 比較するオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y��菬�����Ȃ�Ε��̐��Ax��y�Ɠ������Ȃ��0�Ax��y���傫���Ȃ�ΐ��̐��ł��B
+        /// xがyより小さいならば負の数、xがyと等しいならば0、xがyより大きいならば正の数です。
         /// </returns>
         [CLSCompliant(false)]
         public static int Compare(ulong x, UnsignedLongLongInteger y)
@@ -320,16 +320,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̘_���I�ȑ召�֌W����߂܂��B
+        /// 二つのオブジェクトの論理的な大小関係を求めます。
         /// </summary>
         /// <param name="x">
-        /// ��r����I�u�W�F�N�g�ł��B
+        /// 比較するオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r����I�u�W�F�N�g�ł��B
+        /// 比較するオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y��菬�����Ȃ�Ε��̐��Ax��y�Ɠ������Ȃ��0�Ax��y���傫���Ȃ�ΐ��̐��ł��B
+        /// xがyより小さいならば負の数、xがyと等しいならば0、xがyより大きいならば正の数です。
         /// </returns>
         public static int Compare(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -345,16 +345,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region IComparable �����o
+        #region IComparable メンバ
 
         /// <summary>
-        /// �I�u�W�F�N�g�̘_���I�ȑ召�֌W����߂܂��B
+        /// オブジェクトの論理的な大小関係を求めます。
         /// </summary>
         /// <param name="o">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g��o��菬�����Ȃ�Ε��̐��A�I�u�W�F�N�g��o�Ɠ������Ȃ��0�A�I�u�W�F�N�g��o���傫���Ȃ�ΐ��̐��ł��B
+        /// オブジェクトがoより小さいならば負の数、オブジェクトがoと等しいならば0、オブジェクトがoより大きいならば正の数です。
         /// </returns>
         public int CompareTo(object o)
         {
@@ -365,21 +365,21 @@ namespace Palmtree.Math
             else if (o is UnsignedLongLongInteger)
                 return (Compare(this, (UnsignedLongLongInteger)o));
             else
-                throw (new ArgumentException("UnsignedLongLongInteger�I�u�W�F�N�g�Ɣ�r�ł��Ȃ��I�u�W�F�N�g���^�����܂����B", "o"));
+                throw (new ArgumentException("UnsignedLongLongIntegerオブジェクトと比較できないオブジェクトが与えられました。", "o"));
         }
 
         #endregion
 
-        #region IComparable<UnsignedLongLongInteger> �����o
+        #region IComparable<UnsignedLongLongInteger> メンバ
 
         /// <summary>
-        /// �I�u�W�F�N�g�̘_���I�ȑ召�֌W����߂܂��B
+        /// オブジェクトの論理的な大小関係を求めます。
         /// </summary>
         /// <param name="o">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g��o��菬�����Ȃ�Ε��̐��A�I�u�W�F�N�g��o�Ɠ������Ȃ��0�A�I�u�W�F�N�g��o���傫���Ȃ�ΐ��̐��ł��B
+        /// オブジェクトがoより小さいならば負の数、オブジェクトがoと等しいならば0、オブジェクトがoより大きいならば正の数です。
         /// </returns>
         public int CompareTo(UnsignedLongLongInteger o)
         {

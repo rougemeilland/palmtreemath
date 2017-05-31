@@ -15,32 +15,32 @@ using System.Runtime.Serialization;
 namespace Palmtree.Math
 {
     /// <summary>
-    /// ���{�������̃N���X�ł��B
+    /// 多倍長整数のクラスです。
     /// </summary>
     [Serializable]
     public partial struct LongLongInteger
         : ISerializable
     {
-        #region �p�u���b�N�t�B�[���h
+        #region パブリックフィールド
 
         /// <summary>
-        /// ����0������C���X�^���X�ł��B
+        /// 整数0を示すインスタンスです。
         /// </summary>
         public static readonly LongLongInteger Zero;
 
         /// <summary>
-        /// ����1������C���X�^���X�ł��B
+        /// 整数1を示すインスタンスです。
         /// </summary>
         public static readonly LongLongInteger One;
 
         /// <summary>
-        /// ����-1������C���X�^���X�ł��B
+        /// 整数-1を示すインスタンスです。
         /// </summary>
         public static readonly LongLongInteger MinusOne;
 
         #endregion
 
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private static string _member_name = "Value";
         private const ulong _nagated_long_min_value = 9223372036854775808UL;
@@ -52,7 +52,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         static LongLongInteger()
         {
@@ -67,7 +67,7 @@ namespace Palmtree.Math
 
 #if false
         /// <summary>
-        /// �R���X�g���N�^�ł��B
+        /// コンストラクタです。
         /// </summary>
         public LongLongInteger()
         {
@@ -78,10 +78,10 @@ namespace Palmtree.Math
 #endif
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
+        /// コンストラクタです。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���ł��B
+        /// 初期値となる整数です。
         /// </param>
         public LongLongInteger(int value)
             : this((long)value)
@@ -89,10 +89,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
+        /// コンストラクタです。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���ł��B
+        /// 初期値となる整数です。
         /// </param>
         public LongLongInteger(long value)
         {
@@ -122,10 +122,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
+        /// コンストラクタです。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���ł��B
+        /// 初期値となる整数です。
         /// </param>
         [CLSCompliant(false)]
         public LongLongInteger(uint value)
@@ -134,10 +134,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
+        /// コンストラクタです。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���ł��B
+        /// 初期値となる整数です。
         /// </param>
         [CLSCompliant(false)]
         public LongLongInteger(ulong value)
@@ -158,10 +158,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
+        /// コンストラクタです。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���ł��B
+        /// 初期値となる整数です。
         /// </param>
         public LongLongInteger(UnsignedLongLongInteger value)
         {
@@ -181,10 +181,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
+        /// コンストラクタです。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���ł��B
+        /// 初期値となる整数です。
         /// </param>
         public LongLongInteger(float value)
             : this((double)value)
@@ -192,15 +192,15 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
+        /// コンストラクタです。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���ł��B
+        /// 初期値となる整数です。
         /// </param>
         public LongLongInteger(double value)
         {
             if (double.IsInfinity(value) || double.IsNaN(value))
-                throw (new ArgumentException(@"LongLongInteger�ŕ\���ł��Ȃ��l���w�肳��܂����B", "value"));
+                throw (new ArgumentException(@"LongLongIntegerで表現できない値が指定されました。", "value"));
             if (value >= 0)
             {
                 _sign = SignType.Positive;
@@ -219,10 +219,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �R���X�g���N�^�ł��B
+        /// コンストラクタです。
         /// </summary>
         /// <param name="value">
-        /// �����l�ƂȂ鐮���ł��B
+        /// 初期値となる整数です。
         /// </param>
         public LongLongInteger(decimal value)
         {
@@ -247,7 +247,7 @@ namespace Palmtree.Math
         {
             string s = info.GetString(_member_name);
             if (!TryParseImp(s, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out _sign, out _abs))
-                throw (new FormatException(string.Format("������'{0}'��LongLongInteger�̌`���ł͂���܂���B", s)));
+                throw (new FormatException(string.Format("文字列'{0}'はLongLongIntegerの形式ではありません。", s)));
             _bit_length_cache = null;
             _is_power_of_two_cache = null;
             Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
@@ -264,18 +264,18 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
 #if DEBUG
 
         /// <summary>
-        /// �e�X�g�f�[�^����<see cref="LongLongInteger"/>�I�u�W�F�N�g�𐶐����܂��B
+        /// テストデータから<see cref="LongLongInteger"/>オブジェクトを生成します。
         /// </summary>
         /// <param name="data">
-        /// �e�X�g�f�[�^�ł��B
+        /// テストデータです。
         /// </param>
         /// <returns>
-        /// �������ꂽ<see cref="LongLongInteger"/>�I�u�W�F�N�g�ł��B
+        /// 生成された<see cref="LongLongInteger"/>オブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger FromTestData(ushort[] data)
@@ -288,7 +288,7 @@ namespace Palmtree.Math
             else if (header == 2)
                 sign = SignType.Negative;
             else
-                throw (new ArgumentException("�e�X�g�f�[�^�̌`���Ɍ�肪����܂��B", "data"));
+                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
             ArraySegment<ushort> p = reader.GetSegment();
             reader.AssertEndOfData();
             if (p.Count == 0)
@@ -298,13 +298,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�̓�e��������܂��B
+        /// オブジェクトの内容を検査します。
         /// </summary>
         /// <param name="data">
-        /// �I�u�W�F�N�g�̓�e��������邽�߂̔�r�f�[�^�ł��B
+        /// オブジェクトの内容を検査するための比較データです。
         /// </param>
         /// <returns>
-        /// �����ɐ��������true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 検査に成功すればtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public bool EqualsInternally(ushort[] data)
@@ -317,7 +317,7 @@ namespace Palmtree.Math
             else if (header == 2)
                 data_sign = SignType.Negative;
             else
-                throw (new ArgumentException("�e�X�g�f�[�^�̌`���Ɍ�肪����܂��B", "data"));
+                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
             ArraySegment<ushort> data_abs = reader.GetSegment();
             reader.AssertEndOfData();
             if (data_abs.Count == 0)
@@ -329,10 +329,10 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N�v���p�e�B
+        #region パブリックプロパティ
 
         /// <summary>
-        /// �l�����Ȃ琳�̐����A�l��0�Ȃ��0�A�l�����Ȃ�Ε��̐����ł��B
+        /// 値が正なら正の整数、値が0ならば0、値が負ならば負の整数です。
         /// </summary>
         public int Sign
         {
@@ -343,7 +343,7 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �l��0�Ȃ�true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 値が0ならtrue、そうではないのならfalseです。
         /// </summary>
         public bool IsZero
         {
@@ -354,7 +354,7 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �l��1�Ȃ�true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 値が1ならtrue、そうではないのならfalseです。
         /// </summary>
         public bool IsOne
         {
@@ -365,7 +365,7 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �l��-1�Ȃ�true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 値が-1ならtrue、そうではないのならfalseです。
         /// </summary>
         public bool IsMinusOne
         {
@@ -376,7 +376,7 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �l������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 値が偶数ならばtrue、そうではないのならfalseです。
         /// </summary>
         public bool IsEven
         {
@@ -388,7 +388,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �C���^�[�i�����\�b�h
+        #region インターナルメソッド
 
         internal bool EqualsInternally(SignType data_sign, ArraySegment<ushort> data_abs)
         {
@@ -425,16 +425,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region object ����p�����ꂽ�����o
+        #region object から継承されたメンバ
 
         /// <summary>
-        /// �I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// オブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="o">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// オブジェクトが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public override bool Equals(object o)
         {
@@ -453,10 +453,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�̃n�b�V���R�[�h��v�Z���܂��B
+        /// オブジェクトのハッシュコードを計算します。
         /// </summary>
         /// <returns>
-        /// �v�Z���ʂ̃n�b�V���R�[�h�ł��B
+        /// 計算結果のハッシュコードです。
         /// </returns>
         public override int GetHashCode()
         {
@@ -464,10 +464,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g��\�����镶�����쐬���܂��B
+        /// オブジェクトを表現する文字列を作成します。
         /// </summary>
         /// <returns>
-        /// �I�u�W�F�N�g��\�����镶����ł��B
+        /// オブジェクトを表現する文字列です。
         /// </returns>
         public override string ToString()
         {
@@ -476,7 +476,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region ISerializable �����o
+        #region ISerializable メンバ
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {

@@ -16,12 +16,12 @@ namespace Palmtree.Math
     partial struct RationalNumber
         : IFormattable
     {
-        #region FormatterCreator �̒�`
+        #region FormatterCreator の定義
 
         private class FormatterCreator
             : FormatterCreatorBase
         {
-            #region �R���X�g���N�^
+            #region コンストラクタ
 
             public FormatterCreator()
             {
@@ -29,7 +29,7 @@ namespace Palmtree.Math
 
             #endregion
 
-            #region FormattingTypeInfoBase ����p�����ꂽ�����o
+            #region FormattingTypeInfoBase から継承されたメンバ
 
             protected override string ValidFormatTypes
             {
@@ -57,16 +57,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
         /// <summary>
-        /// <see cref="LongLongInteger"/>�I�u�W�F�N�g�𕶎���`���ɕϊ����܂��B
+        /// <see cref="LongLongInteger"/>オブジェクトを文字列形式に変換します。
         /// </summary>
         /// <param name="format">
-        /// �ϊ��Ɏg�p���鏑���w�蕶����ł��B
+        /// 変換に使用する書式指定文字列です。
         /// </param>
         /// <returns>
-        /// <see cref="LongLongInteger"/>�I�u�W�F�N�g�̕�����`���ł��B
+        /// <see cref="LongLongInteger"/>オブジェクトの文字列形式です。
         /// </returns>
         public string ToString(string format)
         {
@@ -74,13 +74,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �w�肵����������уJ���`���ɌŗL�̏�������g�p���āA���̃C���X�^���X�̐��l�����Ɠ����ȕ�����`���ɕϊ����܂��B
+        /// 指定した書式およびカルチャに固有の書式情報を使用して、このインスタンスの数値をそれと等価な文字列形式に変換します。
         /// </summary>
         /// <param name="provider">
-        /// �J���`���ŗL�̏�������񋟂���v���o�C�_�ł��B
+        /// カルチャ固有の書式情報を提供するプロバイダです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ������ł��B
+        /// 変換された文字列です。
         /// </returns>
         public string ToString(IFormatProvider provider)
         {
@@ -89,19 +89,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region IFormattable �����o
+        #region IFormattable メンバ
 
         /// <summary>
-        /// �w�肵����������уJ���`���ɌŗL�̏�������g�p���āA���̃C���X�^���X�̐��l�����Ɠ����ȕ�����`���ɕϊ����܂��B
+        /// 指定した書式およびカルチャに固有の書式情報を使用して、このインスタンスの数値をそれと等価な文字列形式に変換します。
         /// </summary>
         /// <param name="format">
-        /// ������\��������ł��B
+        /// 書式を表す文字列です。
         /// </param>
         /// <param name="provider">
-        /// �J���`���ŗL�̏�������񋟂���v���o�C�_�ł��B
+        /// カルチャ固有の書式情報を提供するプロバイダです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ������ł��B
+        /// 変換された文字列です。
         /// </returns>
         public string ToString(string format, IFormatProvider provider)
         {
@@ -112,14 +112,14 @@ namespace Palmtree.Math
             if (string.Equals(format, "R") || string.Equals(format, "r"))
                 return (string.Format(provider, "{0:R}/{1:R}", _InternalNumerator, _InternalDenominator));
             char format_spec = format[0];
-            int precision = -1;// ����͐��x�w��Ȃ�
+            int precision = -1;// 既定は精度指定なし
             if (format.Length >= 2)
             {
                 string precision_string = format.Substring(1);
                 if (precision_string == "*")
-                    precision = -2;// �������x�w��
+                    precision = -2;// 無限精度指定
                 else if (!int.TryParse(precision_string, NumberStyles.None, provider, out precision))
-                    throw (new FormatException("�����w�蕶����̌`���Ɍ�肪����܂��B"));
+                    throw (new FormatException("書式指定文字列の形式に誤りがあります。"));
             }
 #endif
             CultureInfo culture = provider as CultureInfo;

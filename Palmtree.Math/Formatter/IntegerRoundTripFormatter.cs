@@ -12,14 +12,14 @@ namespace Palmtree.Math.Formatter
     internal class IntegerRoundTripFormatter
         : RoundTripFormatterBase
     {
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private bool _negative;
         private ushort[] _value;
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         public IntegerRoundTripFormatter(bool negative, ushort[] value_numerator)
         {
@@ -29,7 +29,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region RoundTripFormatterBase ����p�����ꂽ�����o
+        #region RoundTripFormatterBase から継承されたメンバ
 
         protected override string Format()
         {

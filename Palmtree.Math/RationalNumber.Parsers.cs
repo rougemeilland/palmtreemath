@@ -15,16 +15,16 @@ namespace Palmtree.Math
 {
     partial struct RationalNumber
     {
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`�������Ɠ�����<see cref="RationalNumber"/>�I�u�W�F�N�g�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式をそれと等価な<see cref="RationalNumber"/>オブジェクトに変換します。
         /// </summary>
         /// <param name="s">
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`���ł��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式です。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ<see cref="RationalNumber"/>�I�u�W�F�N�g�ł��B
+        /// 変換された<see cref="RationalNumber"/>オブジェクトです。
         /// </returns>
         public static RationalNumber Parse(string s)
         {
@@ -32,16 +32,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`�������Ɠ�����<see cref="RationalNumber"/>�I�u�W�F�N�g�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式をそれと等価な<see cref="RationalNumber"/>オブジェクトに変換します。
         /// </summary>
         /// <param name="s">
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`���ł��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式です。
         /// </param>
         /// <param name="provider">
-        /// s�Ɋւ���J���`���ɌŗL�̏�������񋟂���<see cref="System.IFormatProvider"/>�I�u�W�F�N�g�ł��B
+        /// sに関するカルチャに固有の書式情報を提供する<see cref="System.IFormatProvider"/>オブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ<see cref="RationalNumber"/>�I�u�W�F�N�g�ł��B
+        /// 変換された<see cref="RationalNumber"/>オブジェクトです。
         /// </returns>
         public static RationalNumber Parse(string s, IFormatProvider provider)
         {
@@ -49,17 +49,17 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`�������Ɠ�����<see cref="RationalNumber"/>�I�u�W�F�N�g�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式をそれと等価な<see cref="RationalNumber"/>オブジェクトに変換します。
         /// </summary>
         /// <param name="s">
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`���ł��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式です。
         /// </param>
         /// <param name="style">
-        /// s�Ŏg�p�\�ȏ���������A<see cref="System.Globalization.NumberStyles"/>�l�̃r�b�g���Ƃ̑g�ݍ��킹�ł��B
-        /// �ʏ�w�肷��l�́A<see cref="System.Globalization.NumberStyles.Integer"/>�ł��B
+        /// sで使用可能な書式を示す、<see cref="System.Globalization.NumberStyles"/>値のビットごとの組み合わせです。
+        /// 通常指定する値は、<see cref="System.Globalization.NumberStyles.Integer"/>です。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ<see cref="RationalNumber"/>�I�u�W�F�N�g�ł��B
+        /// 変換された<see cref="RationalNumber"/>オブジェクトです。
         /// </returns>
         public static RationalNumber Parse(string s, NumberStyles style)
         {
@@ -67,40 +67,40 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`�������Ɠ�����<see cref="RationalNumber"/>�I�u�W�F�N�g�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式をそれと等価な<see cref="RationalNumber"/>オブジェクトに変換します。
         /// </summary>
         /// <param name="s">
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`���ł��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式です。
         /// </param>
         /// <param name="style">
-        /// s�Ŏg�p�\�ȏ���������A<see cref="System.Globalization.NumberStyles"/>�l�̃r�b�g���Ƃ̑g�ݍ��킹�ł��B
-        /// �ʏ�w�肷��l�́A<see cref="System.Globalization.NumberStyles.Integer"/>�ł��B
+        /// sで使用可能な書式を示す、<see cref="System.Globalization.NumberStyles"/>値のビットごとの組み合わせです。
+        /// 通常指定する値は、<see cref="System.Globalization.NumberStyles.Integer"/>です。
         /// </param>
         /// <param name="provider">
-        /// s�Ɋւ���J���`���ɌŗL�̏�������񋟂���<see cref="System.IFormatProvider"/>�I�u�W�F�N�g�ł��B
+        /// sに関するカルチャに固有の書式情報を提供する<see cref="System.IFormatProvider"/>オブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ<see cref="RationalNumber"/>�I�u�W�F�N�g�ł��B
+        /// 変換された<see cref="RationalNumber"/>オブジェクトです。
         /// </returns>
         public static RationalNumber Parse(string s, NumberStyles style, IFormatProvider provider)
         {
             RationalNumber value;
             if (!TryParse(s, style, provider, out value))
-                throw (new FormatException(string.Format("������\"{0}\"��������Fraction�̏����ł͂���܂���B", s)));
+                throw (new FormatException(string.Format("文字列\"{0}\"が正しいFractionの書式ではありません。", s)));
             return (value);
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`�������Ɠ�����<see cref="RationalNumber"/>�I�u�W�F�N�g�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式をそれと等価な<see cref="RationalNumber"/>オブジェクトに変換します。
         /// </summary>
         /// <param name="s">
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�̕�����`���ł��B
+        /// <see cref="RationalNumber"/>オブジェクトの文字列形式です。
         /// </param>
         /// <param name="result">
-        /// �ϊ��ɐ��������ꍇ�A�ϊ����ꂽ<see cref="RationalNumber"/>�I�u�W�F�N�g�ł��B
+        /// 変換に成功した場合、変換された<see cref="RationalNumber"/>オブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ��ɐ��������ꍇ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// 変換に成功した場合はtrue、そうではないのならfalseです。
         /// </returns>
         public static bool TryParse(string s, out RationalNumber result)
         {
@@ -108,25 +108,25 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �w�肵���X�^�C������уJ���`���ɌŗL�̏����ɂ�鐔�l�̕�����`����A����Ɠ�����<see cref="RationalNumber"/>�I�u�W�F�N�g�ɕϊ����܂��B
-        /// �߂�l�́A�ϊ����������������s������������܂��B
+        /// 指定したスタイルおよびカルチャに固有の書式による数値の文字列形式を、それと等価の<see cref="RationalNumber"/>オブジェクトに変換します。
+        /// 戻り値は、変換が成功したか失敗したかを示します。
         /// </summary>
         /// <param name="s">
-        /// �ϊ����鐔�l��i�[���Ă��镶����ł��B
+        /// 変換する数値を格納している文字列です。
         /// </param>
         /// <param name="style">
-        /// s�Ŏg�p�\�ȏ���������A<see cref="System.Globalization.NumberStyles"/>�l�̃r�b�g���Ƃ̑g�ݍ��킹�ł��B
-        /// �ʏ�w�肷��l�́A<see cref="System.Globalization.NumberStyles.Integer"/>�ł��B
+        /// sで使用可能な書式を示す、<see cref="System.Globalization.NumberStyles"/>値のビットごとの組み合わせです。
+        /// 通常指定する値は、<see cref="System.Globalization.NumberStyles.Integer"/>です。
         /// </param>
         /// <param name="provider">
-        /// s�Ɋւ���J���`���ɌŗL�̏�������񋟂���<see cref="System.IFormatProvider"/>�I�u�W�F�N�g�ł��B
+        /// sに関するカルチャに固有の書式情報を提供する<see cref="System.IFormatProvider"/>オブジェクトです。
         /// </param>
         /// <param name="result">
-        /// �ϊ������������ꍇ�A���̃��\�b�h���Ԃ����Ƃ��ɁAs�Ɋi�[���ꂽ���l�Ɠ�����<see cref="RationalNumber"/>�I�u�W�F�N�g��i�[���܂��B
-        /// �ϊ��Ɏ��s�����ꍇ��null��i�[���܂��B
+        /// 変換が成功した場合、このメソッドが返されるときに、sに格納された数値と等価の<see cref="RationalNumber"/>オブジェクトを格納します。
+        /// 変換に失敗した場合はnullを格納します。
         /// </param>
         /// <returns>
-        /// s������ɕϊ����ꂽ�ꍇ��true�A�����ł͂Ȃ��ꍇ��false�ł��B
+        /// sが正常に変換された場合はtrue、そうではない場合はfalseです。
         /// </returns>
         public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out RationalNumber result)
         {
@@ -141,12 +141,12 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �v���C�x�[�g���\�b�h
+        #region プライベートメソッド
 
         private static bool TryParseImp(string s, NumberStyles style, IFormatProvider provider, out LongLongInteger numerator, out UnsignedLongLongInteger denominator)
         {
             if ((style & NumberStyles.AllowHexSpecifier) != 0)
-                throw (new ArgumentException("�������RationalNumber�I�u�W�F�N�g�ɕϊ�����ۂ�NumberStyles.AllowHexSpecifier�t���O�͎w��ł��܂���B"));
+                throw (new ArgumentException("文字列をRationalNumberオブジェクトに変換する際にNumberStyles.AllowHexSpecifierフラグは指定できません。"));
             if (s.IndexOf('[') >= 0)
                 return (TryParseRoundTripFormat(s, style, out numerator, out denominator));
             else

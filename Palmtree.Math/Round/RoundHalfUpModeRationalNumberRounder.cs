@@ -1,4 +1,4 @@
-/*
+﻿/*
   RoundHalfUpModeRationalNumberRounder.cs
 
   Copyright (c) 2017 Palmtree Software

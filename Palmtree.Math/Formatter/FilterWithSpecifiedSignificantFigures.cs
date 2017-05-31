@@ -16,7 +16,7 @@ namespace Palmtree.Math.Formatter
     internal class FilterWithSpecifiedSignificantFigures
         : IParserOfNumber
     {
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private IParserOfNumber _parser_imp;
         private int _offset;
@@ -24,7 +24,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         public FilterWithSpecifiedSignificantFigures(IParserOfNumber parser_imp, int significant_figures, bool omit_least_zero)
         {
@@ -64,7 +64,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region IParserOfNumber �����o
+        #region IParserOfNumber メンバ
 
         int IParserOfNumber.Offset
         {

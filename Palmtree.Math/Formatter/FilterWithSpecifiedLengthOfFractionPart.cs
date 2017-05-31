@@ -14,7 +14,7 @@ namespace Palmtree.Math.Formatter
     internal class FilterWithSpecifiedLengthOfFractionPart
         : IParserOfNumber
     {
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private IParserOfNumber _parser_imp;
         private int _offset;
@@ -22,7 +22,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         public FilterWithSpecifiedLengthOfFractionPart(IParserOfNumber parser_imp, ushort length_of_fraction_part)
         {
@@ -52,7 +52,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region IParserOfNumber �����o
+        #region IParserOfNumber メンバ
 
         int IParserOfNumber.Offset
         {

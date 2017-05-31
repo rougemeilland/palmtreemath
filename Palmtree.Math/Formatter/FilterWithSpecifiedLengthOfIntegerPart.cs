@@ -12,12 +12,12 @@ namespace Palmtree.Math.Formatter
     internal class FilterWithSpecifiedLengthOfIntegerPart
         : IParserOfNumber
     {
-        #region NumberSequence �N���X�̒�`
+        #region NumberSequence クラスの定義
 
         private class NumberSequence
             : INumberSequence
         {
-            #region �v���C�x�[�g�t�B�[���h
+            #region プライベートフィールド
 
             private int _counter_of_leadeng_zero;
             private INumberSequence _sequence_imp;
@@ -25,7 +25,7 @@ namespace Palmtree.Math.Formatter
 
             #endregion
 
-            #region �R���X�g���N�^
+            #region コンストラクタ
 
             public NumberSequence(IParserOfNumber parser_imp, int length_of_integer_part)
             {
@@ -38,7 +38,7 @@ namespace Palmtree.Math.Formatter
 
             #endregion
 
-            #region INumberSequence �����o
+            #region INumberSequence メンバ
 
             bool INumberSequence.IsZero
             {
@@ -64,7 +64,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private IParserOfNumber _parser_imp;
         private int _length_of_integer_part;
@@ -72,7 +72,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         public FilterWithSpecifiedLengthOfIntegerPart(IParserOfNumber parser_imp, int length_of_integer_part)
         {
@@ -85,7 +85,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region IParserOfNumber �����o
+        #region IParserOfNumber メンバ
 
         int IParserOfNumber.Offset
         {

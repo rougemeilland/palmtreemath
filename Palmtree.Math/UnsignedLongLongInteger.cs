@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
 using Palmtree.Math.Formatter;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math
 {
@@ -45,25 +46,25 @@ namespace Palmtree.Math
         #region プライベートフィールド
 
         private static string _member_name = "Value";
+        private static ImplementOfUnsignedLongLongInteger _imp;
         private static IBaseNumberInfo _decimal_base_number_info;
         private static IBaseNumberInfo _upper_case_hexadecimal_base_number_info;
         private static IBaseNumberInfo _lower_case_hexadecimal_base_number_info;
         private static FormatterCreator _formatter_creator;
-        private NativeUnsignedInteger __internal_value;
-        //private int? _bit_length_cache;
-        //private bool? _is_power_of_two_cache;
+        private ushort[] __internal_value;
+        private int? _bit_length_cache;
+        private bool? _is_power_of_two_cache;
 
         #endregion
 
         #region プライベートプロパティ
 
-        /*
-        private NativeUnsignedInteger _InternalValue
+        private ushort[] _InternalValue
         {
             get
             {
                 if (__internal_value == null)
-                    __internal_value = NativeUnsignedInteger.Zero;
+                    __internal_value = new ushort[0];
                 return (__internal_value);
             }
 
@@ -74,7 +75,6 @@ namespace Palmtree.Math
                 __internal_value = value;
             }
         }
-        */
 
         #endregion
 
@@ -82,14 +82,25 @@ namespace Palmtree.Math
 
         static UnsignedLongLongInteger()
         {
-            Zero = new UnsignedLongLongInteger(NativeUnsignedInteger.Zero);
-            One = new UnsignedLongLongInteger(NativeUnsignedInteger.One);
-            Ten = new UnsignedLongLongInteger(new NativeUnsignedInteger(10));
+            _imp = new ImplementOfUnsignedLongLongInteger();
+            Zero = new UnsignedLongLongInteger();
+            One = new UnsignedLongLongInteger(new ushort[] { 1 });
+            Ten = new UnsignedLongLongInteger(new ushort[] { 10 });
             _decimal_base_number_info = DecimalBaseNumberInfo.DefaultInstance;
             _upper_case_hexadecimal_base_number_info = HexaDecimalBaseNumberInfo.DefaultInstanceUsingUpperCaseDigit;
             _lower_case_hexadecimal_base_number_info = HexaDecimalBaseNumberInfo.DefaultInstanceUsingLowerCaseDigit;
             _formatter_creator = new FormatterCreator();
         }
+
+#if false
+        /// <summary>
+        /// コンストラクタです。
+        /// </summary>
+        public UnsignedLongLongInteger()
+        {
+            _imp = new ushort[0];
+        }
+#endif
 
         /// <summary>
         /// コンストラクタです。
@@ -98,10 +109,43 @@ namespace Palmtree.Math
         /// 初期値となる整数です。
         /// </param>
         public UnsignedLongLongInteger(int value)
+            : this((long)value)
+        {
+        }
+
+        /// <summary>
+        /// コンストラクタです。
+        /// </summary>
+        /// <param name="value">
+        /// 初期値となる整数です。
+        /// </param>
+        public UnsignedLongLongInteger(long value)
         {
             if (value < 0)
                 throw (new ArgumentException(@"UnsignedLongLongIntegerで表現できない値が指定されました。", "value"));
-            __internal_value = new NativeUnsignedInteger((uint)value);
+            if (value == 0)
+                __internal_value = new ushort[0];
+            else if (value <= ushort.MaxValue)
+                __internal_value = new ushort[] { (ushort)value };
+            else
+                __internal_value = CreateInternalValue((ulong)value);
+            _bit_length_cache = null;
+            _is_power_of_two_cache = null;
+        }
+
+        internal UnsignedLongLongInteger(byte value)
+            : this((ushort)value)
+        {
+        }
+
+        internal UnsignedLongLongInteger(ushort value)
+        {
+            if (value == 0)
+                __internal_value = new ushort[0];
+            else
+                __internal_value = new ushort[] { value };
+            _bit_length_cache = null;
+            _is_power_of_two_cache = null;
         }
 
         /// <summary>
@@ -112,8 +156,8 @@ namespace Palmtree.Math
         /// </param>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger(uint value)
+            : this((ulong)value)
         {
-            __internal_value = new NativeUnsignedInteger(value);
         }
 
         /// <summary>
@@ -125,28 +169,130 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public UnsignedLongLongInteger(ulong value)
         {
-            __internal_value = new NativeUnsignedInteger(value);
+            if (value == 0)
+                __internal_value = new ushort[0];
+            else if (value <= ushort.MaxValue)
+                __internal_value = new ushort[] { (ushort)value };
+            else
+                __internal_value = CreateInternalValue(value);
+            _bit_length_cache = null;
+            _is_power_of_two_cache = null;
+        }
+
+        /// <summary>
+        /// コンストラクタです。
+        /// </summary>
+        /// <param name="value">
+        /// 初期値となる整数です。
+        /// </param>
+        public UnsignedLongLongInteger(float value)
+            : this((double)value)
+        {
+        }
+
+        /// <summary>
+        /// コンストラクタです。
+        /// </summary>
+        /// <param name="value">
+        /// 初期値となる整数です。
+        /// </param>
+        public UnsignedLongLongInteger(double value)
+        {
+            __internal_value = FromDoubleImp(value);
+            _bit_length_cache = null;
+            _is_power_of_two_cache = null;
+        }
+
+        /// <summary>
+        /// コンストラクタです。
+        /// </summary>
+        /// <param name="value">
+        /// 初期値となる整数です。
+        /// </param>
+        public UnsignedLongLongInteger(decimal value)
+        {
+            __internal_value = FromDecimalImp(value);
+            _bit_length_cache = null;
+            _is_power_of_two_cache = null;
         }
 
         private UnsignedLongLongInteger(SerializationInfo info, StreamingContext context)
         {
             string s = info.GetString(_member_name);
-            NativeUnsignedInteger result;
+            ushort[] result;
             if (!TryParseImp(s, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out result))
                 throw (new FormatException(string.Format("文字列'{0}'はUnsignedLongLongIntegerの形式ではありません。", s)));
             __internal_value = result;
-            //_bit_length_cache = null;
-            //_is_power_of_two_cache = null;
+            _bit_length_cache = null;
+            _is_power_of_two_cache = null;
         }
 
-        internal UnsignedLongLongInteger(NativeUnsignedInteger value)
+        internal UnsignedLongLongInteger(ushort[] value)
         {
+            Debug.Assert(value != null);
+            Debug.Assert(value.Length == 0 || value[value.Length - 1] > 0);
             __internal_value = value;
+            _bit_length_cache = null;
+            _is_power_of_two_cache = null;
+        }
+
+        internal UnsignedLongLongInteger(ArraySegment<ushort> data)
+            : this(CreateInternalValue(data))
+        {
         }
 
         #endregion
 
         #region パブリックメソッド
+
+#if DEBUG
+
+        /// <summary>
+        /// テストデータから<see cref="UnsignedLongLongInteger"/>オブジェクトを生成します。
+        /// </summary>
+        /// <param name="data">
+        /// テストデータです。
+        /// </param>
+        /// <returns>
+        /// 生成された<see cref="UnsignedLongLongInteger"/>オブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger FromTestData(ushort[] data)
+        {
+            TestDataReader reader = new TestDataReader(data);
+            ushort header = reader.GetUShortValue();
+            if (header != 0)
+                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
+            ArraySegment<ushort> p = reader.GetSegment();
+            reader.AssertEndOfData();
+            if (p.Count == 0)
+                return (Zero);
+            else
+                return (new UnsignedLongLongInteger(p));
+        }
+
+        /// <summary>
+        /// オブジェクトの内容をテストデータと比較します。
+        /// </summary>
+        /// <param name="data">
+        /// 比較対象のテストデータです。
+        /// </param>
+        /// <returns>
+        /// 一致していればtrue、そうではないのならfalseです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public bool EqualsInternally(ushort[] data)
+        {
+            TestDataReader reader = new TestDataReader(data);
+            ushort header = reader.GetUShortValue();
+            if (header != 0)
+                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
+            ArraySegment<ushort> p = reader.GetSegment();
+            reader.AssertEndOfData();
+            return (EqualsInternally(p));
+        }
+
+#endif
 
         #endregion
 
@@ -159,7 +305,7 @@ namespace Palmtree.Math
         {
             get
             {
-                return (__internal_value.IsZero);
+                return (_InternalValue.Length == 0);
             }
         }
 

@@ -10,9 +10,9 @@
 using System;
 using System.Diagnostics;
 
-// ���Z�q�̃I�[�o�[���[�h�Ɋւ���K�C�h���C��:
+// 演算子のオーバーロードに関するガイドライン:
 //   http://msdn.microsoft.com/ja-jp/library/ms229032.aspx
-// �ϊ����Z�q�̃K�C�h���C���F
+// 変換演算子のガイドライン：
 //   http://msdn.microsoft.com/ja-jp/library/ms229033(v=VS.100).aspx
 
 namespace Palmtree.Math
@@ -20,20 +20,20 @@ namespace Palmtree.Math
     partial struct RationalNumber
         : IConvertible
     {
-        #region ���Z�q
+        #region 演算子
 
 #if !CONCEAL_OPERATORS
 
 #if !CONCEAL_IMPLICIT_OPERATORS
         
         /// <summary>
-        /// <see cref="sbyte"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="sbyte"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static implicit operator RationalNumber(sbyte o)
@@ -42,13 +42,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="short"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="short"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static implicit operator RationalNumber(short o)
         {
@@ -56,13 +56,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="int"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="int"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static implicit operator RationalNumber(int o)
         {
@@ -70,13 +70,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="long"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="long"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static implicit operator RationalNumber(long o)
         {
@@ -84,13 +84,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="byte"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="byte"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static implicit operator RationalNumber(byte o)
         {
@@ -98,13 +98,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="ushort"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="ushort"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static implicit operator RationalNumber(ushort o)
@@ -113,13 +113,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="uint"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="uint"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static implicit operator RationalNumber(uint o)
@@ -128,13 +128,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="ulong"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="ulong"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static implicit operator RationalNumber(ulong o)
@@ -145,13 +145,13 @@ namespace Palmtree.Math
 #endif
 
         /// <summary>
-        /// <see cref="float"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="float"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator RationalNumber(float o)
         {
@@ -159,13 +159,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="double"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="double"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator RationalNumber(double o)
         {
@@ -173,13 +173,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="decimal"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="decimal"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator RationalNumber(decimal o)
         {
@@ -189,13 +189,13 @@ namespace Palmtree.Math
 #if !CONCEAL_IMPLICIT_OPERATORS
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static implicit operator RationalNumber(UnsignedLongLongInteger o)
         {
@@ -203,13 +203,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="LongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="LongLongInteger"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static implicit operator RationalNumber(LongLongInteger o)
         {
@@ -219,13 +219,13 @@ namespace Palmtree.Math
 #endif
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="sbyte"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="sbyte"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static explicit operator sbyte(RationalNumber o)
@@ -234,13 +234,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="short"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="short"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator short(RationalNumber o)
         {
@@ -248,13 +248,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="int"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="int"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator int(RationalNumber o)
         {
@@ -262,13 +262,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="long"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="long"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator long(RationalNumber o)
         {
@@ -276,13 +276,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="byte"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="byte"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator byte(RationalNumber o)
         {
@@ -290,13 +290,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="ushort"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="ushort"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static explicit operator ushort(RationalNumber o)
@@ -305,13 +305,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="uint"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="uint"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static explicit operator uint(RationalNumber o)
@@ -320,13 +320,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="ulong"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="ulong"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static explicit operator ulong(RationalNumber o)
@@ -335,13 +335,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="float"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="float"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator float(RationalNumber o)
         {
@@ -349,13 +349,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="double"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="double"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator double(RationalNumber o)
         {
@@ -363,13 +363,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="decimal"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="decimal"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator decimal(RationalNumber o)
         {
@@ -377,13 +377,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator UnsignedLongLongInteger(RationalNumber o)
         {
@@ -391,13 +391,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="LongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="LongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator LongLongInteger(RationalNumber o)
         {
@@ -407,13 +407,13 @@ namespace Palmtree.Math
 #endif
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
         /// <summary>
-        /// <see cref="sbyte"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="sbyte"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber FromSByte(sbyte o)
@@ -422,10 +422,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="short"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="short"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static RationalNumber FromInt16(short o)
         {
@@ -433,10 +433,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="int"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="int"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static RationalNumber FromInt32(int o)
         {
@@ -444,10 +444,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="long"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="long"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static RationalNumber FromInt64(long o)
         {
@@ -455,10 +455,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="byte"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="byte"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static RationalNumber FromByte(byte o)
         {
@@ -466,10 +466,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="ushort"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="ushort"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber FromUInt16(ushort o)
@@ -478,10 +478,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="uint"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="uint"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber FromUInt32(uint o)
@@ -490,10 +490,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="ulong"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="ulong"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber FromUInt64(ulong o)
@@ -502,10 +502,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="float"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="float"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static RationalNumber FromSingle(float o)
         {
@@ -520,10 +520,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="double"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="double"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static RationalNumber FromDouble(double o)
         {
@@ -538,10 +538,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="decimal"/>�I�u�W�F�N�g��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="decimal"/>オブジェクトを<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static RationalNumber FromDecimal(decimal o)
         {
@@ -549,10 +549,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static RationalNumber FromUnsignedLongLongInteger(UnsignedLongLongInteger o)
         {
@@ -560,10 +560,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="LongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="RationalNumber"/>�^�ɕϊ����܂��B
+        /// <see cref="LongLongInteger"/>オブジェクトを明示的に<see cref="RationalNumber"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static RationalNumber FromLongLongInteger(LongLongInteger o)
         {
@@ -571,10 +571,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g<see cref="byte"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクト<see cref="byte"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public byte ToByte()
         {
@@ -589,10 +589,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="short"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="short"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public short ToInt16()
         {
@@ -607,10 +607,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="int"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="int"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public int ToInt32()
         {
@@ -625,10 +625,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="long"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="long"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public long ToInt64()
         {
@@ -643,10 +643,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="float"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="float"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public float ToSingle()
         {
@@ -686,10 +686,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="double"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="double"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public double ToDouble()
         {
@@ -729,10 +729,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="decimal"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="decimal"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public decimal ToDecimal()
         {
@@ -781,10 +781,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="sbyte"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="sbyte"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public sbyte ToSByte()
@@ -800,10 +800,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="ushort"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="ushort"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public ushort ToUInt16()
@@ -819,10 +819,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="ushort"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="ushort"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public uint ToUInt32()
@@ -838,10 +838,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="ushort"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="ushort"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public ulong ToUInt64()
@@ -857,10 +857,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger ToUnsignedLongLongInteger()
         {
@@ -875,10 +875,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="RationalNumber"/>�I�u�W�F�N�g�𖾎��I��<see cref="LongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="RationalNumber"/>オブジェクトを明示的に<see cref="LongLongInteger"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public LongLongInteger ToLongLongInteger()
         {
@@ -894,7 +894,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �v���C�x�[�g���\�b�h
+        #region プライベートメソッド
 
         private LongLongInteger ToIEEERealNumberImp(int max_fraction_part_bits, out int factor)
         {
@@ -993,7 +993,7 @@ namespace Palmtree.Math
             }
             Debug.Assert(q.BitLength <= max_fraction_part_bits);
 #if DEBUG
-            // | q - (n / d << factor)| <= 0.5 �ł��邱�Ƃ���؂���
+            // | q - (n / d << factor)| <= 0.5 であることを検証する
             if (factor >= 0)
             {
                 UnsignedLongLongInteger v1 = q.Multiply(d).LeftShift(1);
@@ -1037,17 +1037,17 @@ namespace Palmtree.Math
 
         private static Exception CreateOverflowExceptionObject(Type target_type, object value)
         {
-            return (new OverflowException(string.Format(@"{0} �^�̃I�u�W�F�N�g'{1}'�́A{2} �^�ł͕\���ł��Ȃ��l�ł��B", value.GetType().FullName, value.ToString(), target_type.FullName)));
+            return (new OverflowException(string.Format(@"{0} 型のオブジェクト'{1}'は、{2} 型では表現できない値です。", value.GetType().FullName, value.ToString(), target_type.FullName)));
         }
 
         private static Exception CreateOverflowExceptionObject(Type target_type, object value, Exception e)
         {
-            return (new OverflowException(string.Format(@"{0} �^�̃I�u�W�F�N�g'{1}'�́A{2} �^�ł͕\���ł��Ȃ��l�ł��B", value.GetType().FullName, value.ToString(), target_type.FullName), e));
+            return (new OverflowException(string.Format(@"{0} 型のオブジェクト'{1}'は、{2} 型では表現できない値です。", value.GetType().FullName, value.ToString(), target_type.FullName), e));
         }
 
         #endregion
 
-        #region IConvertible �����o
+        #region IConvertible メンバ
 
         TypeCode IConvertible.GetTypeCode()
         {
@@ -1071,7 +1071,7 @@ namespace Palmtree.Math
 
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
-            throw (new InvalidCastException("DateTime�^�ɕϊ����邱�Ƃ͂ł��܂���B"));
+            throw (new InvalidCastException("DateTime型に変換することはできません。"));
         }
 
         decimal IConvertible.ToDecimal(IFormatProvider provider)
@@ -1153,7 +1153,7 @@ namespace Palmtree.Math
             else if (conversionType == typeof(ulong))
                 return (((IConvertible)this).ToUInt64(provider));
             else
-                throw (new InvalidCastException(conversionType.FullName + "�^�ɂ͕ϊ��ł��܂���B"));
+                throw (new InvalidCastException(conversionType.FullName + "型には変換できません。"));
         }
 
         ushort IConvertible.ToUInt16(IFormatProvider provider)

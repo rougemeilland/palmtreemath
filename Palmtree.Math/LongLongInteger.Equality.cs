@@ -9,7 +9,7 @@
 
 using System;
 
-// ���Z�q�̃I�[�o�[���[�h�Ɋւ���K�C�h���C��:
+// 演算子のオーバーロードに関するガイドライン:
 //   http://msdn.microsoft.com/ja-jp/library/ms229032.aspx
 
 namespace Palmtree.Math
@@ -17,23 +17,23 @@ namespace Palmtree.Math
     partial struct LongLongInteger
         : IEquatable<LongLongInteger>
     {
-        #region ���Z�q
+        #region 演算子
 
 #if !CONCEAL_OPERATORS
 
-        #region == �̃I�[�o�[���[�h
+        #region == のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator ==(long x, LongLongInteger y)
         {
@@ -41,16 +41,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator ==(ulong x, LongLongInteger y)
@@ -59,16 +59,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator ==(UnsignedLongLongInteger x, LongLongInteger y)
         {
@@ -76,16 +76,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator ==(LongLongInteger x, long y)
         {
@@ -93,16 +93,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator ==(LongLongInteger x, ulong y)
@@ -111,16 +111,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator ==(LongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -128,16 +128,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator ==(LongLongInteger x, LongLongInteger y)
         {
@@ -146,19 +146,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region != �̃I�[�o�[���[�h
+        #region != のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しくないならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator !=(long x, LongLongInteger y)
         {
@@ -166,16 +166,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しくないならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator !=(ulong x, LongLongInteger y)
@@ -184,16 +184,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しくないならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator !=(UnsignedLongLongInteger x, LongLongInteger y)
         {
@@ -201,16 +201,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しくないならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator !=(LongLongInteger x, long y)
         {
@@ -218,16 +218,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しくないならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool operator !=(LongLongInteger x, ulong y)
@@ -236,16 +236,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しくないならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator !=(LongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -253,16 +253,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���������Ȃ��Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが等しくないならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool operator !=(LongLongInteger x, LongLongInteger y)
         {
@@ -275,18 +275,18 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
-        #region Eqauls �̃I�[�o�[���[�h
+        #region Eqauls のオーバーロード
 
         /// <summary>
-        /// �I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// オブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="o">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// オブジェクトが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public bool Equals(long o)
         {
@@ -294,13 +294,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// オブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="o">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// オブジェクトが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public bool Equals(ulong o)
@@ -309,13 +309,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// オブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="o">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// オブジェクトが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public bool Equals(UnsignedLongLongInteger o)
         {
@@ -323,16 +323,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool Equals(long x, LongLongInteger y)
         {
@@ -340,16 +340,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool Equals(ulong x, LongLongInteger y)
@@ -358,16 +358,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool Equals(UnsignedLongLongInteger x, LongLongInteger y)
         {
@@ -375,16 +375,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool Equals(LongLongInteger x, long y)
         {
@@ -401,16 +401,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
         public static bool Equals(LongLongInteger x, ulong y)
@@ -422,16 +422,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool Equals(LongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -442,16 +442,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="x">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public static bool Equals(LongLongInteger x, LongLongInteger y)
         {
@@ -469,16 +469,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region IEquatable<LongLongInteger> �����o
+        #region IEquatable<LongLongInteger> メンバ
 
         /// <summary>
-        /// �I�u�W�F�N�g���_���I�ɓ��������ǂ������ׂ܂��B
+        /// オブジェクトが論理的に等しいかどうか調べます。
         /// </summary>
         /// <param name="o">
-        /// ��r�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 比較対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �I�u�W�F�N�g���_���I�ɓ������Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// オブジェクトが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         public bool Equals(LongLongInteger o)
         {

@@ -17,7 +17,7 @@ namespace Palmtree.Math.SerializerPlugin
     internal class RationalNumberSerializer
         : SimpleTypeSerializerBase
     {
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         public RationalNumberSerializer(PluginInitializingParameter p)
             : base(p.IsBuiltin, false, null, Guid.Empty, typeof(RationalNumber), "RationalNumber")
@@ -26,7 +26,7 @@ namespace Palmtree.Math.SerializerPlugin
 
         #endregion
 
-        #region SimpleTypeSerializers ����p�����ꂽ�����o
+        #region SimpleTypeSerializers から継承されたメンバ
 
         protected override string Serialize(object instance)
         {
@@ -38,7 +38,7 @@ namespace Palmtree.Math.SerializerPlugin
         {
             RationalNumber instance;
             if (!RationalNumber.TryParse(text, NumberStyles.Number, CultureInfo.InvariantCulture.NumberFormat, out instance))
-                throw (new ArgumentException(string.Format("�e�L�X�g'{0}'��^'{1}'�Ƃ��ăf�V���A���C�Y�ł��܂���B",
+                throw (new ArgumentException(string.Format("テキスト'{0}'を型'{1}'としてデシリアライズできません。",
                                                            text,
                                                            instance.GetType().FullName),
                                              "text"));

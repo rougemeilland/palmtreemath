@@ -16,7 +16,7 @@ namespace Palmtree.Math.Formatter
     internal class FixedPointFormFormatter
         : INumberFormatter
     {
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private IParserOfNumber _parser;
         private NumberFormatInfo _number_format_info;
@@ -27,7 +27,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         public FixedPointFormFormatter(IParserOfNumber parser, NumberFormatInfo number_format_info, bool negative, bool thousand_separated, NumberFormatType number_format_type)
         {
@@ -41,7 +41,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �v���C�x�[�g���\�b�h
+        #region プライベートメソッド
 
         private string GetDigitsString(string integer_part_string, string fraction_part_string)
         {
@@ -98,7 +98,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region INumberFormatter �����o
+        #region INumberFormatter メンバ
 
         string INumberFormatter.Format()
         {

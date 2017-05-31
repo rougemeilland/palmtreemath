@@ -10,27 +10,27 @@
 using System;
 using System.Diagnostics;
 
-// ���Z�q�̃I�[�o�[���[�h�Ɋւ���K�C�h���C��:
+// 演算子のオーバーロードに関するガイドライン:
 //   http://msdn.microsoft.com/ja-jp/library/ms229032.aspx
 
 namespace Palmtree.Math
 {
     partial struct UnsignedLongLongInteger
     {
-        #region ���Z�q
+        #region 演算子
 
 #if !CONCEAL_OPERATORS
 
-        #region �P�� + ���Z�q�̃I�[�o�[���[�h
+        #region 単項 + 演算子のオーバーロード
 
         /// <summary>
-        /// �I�u�W�F�N�g����̂܂ܕԂ��܂��B
+        /// オブジェクトをそのまま返します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x�ɓ������I�u�W�F�N�g�ł��B
+        /// xに等しいオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator +(UnsignedLongLongInteger x)
         {
@@ -39,16 +39,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �P�� ++ ���Z�q�̃I�[�o�[���[�h
+        #region 単項 ++ 演算子のオーバーロード
 
         /// <summary>
-        /// ������C���N�������g���܂��B
+        /// 整数をインクリメントします。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̐����ł��B
+        /// 計算対象の整数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator ++(UnsignedLongLongInteger x)
         {
@@ -57,16 +57,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �P�� -- ���Z�q�̃I�[�o�[���[�h
+        #region 単項 -- 演算子のオーバーロード
 
         /// <summary>
-        /// ������f�N�������g���܂��B
+        /// 整数をデクリメントします。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̐����ł��B
+        /// 計算対象の整数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator --(UnsignedLongLongInteger x)
         {
@@ -75,19 +75,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �� + ���Z�q�̃I�[�o�[���[�h
+        #region 二項 + 演算子のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator +(ulong x, UnsignedLongLongInteger y)
@@ -96,16 +96,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator +(UnsignedLongLongInteger x, ulong y)
@@ -114,16 +114,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator +(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -132,19 +132,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �� - ���Z�q�̃I�[�o�[���[�h
+        #region 二項 - 演算子のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator -(ulong x, UnsignedLongLongInteger y)
@@ -153,16 +153,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator -(UnsignedLongLongInteger x, ulong y)
@@ -171,16 +171,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator -(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -189,19 +189,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �� * ���Z�q�̃I�[�o�[���[�h
+        #region 二項 * 演算子のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator *(ulong x, UnsignedLongLongInteger y)
@@ -210,16 +210,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator *(UnsignedLongLongInteger x, ulong y)
@@ -228,16 +228,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator *(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -246,19 +246,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �� / ���Z�q�̃I�[�o�[���[�h
+        #region 二項 / 演算子のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong operator /(ulong x, UnsignedLongLongInteger y)
@@ -267,16 +267,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator /(UnsignedLongLongInteger x, ulong y)
@@ -285,16 +285,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator /(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -303,19 +303,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �� % ���Z�q�̃I�[�o�[���[�h
+        #region 二項 % 演算子のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�]��v�Z���܂��B
+        /// 二つのオブジェクトの剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong operator %(ulong x, UnsignedLongLongInteger y)
@@ -324,16 +324,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�]��v�Z���܂��B
+        /// 二つのオブジェクトの剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong operator %(UnsignedLongLongInteger x, ulong y)
@@ -342,16 +342,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�]��v�Z���܂��B
+        /// 二つのオブジェクトの剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator %(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -364,18 +364,18 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
-        #region Add �̃I�[�o�[���[�h
+        #region Add のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̉��Z��s���܂��B
+        /// 与えられたオブジェクトとの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger Add(ulong x)
@@ -384,13 +384,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̉��Z��s���܂��B
+        /// 与えられたオブジェクトとの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 加算した結果を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Add(UnsignedLongLongInteger x)
         {
@@ -398,16 +398,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Add(ulong x, UnsignedLongLongInteger y)
@@ -416,16 +416,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Add(UnsignedLongLongInteger x, ulong y)
@@ -441,16 +441,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Add(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -464,16 +464,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Subtract �̃I�[�o�[���[�h
+        #region Subtract のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̌��Z��s���܂��B
+        /// 与えられたオブジェクトとの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger Subtract(ulong x)
@@ -482,13 +482,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̌��Z��s���܂��B
+        /// 与えられたオブジェクトとの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 減算した結果を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Subtract(UnsignedLongLongInteger x)
         {
@@ -496,16 +496,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Subtract(ulong x, UnsignedLongLongInteger y)
@@ -513,7 +513,7 @@ namespace Palmtree.Math
             if (x == 0)
             {
                 if (y._InternalValue.Length != 0)
-                    throw (new OverflowException(@"���Z�̌��ʂ�UnsignedLongLongInteger�ŕ\���s�\�Ȓl�ɂȂ�܂����B"));
+                    throw (new OverflowException(@"減算の結果がUnsignedLongLongIntegerで表現不可能な値になりました。"));
                 return (Zero);
             }
             else if (y._InternalValue.Length == 0)
@@ -525,16 +525,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Subtract(UnsignedLongLongInteger x, ulong y)
@@ -544,7 +544,7 @@ namespace Palmtree.Math
                 if (y == 0)
                     return (Zero);
                 else
-                    throw (new OverflowException(@"���Z�̌��ʂ�UnsignedLongLongInteger�ŕ\���s�\�Ȓl�ɂȂ�܂����B"));
+                    throw (new OverflowException(@"減算の結果がUnsignedLongLongIntegerで表現不可能な値になりました。"));
             }
             else if (y == 0)
                 return (x);
@@ -555,16 +555,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Subtract(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -573,7 +573,7 @@ namespace Palmtree.Math
                 if (y._InternalValue.Length == 0)
                     return (Zero);
                 else
-                    throw (new OverflowException(@"���Z�̌��ʂ�UnsignedLongLongInteger�ŕ\���s�\�Ȓl�ɂȂ�܂����B"));
+                    throw (new OverflowException(@"減算の結果がUnsignedLongLongIntegerで表現不可能な値になりました。"));
             }
             else if (y._InternalValue.Length == 0)
                 return (x);
@@ -583,13 +583,13 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Increment �̃I�[�o�[���[�h
+        #region Increment のオーバーロード
 
         /// <summary>
-        /// ������C���N�������g���܂��B
+        /// 整数をインクリメントします。
         /// </summary>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Increment()
         {
@@ -597,13 +597,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ������C���N�������g���܂��B
+        /// 整数をインクリメントします。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̐����ł��B
+        /// 計算対象の整数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Increment(UnsignedLongLongInteger x)
         {
@@ -615,13 +615,13 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Decrement �̃I�[�o�[���[�h
+        #region Decrement のオーバーロード
 
         /// <summary>
-        /// ������f�N�������g���܂��B
+        /// 整数をデクリメントします。
         /// </summary>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Decrement()
         {
@@ -629,34 +629,34 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ������f�N�������g���܂��B
+        /// 整数をデクリメントします。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̐����ł��B
+        /// 計算対象の整数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Decrement(UnsignedLongLongInteger x)
         {
             if (x._InternalValue.Length == 0)
-                throw (new OverflowException(@"���Z�̌��ʂ�UnsignedLongLongInteger�ŕ\���s�\�Ȓl�ɂȂ�܂����B"));
+                throw (new OverflowException(@"減算の結果がUnsignedLongLongIntegerで表現不可能な値になりました。"));
             else
                 return (new UnsignedLongLongInteger(_imp.Decrement(x._InternalValue)));
         }
 
         #endregion
 
-        #region Multiply �̃I�[�o�[���[�h
+        #region Multiply のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏�Z��s���܂��B
+        /// 与えられたオブジェクトとの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger Multiply(ulong x)
@@ -665,13 +665,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏�Z��s���܂��B
+        /// 与えられたオブジェクトとの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 乗算した結果を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Multiply(UnsignedLongLongInteger x)
         {
@@ -679,16 +679,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Multiply(ulong x, UnsignedLongLongInteger y)
@@ -697,16 +697,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Multiply(UnsignedLongLongInteger x, ulong y)
@@ -739,16 +739,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Multiply(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -787,16 +787,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Divide �̃I�[�o�[���[�h
+        #region Divide のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Z��s���܂��B
+        /// 与えられたオブジェクトとの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger Divide(ulong x)
@@ -805,13 +805,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Z��s���܂��B
+        /// 与えられたオブジェクトとの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Divide(UnsignedLongLongInteger x)
         {
@@ -819,22 +819,22 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong Divide(ulong x, UnsignedLongLongInteger y)
         {
             if (y._InternalValue.Length == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x == 0)
                 return (0);
             else if (y._InternalValue.Length == 1)
@@ -857,22 +857,22 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Divide(UnsignedLongLongInteger x, ulong y)
         {
             if (y == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x._InternalValue.Length == 0)
                 return (Zero);
             else if (y == 1)
@@ -890,21 +890,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Divide(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
             if (y._InternalValue.Length == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x._InternalValue.Length == 0)
                 return (Zero);
             else if (y._InternalValue.Length == 1)
@@ -926,17 +926,17 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region DivideExactly �̃I�[�o�[���[�h
+        #region DivideExactly のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Z��s���܂��B
-        /// ����؂�Ȃ��ꍇ�ɂ͗�O���������܂��B
+        /// 与えられたオブジェクトとの除算を行います。
+        /// 割り切れない場合には例外が発生します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger DivideExactly(ulong x)
@@ -945,14 +945,14 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Z��s���܂��B
-        /// ����؂�Ȃ��ꍇ�ɂ͗�O���������܂��B
+        /// 与えられたオブジェクトとの除算を行います。
+        /// 割り切れない場合には例外が発生します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger DivideExactly(UnsignedLongLongInteger x)
         {
@@ -960,23 +960,23 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
-        /// ����؂�Ȃ��ꍇ�ɂ͗�O���������܂��B
+        /// 二つのオブジェクトの除算を行います。
+        /// 割り切れない場合には例外が発生します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong DivideExactly(ulong x, UnsignedLongLongInteger y)
         {
             if (y._InternalValue.Length == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x == 0)
                 return (0);
             else if (y._InternalValue.Length == 1)
@@ -988,7 +988,7 @@ namespace Palmtree.Math
                     ushort r;
                     ulong q = _imp.DivideRem(x, y._InternalValue[0], out r);
                     if (r != 0)
-                        throw (new ArgumentException("�폜���͏����̔{���łȂ���΂Ȃ�܂���B"));
+                        throw (new ArgumentException("被除数は除数の倍数でなければなりません。"));
                     return (q);
                 }
             }
@@ -997,31 +997,31 @@ namespace Palmtree.Math
                 ulong r;
                 ulong q = _imp.DivideRem(x, ToULong(y._InternalValue), out r);
                 if (r != 0)
-                    throw (new ArgumentException("�폜���͏����̔{���łȂ���΂Ȃ�܂���B"));
+                    throw (new ArgumentException("被除数は除数の倍数でなければなりません。"));
                 return (q);
             }
             else
-                throw (new ArgumentException("�폜���͏����̔{���łȂ���΂Ȃ�܂���B"));
+                throw (new ArgumentException("被除数は除数の倍数でなければなりません。"));
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
-        /// ����؂�Ȃ��ꍇ�ɂ͗�O���������܂��B
+        /// 二つのオブジェクトの除算を行います。
+        /// 割り切れない場合には例外が発生します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger DivideExactly(UnsignedLongLongInteger x, ulong y)
         {
             if (y == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x._InternalValue.Length == 0)
                 return (Zero);
             else if (y == 1)
@@ -1031,7 +1031,7 @@ namespace Palmtree.Math
                 ushort r;
                 ushort[] q = _imp.DivideRem(x._InternalValue, (ushort)y, out r);
                 if (r != 0)
-                    throw (new ArgumentException("�폜���͏����̔{���łȂ���΂Ȃ�܂���B"));
+                    throw (new ArgumentException("被除数は除数の倍数でなければなりません。"));
                 return (new UnsignedLongLongInteger(q));
             }
             else
@@ -1039,28 +1039,28 @@ namespace Palmtree.Math
                 ushort[] r;
                 ushort[] q = _imp.DivideRem(x._InternalValue, CreateInternalValue(y), out r);
                 if (r.Length != 0)
-                    throw (new ArgumentException("�폜���͏����̔{���łȂ���΂Ȃ�܂���B"));
+                    throw (new ArgumentException("被除数は除数の倍数でなければなりません。"));
                 return (new UnsignedLongLongInteger(q));
             }
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
-        /// ����؂�Ȃ��ꍇ�ɂ͗�O���������܂��B
+        /// 二つのオブジェクトの除算を行います。
+        /// 割り切れない場合には例外が発生します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger DivideExactly(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
             if (y._InternalValue.Length == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x._InternalValue.Length == 0)
                 return (Zero);
             else if (y._InternalValue.Length == 1)
@@ -1072,7 +1072,7 @@ namespace Palmtree.Math
                     ushort r;
                     ushort[] q = _imp.DivideRem(x._InternalValue, y._InternalValue[0], out r);
                     if (r != 0)
-                        throw (new ArgumentException("�폜���͏����̔{���łȂ���΂Ȃ�܂���B"));
+                        throw (new ArgumentException("被除数は除数の倍数でなければなりません。"));
                     return (new UnsignedLongLongInteger(q));
                 }
             }
@@ -1081,23 +1081,23 @@ namespace Palmtree.Math
                 ushort[] r;
                 ushort[] q = _imp.DivideRem(x._InternalValue, y._InternalValue, out r);
                 if (r.Length != 0)
-                    throw (new ArgumentException("�폜���͏����̔{���łȂ���΂Ȃ�܂���B"));
+                    throw (new ArgumentException("被除数は除数の倍数でなければなりません。"));
                 return (new UnsignedLongLongInteger(q));
             }
         }
 
         #endregion
 
-        #region Mod �̃I�[�o�[���[�h
+        #region Mod のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏�]��v�Z���܂��B
+        /// 与えられたオブジェクトとの剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public ulong Mod(ulong x)
@@ -1106,13 +1106,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏�]��v�Z���܂��B
+        /// 与えられたオブジェクトとの剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Mod(UnsignedLongLongInteger x)
         {
@@ -1120,22 +1120,22 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�]��v�Z���܂��B
+        /// 二つのオブジェクトの剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong Mod(ulong x, UnsignedLongLongInteger y)
         {
             if (y._InternalValue.Length == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x == 0)
                 return (0);
             else if (y._InternalValue.Length == 1)
@@ -1160,22 +1160,22 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�]��v�Z���܂��B
+        /// 二つのオブジェクトの剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong Mod(UnsignedLongLongInteger x, ulong y)
         {
             if (y == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x._InternalValue.Length == 0)
                 return (0);
             else if (y == 1)
@@ -1196,21 +1196,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�]��v�Z���܂��B
+        /// 二つのオブジェクトの剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Mod(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
             if (y._InternalValue.Length == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x._InternalValue.Length == 0)
                 return (Zero);
             else if (y._InternalValue.Length == 1)
@@ -1234,19 +1234,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region DivRem �̃I�[�o�[���[�h
+        #region DivRem のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Ə�]��v�Z���܂��B
+        /// 与えられたオブジェクトとの商と剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger DivRem(ulong x, out ulong r)
@@ -1255,16 +1255,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Ə�]��v�Z���܂��B
+        /// 与えられたオブジェクトとの商と剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger DivRem(UnsignedLongLongInteger x, out UnsignedLongLongInteger r)
         {
@@ -1272,25 +1272,25 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger DivRem(UnsignedLongLongInteger x, ulong y, out ulong r)
         {
             if (y == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x._InternalValue.Length == 0)
             {
                 r = 0;
@@ -1319,25 +1319,25 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong DivRem(ulong x, UnsignedLongLongInteger y, out ulong r)
         {
             if (y._InternalValue.Length == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x == 0)
             {
                 r = x;
@@ -1373,24 +1373,24 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger DivRem(UnsignedLongLongInteger x, UnsignedLongLongInteger y, out UnsignedLongLongInteger r)
         {
             if (y._InternalValue.Length == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (x._InternalValue.Length == 0)
             {
                 r = x;
@@ -1422,16 +1422,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Power �̃I�[�o�[���[�h
+        #region Power のオーバーロード
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger Power(ulong exp)
@@ -1440,13 +1440,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Power(UnsignedLongLongInteger exp)
         {
@@ -1454,16 +1454,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="x">
-        /// �ׂ���̊�ł��B
+        /// べき乗の基数です。
         /// </param>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Power(ulong x, UnsignedLongLongInteger exp)
@@ -1472,16 +1472,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="x">
-        /// �ׂ���̊�ł��B
+        /// べき乗の基数です。
         /// </param>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Power(UnsignedLongLongInteger x, ulong exp)
@@ -1519,16 +1519,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="x">
-        /// �ׂ���̊�ł��B
+        /// べき乗の基数です。
         /// </param>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Power(UnsignedLongLongInteger x, UnsignedLongLongInteger exp)
         {
@@ -1576,16 +1576,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region GreatestCommonDivisor �̃I�[�o�[���[�h
+        #region GreatestCommonDivisor のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ő���񐔂�v�Z���܂��B
+        /// 与えられたオブジェクトとの最大公約数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő���񐔂�\���I�u�W�F�N�g�ł��B
+        /// 最大公約数を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger GreatestCommonDivisor(ulong x)
@@ -1594,13 +1594,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ő���񐔂�v�Z���܂��B
+        /// 与えられたオブジェクトとの最大公約数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő���񐔂�\���I�u�W�F�N�g�ł��B
+        /// 最大公約数を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger GreatestCommonDivisor(UnsignedLongLongInteger x)
         {
@@ -1608,16 +1608,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő���񐔂�v�Z���܂��B
+        /// 二つのオブジェクトの最大公約数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y�̍ő���񐔂�\���I�u�W�F�N�g�ł��B
+        /// xとyの最大公約数を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger GreatestCommonDivisor(ulong x, UnsignedLongLongInteger y)
@@ -1626,16 +1626,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő���񐔂�v�Z���܂��B
+        /// 二つのオブジェクトの最大公約数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y�̍ő���񐔂�\���I�u�W�F�N�g�ł��B
+        /// xとyの最大公約数を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger GreatestCommonDivisor(UnsignedLongLongInteger x, ulong y)
@@ -1667,16 +1667,16 @@ namespace Palmtree.Math
 
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő���񐔂�v�Z���܂��B
+        /// 二つのオブジェクトの最大公約数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y�̍ő���񐔂�\���I�u�W�F�N�g�ł��B
+        /// xとyの最大公約数を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger GreatestCommonDivisor(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -1717,16 +1717,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Max �̃I�[�o�[���[�h
+        #region Max のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ő�l����߂܂��B
+        /// 与えられたオブジェクトとの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger Max(ulong x)
@@ -1735,13 +1735,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ő�l����߂܂��B
+        /// 与えられたオブジェクトとの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Max(UnsignedLongLongInteger x)
         {
@@ -1749,16 +1749,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l��s���܂��B
+        /// 二つのオブジェクトの最大値を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Max(ulong x, UnsignedLongLongInteger y)
@@ -1767,16 +1767,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l��s���܂��B
+        /// 二つのオブジェクトの最大値を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Max(UnsignedLongLongInteger x, ulong y)
@@ -1789,16 +1789,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l��s���܂��B
+        /// 二つのオブジェクトの最大値を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Max(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -1811,16 +1811,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Min �̃I�[�o�[���[�h
+        #region Min のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ŏ��l����߂܂��B
+        /// 与えられたオブジェクトとの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public ulong Min(ulong x)
@@ -1829,13 +1829,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ŏ��l����߂܂��B
+        /// 与えられたオブジェクトとの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger Min(UnsignedLongLongInteger x)
         {
@@ -1843,16 +1843,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l��s���܂��B
+        /// 二つのオブジェクトの最小値を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong Min(ulong x, UnsignedLongLongInteger y)
@@ -1861,16 +1861,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l��s���܂��B
+        /// 二つのオブジェクトの最小値を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong Min(UnsignedLongLongInteger x, ulong y)
@@ -1883,16 +1883,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l��s���܂��B
+        /// 二つのオブジェクトの最小値を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger Min(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -1907,7 +1907,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �v���C�x�[�g���\�b�h
+        #region プライベートメソッド
 
         private static UnsignedLongLongInteger PowerImp(UnsignedLongLongInteger x, ulong exp)
         {

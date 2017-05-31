@@ -9,27 +9,27 @@
 
 using System;
 
-// ���Z�q�̃I�[�o�[���[�h�Ɋւ���K�C�h���C��:
+// 演算子のオーバーロードに関するガイドライン:
 //   http://msdn.microsoft.com/ja-jp/library/ms229032.aspx
 
 namespace Palmtree.Math
 {
     partial struct LongLongInteger
     {
-        #region ���Z�q
+        #region 演算子
 
 #if !CONCEAL_OPERATORS
 
-        #region ~ �̃I�[�o�[���[�h
+        #region ~ のオーバーロード
 
         /// <summary>
-        /// �����̃r�b�g���̔ے��v�Z���܂��B
+        /// 整数のビット毎の否定を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator ~(LongLongInteger x)
         {
@@ -38,19 +38,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region << �̃I�[�o�[���[�h
+        #region << のオーバーロード
 
         /// <summary>
-        /// ��������V�t�g���܂��B
+        /// 整数を左シフトします。
         /// </summary>
         /// <param name="x">
-        /// �V�t�g�Ώۂ̐����ł��B
+        /// シフト対象の整数です。
         /// </param>
         /// <param name="n">
-        /// �V�t�g����r�b�g���ł��B
+        /// シフトするビット数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator <<(LongLongInteger x, int n)
         {
@@ -59,19 +59,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region >> �̃I�[�o�[���[�h
+        #region >> のオーバーロード
 
         /// <summary>
-        /// ������E�V�t�g���܂��B
+        /// 整数を右シフトします。
         /// </summary>
         /// <param name="x">
-        /// �V�t�g�Ώۂ̐����ł��B
+        /// シフト対象の整数です。
         /// </param>
         /// <param name="n">
-        /// �V�t�g����r�b�g���ł��B
+        /// シフトするビット数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator >>(LongLongInteger x, int n)
         {
@@ -80,19 +80,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region & �̃I�[�o�[���[�h
+        #region & のオーバーロード
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator &(long x, LongLongInteger y)
         {
@@ -100,16 +100,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong operator &(ulong x, LongLongInteger y)
@@ -118,16 +118,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator &(UnsignedLongLongInteger x, LongLongInteger y)
         {
@@ -135,16 +135,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator &(LongLongInteger x, long y)
         {
@@ -152,16 +152,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong operator &(LongLongInteger x, ulong y)
@@ -170,16 +170,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger operator &(LongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -187,16 +187,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator &(LongLongInteger x, LongLongInteger y)
         {
@@ -205,19 +205,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region | �̃I�[�o�[���[�h
+        #region | のオーバーロード
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator |(long x, LongLongInteger y)
         {
@@ -225,16 +225,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger operator |(ulong x, LongLongInteger y)
@@ -243,16 +243,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator |(UnsignedLongLongInteger x, LongLongInteger y)
         {
@@ -260,16 +260,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator |(LongLongInteger x, long y)
         {
@@ -277,16 +277,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger operator |(LongLongInteger x, ulong y)
@@ -295,16 +295,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator |(LongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -312,16 +312,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator |(LongLongInteger x, LongLongInteger y)
         {
@@ -330,19 +330,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region ^ �̃I�[�o�[���[�h
+        #region ^ のオーバーロード
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator ^(long x, LongLongInteger y)
         {
@@ -350,16 +350,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger operator ^(ulong x, LongLongInteger y)
@@ -368,16 +368,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator ^(UnsignedLongLongInteger x, LongLongInteger y)
         {
@@ -385,16 +385,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator ^(LongLongInteger x, long y)
         {
@@ -402,16 +402,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger operator ^(LongLongInteger x, ulong y)
@@ -420,16 +420,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator ^(LongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -437,16 +437,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger operator ^(LongLongInteger x, LongLongInteger y)
         {
@@ -459,17 +459,17 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
-        #region OnesComplement �̃I�[�o�[���[�h
+        #region OnesComplement のオーバーロード
 
-        // ����: ~x == -x - 1 == -(x + 1)
+        // 公式: ~x == -x - 1 == -(x + 1)
 
         /// <summary>
-        /// �^����ꂽ�����̃r�b�g���̔ے��v�Z���܂��B
+        /// 与えられた整数のビット毎の否定を計算します。
         /// </summary>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger OnesComplement()
         {
@@ -477,13 +477,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �����̃r�b�g���̔ے��v�Z���܂��B
+        /// 整数のビット毎の否定を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger OnesComplement(UnsignedLongLongInteger x)
         {
@@ -494,13 +494,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �����̃r�b�g���̔ے��v�Z���܂��B
+        /// 整数のビット毎の否定を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger OnesComplement(LongLongInteger x)
         {
@@ -514,16 +514,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region LeftShift �̃I�[�o�[���[�h
+        #region LeftShift のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ��������V�t�g���܂��B
+        /// 与えられた整数を左シフトします。
         /// </summary>
         /// <param name="n">
-        /// �V�t�g����r�b�g���ł��B
+        /// シフトするビット数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger LeftShift(int n)
         {
@@ -531,21 +531,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��������V�t�g���܂��B
+        /// 整数を左シフトします。
         /// </summary>
         /// <param name="x">
-        /// �V�t�g�Ώۂ̐����ł��B
+        /// シフト対象の整数です。
         /// </param>
         /// <param name="n">
-        /// �V�t�g����r�b�g���ł��B
+        /// シフトするビット数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger LeftShift(LongLongInteger x, int n)
         {
             if (n < 0)
-                throw (new ArgumentException("�V�t�g�񐔂͐��܂���0�łȂ��Ă͂Ȃ�܂���B", "n"));
+                throw (new ArgumentException("シフト回数は正または0でなくてはなりません。", "n"));
             if (n == 0)
                 return (x);
             if (x._sign == SignType.Zero)
@@ -556,16 +556,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region RightShift �̃I�[�o�[���[�h
+        #region RightShift のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ������E�V�t�g���܂��B
+        /// 与えられた整数を右シフトします。
         /// </summary>
         /// <param name="n">
-        /// �V�t�g����r�b�g���ł��B
+        /// シフトするビット数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger RightShift(int n)
         {
@@ -573,21 +573,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ������E�V�t�g���܂��B
+        /// 整数を右シフトします。
         /// </summary>
         /// <param name="x">
-        /// �V�t�g�Ώۂ̐����ł��B
+        /// シフト対象の整数です。
         /// </param>
         /// <param name="n">
-        /// �V�t�g����r�b�g���ł��B
+        /// シフトするビット数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger RightShift(LongLongInteger x, int n)
         {
             if (n < 0)
-                throw (new ArgumentException("�V�t�g�񐔂͐��܂���0�łȂ��Ă͂Ȃ�܂���B", "n"));
+                throw (new ArgumentException("シフト回数は正または0でなくてはなりません。", "n"));
             if (n == 0)
                 return (x);
             if (x._sign == SignType.Zero)
@@ -600,21 +600,21 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region TruncateBit �̃I�[�o�[���[�h
+        #region TruncateBit のオーバーロード
 
         /// <summary>
-        /// ���ʂ���n�r�b�g��������đS�Ẵr�b�g��0�ɂ����l��v�Z���܂��B
+        /// 下位からnビット分を除いて全てのビットを0にした値を計算します。
         /// </summary>
         /// <param name="n">
-        /// �ێ�����r�b�g�̐��ł��B
+        /// 保持するビットの数です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger TruncateBit(int n)
         {
             if (n < 0)
-                throw (new ArgumentException("�r�b�g�̐��͐��܂���0�łȂ��Ă͂Ȃ�܂���B", "n"));
+                throw (new ArgumentException("ビットの数は正または0でなくてはなりません。", "n"));
             if (n == 0)
                 return (UnsignedLongLongInteger.Zero);
             else if (_sign == SignType.Zero)
@@ -627,22 +627,22 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region TestBit �̃I�[�o�[���[�h
+        #region TestBit のオーバーロード
 
         /// <summary>
-        /// ����ЂƂ̃r�b�g��1���ǂ����𒲂ׂ܂��B
-        /// ����� (this &amp; (1 &lt;&lt; n)) != 0 �Ɠ����ł��B 
+        /// あるひとつのビットが1かどうかを調べます。
+        /// これは (this &amp; (1 &lt;&lt; n)) != 0 と等価です。 
         /// </summary>
         /// <param name="pos">
-        /// ���ׂ�r�b�g�̈ʒu�ł��B
+        /// 調べるビットの位置です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public bool TestBit(int pos)
         {
             if (pos < 0)
-                throw (new ArgumentException("�r�b�g�̈ʒu�͐��܂���0�łȂ��Ă͂Ȃ�܂���B", "pos"));
+                throw (new ArgumentException("ビットの位置は正または0でなくてはなりません。", "pos"));
             if (_sign == SignType.Zero)
                 return (false);
             else if (_sign == SignType.Positive)
@@ -653,21 +653,21 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region SetBit �̃I�[�o�[���[�h
+        #region SetBit のオーバーロード
 
         /// <summary>
-        /// ����ЂƂ̃r�b�g��Z�b�g�����l��v�Z���܂��B
+        /// あるひとつのビットをセットした値を計算します。
         /// </summary>
         /// <param name="pos">
-        /// �Z�b�g����r�b�g�̈ʒu�ł��B
+        /// セットするビットの位置です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger SetBit(int pos)
         {
             if (pos < 0)
-                throw (new ArgumentException("�r�b�g�̈ʒu�͐��܂���0�łȂ��Ă͂Ȃ�܂���B", "pos"));
+                throw (new ArgumentException("ビットの位置は正または0でなくてはなりません。", "pos"));
             if (_sign == SignType.Zero)
                 return (UnsignedLongLongInteger.One.LeftShift(pos).ToLongLongInteger());
             else if (_sign == SignType.Positive)
@@ -678,21 +678,21 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region ClearBit �̃I�[�o�[���[�h
+        #region ClearBit のオーバーロード
 
         /// <summary>
-        /// ����ЂƂ̃r�b�g��N���A�����l��v�Z���܂��B
+        /// あるひとつのビットをクリアした値を計算します。
         /// </summary>
         /// <param name="pos">
-        /// �N���A����r�b�g�̈ʒu�ł��B
+        /// クリアするビットの位置です。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger ClearBit(int pos)
         {
             if (pos < 0)
-                throw (new ArgumentException("�r�b�g�̈ʒu�͐��܂���0�łȂ��Ă͂Ȃ�܂���B", "pos"));
+                throw (new ArgumentException("ビットの位置は正または0でなくてはなりません。", "pos"));
             if (_sign == SignType.Zero)
                 return (Zero);
             else if (_sign == SignType.Positive)
@@ -703,28 +703,28 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region BitwiseAnd �̃I�[�o�[���[�h
+        #region BitwiseAnd のオーバーロード
 
-        // z = x & y�ɂāAx��y�̂ǂ��炩�܂��͗��������̏ꍇ�ɂ͈ȉ��̂悤�ɕό`����B
+        // z = x & yにて、xとyのどちらかまたは両方が負の場合には以下のように変形する。
         //
-        // 1) x < 0, y > 0�̂Ƃ��A
-        // ���� t == ~(-t - 1)���
+        // 1) x < 0, y > 0のとき、
+        // 公式 t == ~(-t - 1)より
         // z = ~(|x| - 1) & y
         //
-        // 2) x < 0, y < 0�̂Ƃ��A
-        // ���� t == ~(-t - 1)���
+        // 2) x < 0, y < 0のとき、
+        // 公式 t == ~(-t - 1)より
         // ~(-z - 1) = ~(|x| - 1) & ~(|y| - 1)
         // (-z - 1) = (|x| - 1) | (|y| - 1)
         // z = -( (|x| - 1) | (|y| - 1) + 1 )
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 与えられた整数とのビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger BitwiseAnd(long x)
         {
@@ -732,13 +732,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 与えられた整数とのビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public ulong BitwiseAnd(ulong x)
@@ -747,13 +747,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 与えられた整数とのビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public UnsignedLongLongInteger BitwiseAnd(UnsignedLongLongInteger x)
         {
@@ -761,13 +761,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 与えられた整数とのビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger BitwiseAnd(LongLongInteger x)
         {
@@ -775,16 +775,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger BitwiseAnd(long x, LongLongInteger y)
         {
@@ -792,16 +792,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong BitwiseAnd(ulong x, LongLongInteger y)
@@ -810,16 +810,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger BitwiseAnd(UnsignedLongLongInteger x, LongLongInteger y)
         {
@@ -827,16 +827,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger BitwiseAnd(LongLongInteger x, long y)
         {
@@ -844,16 +844,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static ulong BitwiseAnd(LongLongInteger x, ulong y)
@@ -867,16 +867,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger BitwiseAnd(LongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -889,16 +889,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���ς�v�Z���܂��B
+        /// 二つの整数のビット毎の論理積を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger BitwiseAnd(LongLongInteger x, LongLongInteger y)
         {
@@ -922,29 +922,29 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region BitwiseOr �̃I�[�o�[���[�h
+        #region BitwiseOr のオーバーロード
 
-        // z = x | y�ɂāAx��y�̂ǂ��炩�܂��͗��������̏ꍇ�ɂ͈ȉ��̂悤�ɕό`����B
+        // z = x | yにて、xとyのどちらかまたは両方が負の場合には以下のように変形する。
         //
-        // 1) x < 0, y > 0�̂Ƃ��A
+        // 1) x < 0, y > 0のとき、
         // ~z = ~x | ~y
-        // ���� t == ~(-t - 1)���
+        // 公式 t == ~(-t - 1)より
         // z = -(((|x| - 1) & ~y) + 1)
         //
-        // 2) x < 0, y < 0�̂Ƃ��A
-        // ���� t == ~(-t - 1)���
+        // 2) x < 0, y < 0のとき、
+        // 公式 t == ~(-t - 1)より
         // ~(-z - 1) = ~(|x| - 1) | ~(|y| - 1)
         // (-z - 1) = (|x| - 1) & (|y| - 1)
         // z = -( (|x| - 1) & (|y| - 1) + 1 )
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̘_���a��v�Z���܂��B
+        /// 与えられた整数とのビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger BitwiseOr(long x)
         {
@@ -952,13 +952,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̘_���a��v�Z���܂��B
+        /// 与えられた整数とのビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public LongLongInteger BitwiseOr(ulong x)
@@ -967,13 +967,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̘_���a��v�Z���܂��B
+        /// 与えられた整数とのビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger BitwiseOr(UnsignedLongLongInteger x)
         {
@@ -981,13 +981,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̘_���a��v�Z���܂��B
+        /// 与えられた整数とのビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger BitwiseOr(LongLongInteger x)
         {
@@ -995,16 +995,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger BitwiseOr(long x, LongLongInteger y)
         {
@@ -1012,16 +1012,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger BitwiseOr(ulong x, LongLongInteger y)
@@ -1030,16 +1030,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger BitwiseOr(UnsignedLongLongInteger x, LongLongInteger y)
         {
@@ -1047,16 +1047,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger BitwiseOr(LongLongInteger x, long y)
         {
@@ -1064,16 +1064,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger BitwiseOr(LongLongInteger x, ulong y)
@@ -1082,16 +1082,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger BitwiseOr(LongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -1106,16 +1106,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̘_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger BitwiseOr(LongLongInteger x, LongLongInteger y)
         {
@@ -1141,30 +1141,30 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Xor �̃I�[�o�[���[�h
+        #region Xor のオーバーロード
 
-        // z = (x & ~y) | (~x & y)�ɂāAx��y�̂ǂ��炩�܂��͗��������̏ꍇ�ɂ͈ȉ��̂悤�ɕό`����B
+        // z = (x & ~y) | (~x & y)にて、xとyのどちらかまたは両方が負の場合には以下のように変形する。
         //
-        // 1) x < 0, y > 0�̂Ƃ��A
+        // 1) x < 0, y > 0のとき、
         // ~z = ~(x & ~y | (~x & y))
         // ~z = ~(x & ~y) & ~(~x & y)
         // ~z = (~x | y) & ~(~x & y)
-        // ���� t == ~(-t - 1)���
+        // 公式 t == ~(-t - 1)より
         // z = -((((|x| - 1) | y) & ~((|x| - 1) & y)) + 1)
         // 
-        // 2) x < 0, y < 0�̂Ƃ��A
+        // 2) x < 0, y < 0のとき、
         // z = (x & ~y) | (~x & y)
-        // ���� t == ~(-t - 1)���
+        // 公式 t == ~(-t - 1)より
         // z = (~(|x| - 1) & (|y| - 1)) | ((|x| - 1) & ~(|y| - 1))
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 与えられた整数とのビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger Xor(long x)
         {
@@ -1172,13 +1172,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 与えられた整数とのビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public LongLongInteger Xor(ulong x)
@@ -1187,13 +1187,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 与えられた整数とのビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger Xor(UnsignedLongLongInteger x)
         {
@@ -1201,13 +1201,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�����Ƃ̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 与えられた整数とのビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public LongLongInteger Xor(LongLongInteger x)
         {
@@ -1215,16 +1215,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger Xor(long x, LongLongInteger y)
         {
@@ -1232,16 +1232,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger Xor(ulong x, LongLongInteger y)
@@ -1250,16 +1250,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger Xor(UnsignedLongLongInteger x, LongLongInteger y)
         {
@@ -1267,16 +1267,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger Xor(LongLongInteger x, long y)
         {
@@ -1284,16 +1284,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger Xor(LongLongInteger x, ulong y)
@@ -1302,16 +1302,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger Xor(LongLongInteger x, UnsignedLongLongInteger y)
         {
@@ -1329,16 +1329,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̐����̃r�b�g���̔r���I�_���a��v�Z���܂��B
+        /// 二つの整数のビット毎の排他的論理和を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static LongLongInteger Xor(LongLongInteger x, LongLongInteger y)
         {
@@ -1378,15 +1378,15 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N�v���p�e�B
+        #region パブリックプロパティ
 
         /// <summary>
-        /// �I�u�W�F�N�g��r�b�g�z��Ƃ��Č����ꍇ�̔z��̒����ł��B
+        /// オブジェクトをビット配列として見た場合の配列の長さです。
         /// </summary>
         /// <remarks>
-        /// ���̃v���p�e�B�̒l�͈ȉ��̒�`�ɂ�苁�߂��܂��B
-        /// this�����܂���0�̏ꍇ: this + 1 &lt;= (1 &lt;&lt; n) �ł���ŏ���n
-        /// this�����̏ꍇ: -this &lt;= (1 &lt;&lt; n) �ł���ŏ���n
+        /// このプロパティの値は以下の定義により求められます。
+        /// thisが正または0の場合: this + 1 &lt;= (1 &lt;&lt; n) である最小のn
+        /// thisが負の場合: -this &lt;= (1 &lt;&lt; n) である最小のn
         /// </remarks>
         public int BitLength
         {
@@ -1399,7 +1399,7 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g��2�ׂ̂���ł���Ȃ��true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
+        /// オブジェクトが2のべき乗であるならばtrue、そうではないのならfalseです。
         /// </summary>
         public bool IsPowerOfTwo
         {
@@ -1413,7 +1413,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �v���C�x�[�g���\�b�h
+        #region プライベートメソッド
 
         private int GetBitLength()
         {

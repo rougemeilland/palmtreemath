@@ -16,12 +16,12 @@ namespace Palmtree.Math
     partial struct LongLongInteger
         : IFormattable
     {
-        #region FormatterCreator �̒�`
+        #region FormatterCreator の定義
 
         private class FormatterCreator
             : FormatterCreatorBase
         {
-            #region �R���X�g���N�^
+            #region コンストラクタ
 
             public FormatterCreator()
             {
@@ -29,7 +29,7 @@ namespace Palmtree.Math
 
             #endregion
 
-            #region FormattingTypeInfoBase ����p�����ꂽ�����o
+            #region FormattingTypeInfoBase から継承されたメンバ
 
             protected override string ValidFormatTypes
             {
@@ -57,16 +57,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
         /// <summary>
-        /// <see cref="LongLongInteger"/>�I�u�W�F�N�g�𕶎���`���ɕϊ����܂��B
+        /// <see cref="LongLongInteger"/>オブジェクトを文字列形式に変換します。
         /// </summary>
         /// <param name="format">
-        /// �ϊ��Ɏg�p���鏑���w�蕶����ł��B
+        /// 変換に使用する書式指定文字列です。
         /// </param>
         /// <returns>
-        /// <see cref="LongLongInteger"/>�I�u�W�F�N�g�̕�����`���ł��B
+        /// <see cref="LongLongInteger"/>オブジェクトの文字列形式です。
         /// </returns>
         public string ToString(string format)
         {
@@ -74,13 +74,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �w�肵����������уJ���`���ɌŗL�̏�������g�p���āA���̃C���X�^���X�̐��l�����Ɠ����ȕ�����`���ɕϊ����܂��B
+        /// 指定した書式およびカルチャに固有の書式情報を使用して、このインスタンスの数値をそれと等価な文字列形式に変換します。
         /// </summary>
         /// <param name="provider">
-        /// �J���`���ŗL�̏�������񋟂���v���o�C�_�ł��B
+        /// カルチャ固有の書式情報を提供するプロバイダです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ������ł��B
+        /// 変換された文字列です。
         /// </returns>
         public string ToString(IFormatProvider provider)
         {
@@ -89,19 +89,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region IFormattable �����o
+        #region IFormattable メンバ
 
         /// <summary>
-        /// �w�肵����������уJ���`���ɌŗL�̏�������g�p���āA���̃C���X�^���X�̐��l�����Ɠ����ȕ�����`���ɕϊ����܂��B
+        /// 指定した書式およびカルチャに固有の書式情報を使用して、このインスタンスの数値をそれと等価な文字列形式に変換します。
         /// </summary>
         /// <param name="format">
-        /// ������\��������ł��B
+        /// 書式を表す文字列です。
         /// </param>
         /// <param name="provider">
-        /// �J���`���ŗL�̏�������񋟂���v���o�C�_�ł��B
+        /// カルチャ固有の書式情報を提供するプロバイダです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ������ł��B
+        /// 変換された文字列です。
         /// </returns>
         public string ToString(string format, IFormatProvider provider)
         {

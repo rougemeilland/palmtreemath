@@ -15,14 +15,14 @@ namespace Palmtree.Math.Formatter
     internal class FixedNumberSequence
         : INumberSequence
     {
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private byte[] _digits;
         private int _index;
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         public FixedNumberSequence(byte[] digits)
         {
@@ -32,7 +32,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �v���C�x�[�g���\�b�h
+        #region プライベートメソッド
 
         public static byte[] HalfAdjust(byte[] digits, byte last_digit, IBaseNumberInfo base_number_info, ref int offset)
         {
@@ -63,7 +63,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region INumberSequence �����o
+        #region INumberSequence メンバ
 
         bool INumberSequence.IsZero
         {

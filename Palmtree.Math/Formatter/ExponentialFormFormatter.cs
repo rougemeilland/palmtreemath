@@ -17,7 +17,7 @@ namespace Palmtree.Math.Formatter
     internal class ExponentialFormFormatter
         : INumberFormatter
     {
-        #region ExponentialPartDigits �̒�`
+        #region ExponentialPartDigits の定義
 
         public enum ExponentialPartDigits
         {
@@ -27,7 +27,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �v���C�x�[�g�t�B�[���h
+        #region プライベートフィールド
 
         private IParserOfNumber _parser;
         private NumberFormatInfo _info;
@@ -37,12 +37,12 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region �R���X�g���N�^
+        #region コンストラクタ
 
         public ExponentialFormFormatter(IParserOfNumber parser, NumberFormatInfo info, bool negative, FormatterSpecification formatter_spec, ExponentialPartDigits exponential_part_digits)
         {
             if (!parser.BaseNumberInfo.AllowedExponentialForm)
-                throw (new ArgumentException(@"�w���\���̃t�H�[�}�b�^�Ɏw���\�����g�p�ł��Ȃ��p�[�T���^�����܂����B", "parser"));
+                throw (new ArgumentException(@"指数表現のフォーマッタに指数表現が使用できないパーサが与えられました。", "parser"));
             _parser = parser;
             _info = info;
             _negative = negative;
@@ -52,7 +52,7 @@ namespace Palmtree.Math.Formatter
 
         #endregion
 
-        #region INumberFormatter �����o
+        #region INumberFormatter メンバ
 
         string INumberFormatter.Format()
         {

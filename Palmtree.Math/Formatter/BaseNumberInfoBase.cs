@@ -1,4 +1,4 @@
-/*
+﻿/*
   BaseNumberInfoBase.cs
 
   Copyright (c) 2017 Palmtree Software
@@ -21,6 +21,7 @@ namespace Palmtree.Math.Formatter
     {
         #region プライベートフィールド
 
+        private static ImplementOfUnsignedLongLongInteger _imp;
         private byte _base_number_value;
         private bool _allowed_exponential_form;
         private Dictionary<char, byte> _digits_keyd_by_char;
@@ -140,6 +141,18 @@ namespace Palmtree.Math.Formatter
         /// 有理数が小数以下有限桁数で表現できると判断可能ならtrue、そうではないのならfalseです。
         /// </returns>
         protected abstract bool IsRationalNumberRepresentableByFiniteDigits(ushort[] denominator);
+
+        #endregion
+
+        #region プロテクテッドプロパティ
+
+        protected ImplementOfUnsignedLongLongInteger Imp
+        {
+            get
+            {
+                return (_imp);
+            }
+        }
 
         #endregion
 

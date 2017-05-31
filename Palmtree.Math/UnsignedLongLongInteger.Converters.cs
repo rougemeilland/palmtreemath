@@ -9,9 +9,9 @@
 
 using System;
 
-// ���Z�q�̃I�[�o�[���[�h�Ɋւ���K�C�h���C��:
+// 演算子のオーバーロードに関するガイドライン:
 //   http://msdn.microsoft.com/ja-jp/library/ms229032.aspx
-// �ϊ����Z�q�̃K�C�h���C���F
+// 変換演算子のガイドライン：
 //   http://msdn.microsoft.com/ja-jp/library/ms229033(v=VS.100).aspx
 
 namespace Palmtree.Math
@@ -19,18 +19,18 @@ namespace Palmtree.Math
     partial struct UnsignedLongLongInteger
          : IConvertible
     {
-        #region ���Z�q
+        #region 演算子
 
 #if !CONCEAL_OPERATORS
 
         /// <summary>
-        /// <see cref="sbyte"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="sbyte"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static explicit operator UnsignedLongLongInteger(sbyte o)
@@ -39,13 +39,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="short"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="short"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator UnsignedLongLongInteger(short o)
         {
@@ -53,13 +53,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="int"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="int"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator UnsignedLongLongInteger(int o)
         {
@@ -67,13 +67,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="long"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="long"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator UnsignedLongLongInteger(long o)
         {
@@ -84,13 +84,13 @@ namespace Palmtree.Math
 
 
         /// <summary>
-        /// <see cref="byte"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="byte"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static implicit operator UnsignedLongLongInteger(byte o)
         {
@@ -98,13 +98,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="ushort"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="ushort"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static implicit operator UnsignedLongLongInteger(ushort o)
@@ -113,13 +113,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="uint"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="uint"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static implicit operator UnsignedLongLongInteger(uint o)
@@ -128,13 +128,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="ulong"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="ulong"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static implicit operator UnsignedLongLongInteger(ulong o)
@@ -145,13 +145,13 @@ namespace Palmtree.Math
 #endif
 
         /// <summary>
-        /// <see cref="float"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="float"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator UnsignedLongLongInteger(float o)
         {
@@ -159,13 +159,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="double"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="double"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator UnsignedLongLongInteger(double o)
         {
@@ -173,13 +173,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="decimal"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="decimal"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator UnsignedLongLongInteger(decimal o)
         {
@@ -187,13 +187,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="sbyte"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="sbyte"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static explicit operator sbyte(UnsignedLongLongInteger o)
@@ -202,13 +202,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="short"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="short"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator short(UnsignedLongLongInteger o)
         {
@@ -216,13 +216,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="int"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="int"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator int(UnsignedLongLongInteger o)
         {
@@ -230,13 +230,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="long"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="long"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator long(UnsignedLongLongInteger o)
         {
@@ -244,13 +244,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="byte"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="byte"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator byte(UnsignedLongLongInteger o)
         {
@@ -258,13 +258,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="ushort"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="ushort"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static explicit operator ushort(UnsignedLongLongInteger o)
@@ -273,13 +273,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="uint"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="uint"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static explicit operator uint(UnsignedLongLongInteger o)
@@ -288,13 +288,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="ulong"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="ulong"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static explicit operator ulong(UnsignedLongLongInteger o)
@@ -303,13 +303,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="float"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="float"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator float(UnsignedLongLongInteger o)
         {
@@ -317,13 +317,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="double"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="double"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator double(UnsignedLongLongInteger o)
         {
@@ -331,13 +331,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="decimal"/>�^�ɕϊ����鉉�Z�q�ł��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="decimal"/>型に変換する演算子です。
         /// </summary>
         /// <param name="o">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static explicit operator decimal(UnsignedLongLongInteger o)
         {
@@ -348,16 +348,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
         /// <summary>
-        /// <see cref="sbyte"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="sbyte"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger FromSByte(sbyte value)
@@ -373,13 +373,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="short"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="short"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger FromInt16(short value)
         {
@@ -394,13 +394,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="int"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="int"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger FromInt32(int value)
         {
@@ -415,13 +415,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="long"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="long"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger FromInt64(long value)
         {
@@ -436,13 +436,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="byte"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="byte"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger FromByte(byte value)
         {
@@ -450,13 +450,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="ushort"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="ushort"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger FromUInt16(ushort value)
@@ -465,13 +465,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="uint"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="uint"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger FromUInt32(uint value)
@@ -480,13 +480,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="ulong"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="ulong"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger FromUInt64(ulong value)
@@ -495,13 +495,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="float"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="float"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger FromSingle(float value)
         {
@@ -516,13 +516,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="double"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="double"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger FromDouble(double value)
         {
@@ -537,13 +537,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="decimal"/>�I�u�W�F�N�g�𖾎��I��<see cref="UnsignedLongLongInteger"/>�^�ɕϊ����܂��B
+        /// <see cref="decimal"/>オブジェクトを明示的に<see cref="UnsignedLongLongInteger"/>型に変換します。
         /// </summary>
         /// <param name="value">
-        /// �ϊ�����I�u�W�F�N�g�ł��B
+        /// 変換するオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public static UnsignedLongLongInteger FromDecimal(decimal value)
         {
@@ -558,10 +558,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="sbyte"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="sbyte"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public sbyte ToSByte()
@@ -570,10 +570,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="short"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="short"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public short ToInt16()
         {
@@ -581,10 +581,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="int"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="int"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public int ToInt32()
         {
@@ -592,10 +592,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="long"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="long"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public long ToInt64()
         {
@@ -603,10 +603,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="byte"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="byte"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public byte ToByte()
         {
@@ -614,10 +614,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="ushort"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="ushort"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public ushort ToUInt16()
@@ -626,10 +626,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="uint"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="uint"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public uint ToUInt32()
@@ -638,10 +638,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="ulong"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="ulong"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public ulong ToUInt64()
@@ -650,10 +650,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="float"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="float"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public float ToSingle()
         {
@@ -664,10 +664,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="double"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="double"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public double ToDouble()
         {
@@ -678,10 +678,10 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// <see cref="UnsignedLongLongInteger"/>�I�u�W�F�N�g�𖾎��I��<see cref="decimal"/>�^�ɕϊ����܂��B
+        /// <see cref="UnsignedLongLongInteger"/>オブジェクトを明示的に<see cref="decimal"/>型に変換します。
         /// </summary>
         /// <returns>
-        /// �ϊ����ꂽ�I�u�W�F�N�g�ł��B
+        /// 変換されたオブジェクトです。
         /// </returns>
         public decimal ToDecimal()
         {
@@ -700,7 +700,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �v���C�x�[�g���\�b�h
+        #region プライベートメソッド
 
         private bool ToBoolean()
         {
@@ -722,17 +722,17 @@ namespace Palmtree.Math
 
         private static Exception CreateOverflowExceptionObject(Type target_type, object value)
         {
-            return (new OverflowException(string.Format(@"{0} �^�̃I�u�W�F�N�g'{1}'�́A{2} �^�ł͕\���ł��Ȃ��l�ł��B", value.GetType().FullName, value.ToString(), target_type.FullName)));
+            return (new OverflowException(string.Format(@"{0} 型のオブジェクト'{1}'は、{2} 型では表現できない値です。", value.GetType().FullName, value.ToString(), target_type.FullName)));
         }
 
         private static Exception CreateOverflowExceptionObject(Type target_type, object value, Exception e)
         {
-            return (new OverflowException(string.Format(@"{0} �^�̃I�u�W�F�N�g'{1}'�́A{2} �^�ł͕\���ł��Ȃ��l�ł��B", value.GetType().FullName, value.ToString(), target_type.FullName), e));
+            return (new OverflowException(string.Format(@"{0} 型のオブジェクト'{1}'は、{2} 型では表現できない値です。", value.GetType().FullName, value.ToString(), target_type.FullName), e));
         }
 
         #endregion
 
-        #region IConvertible �����o
+        #region IConvertible メンバ
 
         bool IConvertible.ToBoolean(IFormatProvider provider)
         {
@@ -751,7 +751,7 @@ namespace Palmtree.Math
 
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
-            throw (new InvalidCastException("DateTime�^�ɕϊ����邱�Ƃ͂ł��܂���B"));
+            throw (new InvalidCastException("DateTime型に変換することはできません。"));
         }
 
         decimal IConvertible.ToDecimal(IFormatProvider provider)
@@ -853,7 +853,7 @@ namespace Palmtree.Math
             else if (conversionType == typeof(ulong))
                 return (((IConvertible)this).ToUInt64(provider));
             else
-                throw (new InvalidCastException(conversionType.FullName + "�^�ɂ͕ϊ��ł��܂���B"));
+                throw (new InvalidCastException(conversionType.FullName + "型には変換できません。"));
         }
 
         #endregion

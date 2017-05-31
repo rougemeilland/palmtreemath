@@ -12,9 +12,9 @@ namespace Palmtree.Math.Formatter
     internal interface INumberSequence
     {
         /// <summary>
-        /// �܂�GetDigit()��0�łȂ��������擾�ł���\�����Ȃ��Ȃ�true�A�����ł͂Ȃ��̂Ȃ�false�ł��B
-        /// ���̃v���p�e�B��true�ɂȂ����ꍇ�A����ȍ~�̌��͏o�͂���Ȃ����Ƃ�����܂��B
-        /// �m���ɏo�͂��������ł͂��̃v���p�e�B��false�ɂȂ�悤�ɂ��Ă��������B
+        /// まだGetDigit()で0でない数字が取得できる可能性がないならtrue、そうではないのならfalseです。
+        /// このプロパティがtrueになった場合、それ以降の桁は出力されないことがあります。
+        /// 確実に出力したい桁ではこのプロパティがfalseになるようにしてください。
         /// </summary>
         bool IsZero
         {
@@ -22,10 +22,10 @@ namespace Palmtree.Math.Formatter
         }
 
         /// <summary>
-        /// ���̈ꌅ�̐�������o���܂��B
+        /// 次の一桁の数字を取り出します。
         /// </summary>
         /// <returns>
-        /// �����ł��B
+        /// 数字です。
         /// </returns>
         byte GetDigit();
     }
@@ -33,10 +33,10 @@ namespace Palmtree.Math.Formatter
     internal interface IParserOfNumber
     {
         /// <summary>
-        /// ���Ȃ�ΐ������̌����ł��B
-        /// ���Ȃ�Ώ������̐�s����0�̐��ł��B
-        /// ��F���ۂ̒l��"1234.56"�Ȃ��4�ł��B
-        /// ��F���ۂ̒l��"0.00123456"�Ȃ��-2�ł��B
+        /// 正ならば整数部の桁数です。
+        /// 負ならば小数部の先行する0の数です。
+        /// 例：実際の値が"1234.56"ならば4です。
+        /// 例：実際の値が"0.00123456"ならば-2です。
         /// </summary>
         int Offset
         {
@@ -44,7 +44,7 @@ namespace Palmtree.Math.Formatter
         }
 
         /// <summary>
-        /// �L�������ł��邱�Ƃ��ۏ؂���Ă���Ȃ��true�A�L���ł���Ƃ͌���Ȃ��Ȃ��false�ł��B
+        /// 有限桁数であることが保証されているならばtrue、有限であるとは限らないならばfalseです。
         /// </summary>
         bool IsLimittedDigits
         {
@@ -52,7 +52,7 @@ namespace Palmtree.Math.Formatter
         }
 
         /// <summary>
-        /// �������擾���邽�߂̃C���^�[�t�F�[�X�ł��B
+        /// 数字列を取得するためのインターフェースです。
         /// </summary>
         INumberSequence NumberSequence
         {
@@ -60,23 +60,23 @@ namespace Palmtree.Math.Formatter
         }
 
         /// <summary>
-        /// ��������̐����ɑ������镶����ɕϊ����܂��B
+        /// 数字をその数字に相当する文字列に変換します。
         /// </summary>
         /// <param name="digit">
-        /// �ϊ����鐔���ł��B
+        /// 変換する数字です。
         /// </param>
         /// <returns>
-        /// �ϊ����ꂽ������ł��B
+        /// 変換された文字列です。
         /// </returns>
         string FormatDigit(byte digit);
 
         /// <summary>
-        /// ��Ɉˑ�������ł��B
+        /// 基数に依存する情報です。
         /// </summary>
         IBaseNumberInfo BaseNumberInfo { get; }
 
         /// <summary>
-        /// �\�����鐔�l���Œጅ���ɖ����Ȃ��ꍇ�ɍŏ�ʌ��Ƀp�f�B���O���鐔���ł��B
+        /// 表示する数値が最低桁数に満たない場合に最上位桁にパディングする数字です。
         /// </summary>
         byte MostSignificantPaddingDigit
         {

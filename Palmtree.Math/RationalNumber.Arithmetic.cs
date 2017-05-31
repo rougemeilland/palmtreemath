@@ -10,27 +10,27 @@
 using System;
 using Palmtree.Math.Round;
 
-// ���Z�q�̃I�[�o�[���[�h�Ɋւ���K�C�h���C��:
+// 演算子のオーバーロードに関するガイドライン:
 //   http://msdn.microsoft.com/ja-jp/library/ms229032.aspx
 
 namespace Palmtree.Math
 {
     partial struct RationalNumber
     {
-        #region ���Z�q
+        #region 演算子
 
 #if !CONCEAL_OPERATORS
 
-        #region �P�� + ���Z�q�̃I�[�o�[���[�h
+        #region 単項 + 演算子のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g����̂܂ܕԂ��܂��B
+        /// 与えられたオブジェクトをそのまま返します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x�ɓ������I�u�W�F�N�g�ł��B
+        /// xに等しいオブジェクトです。
         /// </returns>
         public static RationalNumber operator +(RationalNumber x)
         {
@@ -39,16 +39,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �P�� - ���Z�q�̃I�[�o�[���[�h
+        #region 単項 - 演算子のオーバーロード
 
         /// <summary>
-        /// �I�u�W�F�N�g�̕������]��s���܂��B
+        /// オブジェクトの符号反転を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x�̕������]�̌��ʂ�\���I�u�W�F�N�g�ł��B
+        /// xの符号反転の結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator -(RationalNumber x)
         {
@@ -57,19 +57,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �� + ���Z�q�̃I�[�o�[���[�h
+        #region 二項 + 演算子のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator +(long x, RationalNumber y)
         {
@@ -77,16 +77,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber operator +(ulong x, RationalNumber y)
@@ -95,16 +95,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator +(UnsignedLongLongInteger x, RationalNumber y)
         {
@@ -112,16 +112,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator +(LongLongInteger x, RationalNumber y)
         {
@@ -129,16 +129,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator +(RationalNumber x, long y)
         {
@@ -146,16 +146,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber operator +(RationalNumber x, ulong y)
@@ -164,16 +164,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator +(RationalNumber x, UnsignedLongLongInteger y)
         {
@@ -181,16 +181,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator +(RationalNumber x, LongLongInteger y)
         {
@@ -198,16 +198,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator +(RationalNumber x, RationalNumber y)
         {
@@ -216,19 +216,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �� - ���Z�q�̃I�[�o�[���[�h
+        #region 二項 - 演算子のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator -(long x, RationalNumber y)
         {
@@ -236,16 +236,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber operator -(ulong x, RationalNumber y)
@@ -254,16 +254,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator -(UnsignedLongLongInteger x, RationalNumber y)
         {
@@ -271,16 +271,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator -(LongLongInteger x, RationalNumber y)
         {
@@ -288,16 +288,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator -(RationalNumber x, long y)
         {
@@ -305,16 +305,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber operator -(RationalNumber x, ulong y)
@@ -323,16 +323,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator -(RationalNumber x, UnsignedLongLongInteger y)
         {
@@ -340,16 +340,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator -(RationalNumber x, LongLongInteger y)
         {
@@ -357,16 +357,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator -(RationalNumber x, RationalNumber y)
         {
@@ -375,19 +375,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �� * ���Z�q�̃I�[�o�[���[�h
+        #region 二項 * 演算子のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator *(long x, RationalNumber y)
         {
@@ -395,16 +395,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber operator *(ulong x, RationalNumber y)
@@ -413,16 +413,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator *(UnsignedLongLongInteger x, RationalNumber y)
         {
@@ -430,16 +430,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator *(LongLongInteger x, RationalNumber y)
         {
@@ -447,16 +447,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator *(RationalNumber x, long y)
         {
@@ -464,16 +464,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber operator *(RationalNumber x, ulong y)
@@ -482,16 +482,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator *(RationalNumber x, UnsignedLongLongInteger y)
         {
@@ -499,16 +499,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator *(RationalNumber x, LongLongInteger y)
         {
@@ -516,16 +516,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator *(RationalNumber x, RationalNumber y)
         {
@@ -534,19 +534,19 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �� / ���Z�q�̃I�[�o�[���[�h
+        #region 二項 / 演算子のオーバーロード
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// x��y�ŏ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xをyで除算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator /(long x, RationalNumber y)
         {
@@ -554,16 +554,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// x��y�ŏ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xをyで除算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber operator /(ulong x, RationalNumber y)
@@ -572,16 +572,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// x��y�ŏ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xをyで除算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator /(UnsignedLongLongInteger x, RationalNumber y)
         {
@@ -589,16 +589,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// x��y�ŏ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xをyで除算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator /(LongLongInteger x, RationalNumber y)
         {
@@ -606,16 +606,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// x��y�ŏ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xをyで除算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator /(RationalNumber x, long y)
         {
@@ -623,16 +623,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// x��y�ŏ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xをyで除算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber operator /(RationalNumber x, ulong y)
@@ -641,16 +641,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// x��y�ŏ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xをyで除算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator /(RationalNumber x, UnsignedLongLongInteger y)
         {
@@ -658,16 +658,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// x��y�ŏ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xをyで除算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator /(RationalNumber x, LongLongInteger y)
         {
@@ -675,21 +675,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// x��y�ŏ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xをyで除算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber operator /(RationalNumber x, RationalNumber y)
         {
             if (y.Sign == 0)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else if (y.Sign > 0)
                 return (new RationalNumber(x._InternalNumerator * y._InternalDenominator, x._InternalDenominator * y._InternalNumerator.Abs()));
             else
@@ -702,18 +702,18 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �p�u���b�N���\�b�h
+        #region パブリックメソッド
 
-        #region Add �̃I�[�o�[���[�h
+        #region Add のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̉��Z��s���܂��B
+        /// 与えられたオブジェクトとの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 加算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Add(long x)
         {
@@ -721,13 +721,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̉��Z��s���܂��B
+        /// 与えられたオブジェクトとの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public RationalNumber Add(ulong x)
@@ -736,13 +736,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̉��Z��s���܂��B
+        /// 与えられたオブジェクトとの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 加算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Add(UnsignedLongLongInteger x)
         {
@@ -750,13 +750,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̉��Z��s���܂��B
+        /// 与えられたオブジェクトとの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 加算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Add(LongLongInteger x)
         {
@@ -764,13 +764,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̉��Z��s���܂��B
+        /// 与えられたオブジェクトとの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 加算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Add(RationalNumber x)
         {
@@ -778,16 +778,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Add(long x, RationalNumber y)
         {
@@ -795,16 +795,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Add(ulong x, RationalNumber y)
@@ -813,16 +813,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Add(UnsignedLongLongInteger x, RationalNumber y)
         {
@@ -830,16 +830,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Add(LongLongInteger x, RationalNumber y)
         {
@@ -847,16 +847,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Add(RationalNumber x, long y)
         {
@@ -864,16 +864,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Add(RationalNumber x, ulong y)
@@ -882,16 +882,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Add(RationalNumber x, UnsignedLongLongInteger y)
         {
@@ -902,16 +902,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Add(RationalNumber x, LongLongInteger y)
         {
@@ -922,16 +922,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̉��Z��s���܂��B
+        /// 二つのオブジェクトの加算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Add(RationalNumber x, RationalNumber y)
         {
@@ -943,16 +943,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Subtract �̃I�[�o�[���[�h
+        #region Subtract のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̌��Z��s���܂��B
+        /// 与えられたオブジェクトとの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 減算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Subtract(long x)
         {
@@ -960,13 +960,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̌��Z��s���܂��B
+        /// 与えられたオブジェクトとの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public RationalNumber Subtract(ulong x)
@@ -975,13 +975,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̌��Z��s���܂��B
+        /// 与えられたオブジェクトとの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 減算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Subtract(UnsignedLongLongInteger x)
         {
@@ -989,13 +989,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̌��Z��s���܂��B
+        /// 与えられたオブジェクトとの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 減算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Subtract(LongLongInteger x)
         {
@@ -1003,13 +1003,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̌��Z��s���܂��B
+        /// 与えられたオブジェクトとの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 減算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Subtract(RationalNumber x)
         {
@@ -1017,16 +1017,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Subtract(long x, RationalNumber y)
         {
@@ -1034,16 +1034,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Subtract(ulong x, RationalNumber y)
@@ -1052,16 +1052,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Subtract(UnsignedLongLongInteger x, RationalNumber y)
         {
@@ -1072,16 +1072,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Subtract(LongLongInteger x, RationalNumber y)
         {
@@ -1092,16 +1092,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Subtract(RationalNumber x, long y)
         {
@@ -1109,16 +1109,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Subtract(RationalNumber x, ulong y)
@@ -1127,16 +1127,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Subtract(RationalNumber x, UnsignedLongLongInteger y)
         {
@@ -1147,16 +1147,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Subtract(RationalNumber x, LongLongInteger y)
         {
@@ -1167,16 +1167,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̌��Z��s���܂��B
+        /// 二つのオブジェクトの減算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x����y����Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Subtract(RationalNumber x, RationalNumber y)
         {
@@ -1188,16 +1188,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Multiply �̃I�[�o�[���[�h
+        #region Multiply のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏�Z��s���܂��B
+        /// 与えられたオブジェクトとの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 乗算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Multiply(long x)
         {
@@ -1205,13 +1205,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏�Z��s���܂��B
+        /// 与えられたオブジェクトとの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public RationalNumber Multiply(ulong x)
@@ -1220,13 +1220,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏�Z��s���܂��B
+        /// 与えられたオブジェクトとの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 乗算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Multiply(UnsignedLongLongInteger x)
         {
@@ -1234,13 +1234,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏�Z��s���܂��B
+        /// 与えられたオブジェクトとの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 乗算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Multiply(LongLongInteger x)
         {
@@ -1248,13 +1248,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏�Z��s���܂��B
+        /// 与えられたオブジェクトとの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// ��Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// 乗算した結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Multiply(RationalNumber x)
         {
@@ -1262,16 +1262,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Multiply(long x, RationalNumber y)
         {
@@ -1279,16 +1279,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Multiply(ulong x, RationalNumber y)
@@ -1297,16 +1297,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Multiply(UnsignedLongLongInteger x, RationalNumber y)
         {
@@ -1314,16 +1314,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Multiply(LongLongInteger x, RationalNumber y)
         {
@@ -1331,16 +1331,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Multiply(RationalNumber x, long y)
         {
@@ -1348,16 +1348,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Multiply(RationalNumber x, ulong y)
@@ -1366,16 +1366,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Multiply(RationalNumber x, UnsignedLongLongInteger y)
         {
@@ -1383,16 +1383,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Multiply(RationalNumber x, LongLongInteger y)
         {
@@ -1400,16 +1400,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏�Z��s���܂��B
+        /// 二つのオブジェクトの乗算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// x��y���Z�������ʂ�\���I�u�W�F�N�g�ł��B
+        /// xとyを乗算した結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Multiply(RationalNumber x, RationalNumber y)
         {
@@ -1418,16 +1418,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Divide �̃I�[�o�[���[�h
+        #region Divide のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Z��s���܂��B
+        /// 与えられたオブジェクトとの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public RationalNumber Divide(long x)
         {
@@ -1435,13 +1435,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Z��s���܂��B
+        /// 与えられたオブジェクトとの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public RationalNumber Divide(ulong x)
@@ -1450,13 +1450,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Z��s���܂��B
+        /// 与えられたオブジェクトとの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public RationalNumber Divide(UnsignedLongLongInteger x)
         {
@@ -1464,13 +1464,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Z��s���܂��B
+        /// 与えられたオブジェクトとの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public RationalNumber Divide(LongLongInteger x)
         {
@@ -1478,13 +1478,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Z��s���܂��B
+        /// 与えられたオブジェクトとの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public RationalNumber Divide(RationalNumber x)
         {
@@ -1492,16 +1492,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Divide(long x, RationalNumber y)
         {
@@ -1509,16 +1509,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Divide(ulong x, RationalNumber y)
@@ -1527,23 +1527,23 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Divide(UnsignedLongLongInteger x, RationalNumber y)
         {
             switch (y._InternalNumerator.InternalSign)
             {
                 case SignType.Zero:
-                    throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                    throw (new DivideByZeroException("0による除算が行われようとしました。"));
                 case SignType.Positive:
                     return (new RationalNumber(x.ToLongLongInteger().Multiply(y._InternalDenominator), y._InternalNumerator.Abs()));
                 default:
@@ -1552,23 +1552,23 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Divide(LongLongInteger x, RationalNumber y)
         {
             switch (y._InternalNumerator.InternalSign)
             {
                 case SignType.Zero:
-                    throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                    throw (new DivideByZeroException("0による除算が行われようとしました。"));
                 case SignType.Positive:
                     return (new RationalNumber(x.Multiply(y._InternalDenominator), y._InternalNumerator.Abs()));
                 default:
@@ -1577,16 +1577,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Divide(RationalNumber x, long y)
         {
@@ -1594,16 +1594,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Divide(RationalNumber x, ulong y)
@@ -1612,43 +1612,43 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Divide(RationalNumber x, UnsignedLongLongInteger y)
         {
             if (y.IsZero)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else
                 return (new RationalNumber(x._InternalNumerator, x._InternalDenominator.Multiply(y)));
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Divide(RationalNumber x, LongLongInteger y)
         {
             switch (y.InternalSign)
             {
                 case SignType.Zero:
-                    throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                    throw (new DivideByZeroException("0による除算が行われようとしました。"));
                 case SignType.Positive:
                     return (new RationalNumber(x._InternalNumerator, x._InternalDenominator.Multiply(y.Abs())));
                 default:
@@ -1657,23 +1657,23 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Z��s���܂��B
+        /// 二つのオブジェクトの除算を行います。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Divide(RationalNumber x, RationalNumber y)
         {
             switch (y._InternalNumerator.InternalSign)
             {
                 case SignType.Zero:
-                    throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                    throw (new DivideByZeroException("0による除算が行われようとしました。"));
                 case SignType.Positive:
                     return (new RationalNumber(x._InternalNumerator.Multiply(y._InternalDenominator), x._InternalDenominator.Multiply(y._InternalNumerator.Abs())));
                 default:
@@ -1683,21 +1683,21 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region DivRem �̃I�[�o�[���[�h
+        #region DivRem のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 与えられたオブジェクトとの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public LongLongInteger DivRem(long x, out RationalNumber r)
         {
@@ -1705,18 +1705,18 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 与えられたオブジェクトとの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public LongLongInteger DivRem(ulong x, out RationalNumber r)
@@ -1725,18 +1725,18 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 与えられたオブジェクトとの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public LongLongInteger DivRem(UnsignedLongLongInteger x, out RationalNumber r)
         {
@@ -1744,18 +1744,18 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 与えられたオブジェクトとの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public LongLongInteger DivRem(LongLongInteger x, out RationalNumber r)
         {
@@ -1763,18 +1763,18 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 与えられたオブジェクトとの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public LongLongInteger DivRem(RationalNumber x, out RationalNumber r)
         {
@@ -1782,21 +1782,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static LongLongInteger DivRem(long x, RationalNumber y, out RationalNumber r)
         {
@@ -1804,21 +1804,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger DivRem(ulong x, RationalNumber y, out RationalNumber r)
@@ -1827,21 +1827,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static LongLongInteger DivRem(UnsignedLongLongInteger x, RationalNumber y, out RationalNumber r)
         {
@@ -1850,7 +1850,7 @@ namespace Palmtree.Math
             switch (y._InternalNumerator.InternalSign)
             {
                 case SignType.Zero:
-                    throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                    throw (new DivideByZeroException("0による除算が行われようとしました。"));
                 case SignType.Positive:
                     t = x.Multiply(y._InternalDenominator);
                     q = FloorImp(SignType.Positive, t, y._InternalNumerator.Abs());
@@ -1865,21 +1865,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static LongLongInteger DivRem(LongLongInteger x, RationalNumber y, out RationalNumber r)
         {
@@ -1888,7 +1888,7 @@ namespace Palmtree.Math
             switch (y._InternalNumerator.InternalSign)
             {
                 case SignType.Zero:
-                    throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                    throw (new DivideByZeroException("0による除算が行われようとしました。"));
                 case SignType.Positive:
                     t = x.Multiply(y._InternalDenominator);
                     q = FloorImp(t.InternalSign, t.Abs(), y._InternalNumerator.Abs());
@@ -1904,21 +1904,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static LongLongInteger DivRem(RationalNumber x, long y, out RationalNumber r)
         {
@@ -1926,21 +1926,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static LongLongInteger DivRem(RationalNumber x, ulong y, out RationalNumber r)
@@ -1949,26 +1949,26 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static LongLongInteger DivRem(RationalNumber x, UnsignedLongLongInteger y, out RationalNumber r)
         {
             if (y.IsZero)
-                throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                throw (new DivideByZeroException("0による除算が行われようとしました。"));
             else
             {
                 UnsignedLongLongInteger t = x._InternalDenominator.Multiply(y);
@@ -1979,21 +1979,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static LongLongInteger DivRem(RationalNumber x, LongLongInteger y, out RationalNumber r)
         {
@@ -2002,7 +2002,7 @@ namespace Palmtree.Math
             switch (y.InternalSign)
             {
                 case SignType.Zero:
-                    throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                    throw (new DivideByZeroException("0による除算が行われようとしました。"));
                 case SignType.Positive:
                     t = x._InternalDenominator.Multiply(y.Abs());
                     q = FloorImp(x._InternalNumerator.InternalSign, x._InternalNumerator.Abs(), t);
@@ -2017,21 +2017,21 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̏��Ə�]��v�Z���܂��B
-        /// �폜����u�A������v�Ƃ����ꍇ�A��q�Ə�]r�͈ȉ��̎��Œ�`����܂��B
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// 被除数がu、除数がvとした場合、商qと剰余rは以下の式で定義されます。
         /// q = Floor(x / y), r = x - q * y
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(�폜��)
+        /// 計算対象のオブジェクトです。(被除数)
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B(����)
+        /// 計算対象のオブジェクトです。(除数)
         /// </param>
         /// <param name="r">
-        /// ��]��\���I�u�W�F�N�g�ł��B
+        /// 剰余を表すオブジェクトです。
         /// </param>
         /// <returns>
-        /// ����\���I�u�W�F�N�g�ł��B
+        /// 商を表すオブジェクトです。
         /// </returns>
         public static LongLongInteger DivRem(RationalNumber x, RationalNumber y, out RationalNumber r)
         {
@@ -2041,7 +2041,7 @@ namespace Palmtree.Math
             switch (y._InternalNumerator.InternalSign)
             {
                 case SignType.Zero:
-                    throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                    throw (new DivideByZeroException("0による除算が行われようとしました。"));
                 case SignType.Positive:
                     t1 = x._InternalNumerator.Multiply(y._InternalDenominator);
                     t2 = x._InternalDenominator.Multiply(y._InternalNumerator.Abs());
@@ -2059,13 +2059,13 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Negate �̃I�[�o�[���[�h
+        #region Negate のオーバーロード
 
         /// <summary>
-        /// ���������]�����l��v�Z���܂��B
+        /// 符号が反転した値を計算します。
         /// </summary>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public RationalNumber Negate()
         {
@@ -2073,13 +2073,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ���������]�����l��v�Z���܂��B
+        /// 符号が反転した値を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̃I�u�W�F�N�g�ł��B
+        /// 計算結果のオブジェクトです。
         /// </returns>
         public static RationalNumber Negate(RationalNumber x)
         {
@@ -2088,16 +2088,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Power �̃I�[�o�[���[�h
+        #region Power のオーバーロード
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Power(long exp)
         {
@@ -2105,13 +2105,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public RationalNumber Power(ulong exp)
@@ -2120,13 +2120,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Power(UnsignedLongLongInteger exp)
         {
@@ -2134,13 +2134,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         public RationalNumber Power(LongLongInteger exp)
         {
@@ -2148,16 +2148,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="x">
-        /// �ׂ���̊�ł��B
+        /// べき乗の基数です。
         /// </param>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Power(RationalNumber x, long exp)
         {
@@ -2165,16 +2165,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="x">
-        /// �ׂ���̊�ł��B
+        /// べき乗の基数です。
         /// </param>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Power(RationalNumber x, ulong exp)
@@ -2183,16 +2183,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="x">
-        /// �ׂ���̊�ł��B
+        /// べき乗の基数です。
         /// </param>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Power(RationalNumber x, UnsignedLongLongInteger exp)
         {
@@ -2205,16 +2205,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�ׂ̂����v�Z���܂��B
+        /// オブジェクトのべき乗を計算します。
         /// </summary>
         /// <param name="x">
-        /// �ׂ���̊�ł��B
+        /// べき乗の基数です。
         /// </param>
         /// <param name="exp">
-        /// �ׂ���̎w���ł��B
+        /// べき乗の指数です。
         /// </param>
         /// <returns>
-        /// �ׂ���̌v�Z���ʂ�\���I�u�W�F�N�g�ł��B
+        /// べき乗の計算結果を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Power(RationalNumber x, LongLongInteger exp)
         {
@@ -2224,7 +2224,7 @@ namespace Palmtree.Math
                     return (One);
                 case SignType.Negative:
                     if (x._InternalNumerator.InternalSign == SignType.Zero)
-                        throw (new DivideByZeroException("0�ɂ�鏜�Z���s���悤�Ƃ��܂����B"));
+                        throw (new DivideByZeroException("0による除算が行われようとしました。"));
                     else
                         return (Reciprocal(x._InternalDenominator.Power(exp.Abs()), x._InternalNumerator.Power(exp.Abs())));
                 default:
@@ -2237,13 +2237,13 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Abs �̃I�[�o�[���[�h
+        #region Abs のオーバーロード
 
         /// <summary>
-        /// ���݂̃I�u�W�F�N�g�̐�Βl��v�Z���܂��B
+        /// 現在のオブジェクトの絶対値を計算します。
         /// </summary>
         /// <returns>
-        /// ��Βl�ł��B
+        /// 絶対値です。
         /// </returns>
         public RationalNumber Abs()
         {
@@ -2252,13 +2252,13 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Floor �̃I�[�o�[���[�h
+        #region Floor のオーバーロード
 
         /// <summary>
-        /// ���݂̃I�u�W�F�N�g��菬�����ő�̐�����v�Z���܂��B
+        /// 現在のオブジェクトより小さい最大の整数を計算します。
         /// </summary>
         /// <returns>
-        /// ���݂̃I�u�W�F�N�g��菬�����ő�̐����ł��B
+        /// 現在のオブジェクトより小さい最大の整数です。
         /// </returns>
         public LongLongInteger Floor()
         {
@@ -2267,13 +2267,13 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Ceiling �̃I�[�o�[���[�h
+        #region Ceiling のオーバーロード
 
         /// <summary>
-        /// ���݂̃I�u�W�F�N�g���傫���ŏ��̐�����v�Z���܂��B
+        /// 現在のオブジェクトより大きい最小の整数を計算します。
         /// </summary>
         /// <returns>
-        /// ���݂̃I�u�W�F�N�g���傫���ŏ��̐����ł��B
+        /// 現在のオブジェクトより大きい最小の整数です。
         /// </returns>
         public LongLongInteger Ceiling()
         {
@@ -2287,16 +2287,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Round �̃I�[�o�[���[�h
+        #region Round のオーバーロード
 
         /// <summary>
-        /// ���݂̃I�u�W�F�N�g�̒l��ۂ߂��I�u�W�F�N�g��Ԃ��܂��B
+        /// 現在のオブジェクトの値を丸めたオブジェクトを返します。
         /// </summary>
         /// <param name="mode">
-        /// �ۂ߂���@������܂��B
+        /// 丸める方法を示します。
         /// </param>
         /// <returns>
-        /// �ۂ߂�ꂽ�I�u�W�F�N�g��Ԃ��܂��B
+        /// 丸められたオブジェクトを返します。
         /// </returns>
         public LongLongInteger Round(RoundingMode mode)
         {
@@ -2310,13 +2310,13 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Reciprocal �̃I�[�o�[���[�h
+        #region Reciprocal のオーバーロード
 
         /// <summary>
-        /// �I�u�W�F�N�g�̋t����v�Z���܂��B
+        /// オブジェクトの逆数を計算します。
         /// </summary>
         /// <returns>
-        /// �v�Z���ʂ̋t���ł��B
+        /// 計算結果の逆数です。
         /// </returns>
         public RationalNumber Reciprocal()
         {
@@ -2324,13 +2324,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�̋t����v�Z���܂��B
+        /// オブジェクトの逆数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̋t���ł��B
+        /// 計算結果の逆数です。
         /// </returns>
         public static RationalNumber Reciprocal(long x)
         {
@@ -2338,13 +2338,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�̋t����v�Z���܂��B
+        /// オブジェクトの逆数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̋t���ł��B
+        /// 計算結果の逆数です。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Reciprocal(ulong x)
@@ -2353,70 +2353,70 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�̋t����v�Z���܂��B
+        /// オブジェクトの逆数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̋t���ł��B
+        /// 計算結果の逆数です。
         /// </returns>
         public static RationalNumber Reciprocal(UnsignedLongLongInteger x)
         {
             if (x.IsZero)
-                throw (new DivideByZeroException("0�̋t���͌v�Z�ł��܂���B"));
+                throw (new DivideByZeroException("0の逆数は計算できません。"));
             else
                 return (Reciprocal(SignType.Positive, x));
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�̋t����v�Z���܂��B
+        /// オブジェクトの逆数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̋t���ł��B
+        /// 計算結果の逆数です。
         /// </returns>
         public static RationalNumber Reciprocal(LongLongInteger x)
         {
             if (x.InternalSign == SignType.Zero)
-                throw (new DivideByZeroException("0�̋t���͌v�Z�ł��܂���B"));
+                throw (new DivideByZeroException("0の逆数は計算できません。"));
             else
                 return (Reciprocal(x.InternalSign, x.Abs()));
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g�̋t����v�Z���܂��B
+        /// オブジェクトの逆数を計算します。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �v�Z���ʂ̋t���ł��B
+        /// 計算結果の逆数です。
         /// </returns>
         public static RationalNumber Reciprocal(RationalNumber x)
         {
             UnsignedLongLongInteger denominator;
             LongLongInteger numerator = x.ToFraction(out denominator);
             if (numerator.IsZero) 
-                throw (new DivideByZeroException("0�̋t���͌v�Z�ł��܂���B"));
+                throw (new DivideByZeroException("0の逆数は計算できません。"));
             else
                 return (Reciprocal(numerator.InternalSign, denominator, numerator.Abs()));
         }
 
         #endregion
 
-        #region Max �̃I�[�o�[���[�h
+        #region Max のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ő�l����߂܂��B
+        /// 与えられたオブジェクトとの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public RationalNumber Max(ulong x)
@@ -2425,13 +2425,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ő�l����߂܂��B
+        /// 与えられたオブジェクトとの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public RationalNumber Max(long x)
         {
@@ -2439,13 +2439,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ő�l����߂܂��B
+        /// 与えられたオブジェクトとの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public RationalNumber Max(UnsignedLongLongInteger x)
         {
@@ -2453,13 +2453,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ő�l����߂܂��B
+        /// 与えられたオブジェクトとの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public RationalNumber Max(LongLongInteger x)
         {
@@ -2467,13 +2467,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ő�l����߂܂��B
+        /// 与えられたオブジェクトとの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public RationalNumber Max(RationalNumber x)
         {
@@ -2481,16 +2481,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l����߂܂��B
+        /// 二つのオブジェクトの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Max(ulong x, RationalNumber y)
@@ -2499,16 +2499,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l����߂܂��B
+        /// 二つのオブジェクトの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Max(long x, RationalNumber y)
         {
@@ -2516,16 +2516,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l����߂܂��B
+        /// 二つのオブジェクトの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Max(UnsignedLongLongInteger x, RationalNumber y)
         {
@@ -2533,16 +2533,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l����߂܂��B
+        /// 二つのオブジェクトの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Max(LongLongInteger x, RationalNumber y)
         {
@@ -2550,16 +2550,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l����߂܂��B
+        /// 二つのオブジェクトの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Max(RationalNumber x, ulong y)
@@ -2572,16 +2572,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l����߂܂��B
+        /// 二つのオブジェクトの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Max(RationalNumber x, long y)
         {
@@ -2593,16 +2593,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l����߂܂��B
+        /// 二つのオブジェクトの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Max(RationalNumber x, UnsignedLongLongInteger y)
         {
@@ -2614,16 +2614,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l����߂܂��B
+        /// 二つのオブジェクトの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Max(RationalNumber x, LongLongInteger y)
         {
@@ -2635,16 +2635,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ő�l����߂܂��B
+        /// 二つのオブジェクトの最大値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ő�l��\���I�u�W�F�N�g�ł��B
+        /// 最大値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Max(RationalNumber x, RationalNumber y)
         {
@@ -2657,16 +2657,16 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region Min �̃I�[�o�[���[�h
+        #region Min のオーバーロード
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ŏ��l����߂܂��B
+        /// 与えられたオブジェクトとの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public RationalNumber Min(ulong x)
@@ -2675,13 +2675,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ŏ��l����߂܂��B
+        /// 与えられたオブジェクトとの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public RationalNumber Min(long x)
         {
@@ -2689,13 +2689,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ŏ��l����߂܂��B
+        /// 与えられたオブジェクトとの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public RationalNumber Min(UnsignedLongLongInteger x)
         {
@@ -2703,13 +2703,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ŏ��l����߂܂��B
+        /// 与えられたオブジェクトとの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public RationalNumber Min(LongLongInteger x)
         {
@@ -2717,13 +2717,13 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// �^����ꂽ�I�u�W�F�N�g�Ƃ̍ŏ��l����߂܂��B
+        /// 与えられたオブジェクトとの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public RationalNumber Min(RationalNumber x)
         {
@@ -2731,16 +2731,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l����߂܂��B
+        /// 二つのオブジェクトの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Min(ulong x, RationalNumber y)
@@ -2749,16 +2749,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l����߂܂��B
+        /// 二つのオブジェクトの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Min(long x, RationalNumber y)
         {
@@ -2766,16 +2766,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l����߂܂��B
+        /// 二つのオブジェクトの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Min(UnsignedLongLongInteger x, RationalNumber y)
         {
@@ -2783,16 +2783,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l����߂܂��B
+        /// 二つのオブジェクトの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Min(LongLongInteger x, RationalNumber y)
         {
@@ -2800,16 +2800,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l����߂܂��B
+        /// 二つのオブジェクトの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
         public static RationalNumber Min(RationalNumber x, ulong y)
@@ -2822,16 +2822,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l����߂܂��B
+        /// 二つのオブジェクトの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Min(RationalNumber x, long y)
         {
@@ -2843,16 +2843,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l����߂܂��B
+        /// 二つのオブジェクトの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Min(RationalNumber x, UnsignedLongLongInteger y)
         {
@@ -2864,16 +2864,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l����߂܂��B
+        /// 二つのオブジェクトの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Min(RationalNumber x, LongLongInteger y)
         {
@@ -2885,16 +2885,16 @@ namespace Palmtree.Math
         }
 
         /// <summary>
-        /// ��̃I�u�W�F�N�g�̍ŏ��l����߂܂��B
+        /// 二つのオブジェクトの最小値を求めます。
         /// </summary>
         /// <param name="x">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <param name="y">
-        /// �v�Z�Ώۂ̃I�u�W�F�N�g�ł��B
+        /// 計算対象のオブジェクトです。
         /// </param>
         /// <returns>
-        /// �ŏ��l��\���I�u�W�F�N�g�ł��B
+        /// 最小値を表すオブジェクトです。
         /// </returns>
         public static RationalNumber Min(RationalNumber x, RationalNumber y)
         {
@@ -2909,7 +2909,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �C���^�[�i�����\�b�h
+        #region インターナルメソッド
 
         internal static RationalNumber Reciprocal(SignType sign, UnsignedLongLongInteger value)
         {
@@ -2928,7 +2928,7 @@ namespace Palmtree.Math
 
         #endregion
 
-        #region �v���C�x�[�g���\�b�h
+        #region プライベートメソッド
 
         private static LongLongInteger FloorImp(SignType sign, UnsignedLongLongInteger numerator, UnsignedLongLongInteger denominator)
         {
