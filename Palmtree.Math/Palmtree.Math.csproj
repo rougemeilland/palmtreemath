@@ -32,6 +32,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Palmtree, Version=1.1.6350.21158, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PalmtreeSoftware.Palmtree.1.1.6350.21158\lib\net46\Palmtree.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,8 +45,89 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formatter\BaseNumberInfoBase.cs" />
+    <Compile Include="Formatter\DecimalBaseNumberInfo.cs" />
+    <Compile Include="Formatter\ExponentialFormFormatter.cs" />
+    <Compile Include="Formatter\FilterWithSpecifiedLengthOfFractionPart.cs" />
+    <Compile Include="Formatter\FilterWithSpecifiedLengthOfIntegerPart.cs" />
+    <Compile Include="Formatter\FilterWithSpecifiedSignificantFigures.cs" />
+    <Compile Include="Formatter\FixedNumberSequence.cs" />
+    <Compile Include="Formatter\FixedPointFormFormatter.cs" />
+    <Compile Include="Formatter\FormatterCreatorBase.cs" />
+    <Compile Include="Formatter\FormatterSpecification.cs" />
+    <Compile Include="Formatter\HexaDecimalBaseNumberInfo.cs" />
+    <Compile Include="Formatter\IBaseNumberInfo.cs" />
+    <Compile Include="Formatter\IFormattingTypeInfo.cs" />
+    <Compile Include="Formatter\IntegerRoundTripFormatter.cs" />
+    <Compile Include="Formatter\INumberFormatter.cs" />
+    <Compile Include="Formatter\IParserOfNumber.cs" />
+    <Compile Include="Formatter\NumberFormatInfoExtensions.cs" />
+    <Compile Include="Formatter\NumberFormatType.cs" />
+    <Compile Include="Formatter\PrecisionStyle.cs" />
+    <Compile Include="Formatter\RationalNumberRoundTripFormatter.cs" />
+    <Compile Include="Formatter\RoundTripFormatterBase.cs" />
+    <Compile Include="Formatter\StringParser.cs" />
+    <None Include="Implements\AddImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\AndImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\BitOperationImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\CompareImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\ComplementAndImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\DivideRemImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\EqualsImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\ImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\ImplementOfUnsignedLongLongIntegerBase.cs" />
+    <None Include="Implements\IncrementDecrementImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\MultiplyImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\OrImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\SubstractImplementOfUnsignedLongLongInteger.cs" />
+    <None Include="Implements\XorImplementOfUnsignedLongLongInteger.cs" />
+    <Compile Include="LinqExtensions.cs" />
+    <Compile Include="LongLongInteger.Arithmetic.cs" />
+    <Compile Include="LongLongInteger.Bit.cs" />
+    <Compile Include="LongLongInteger.Converters.cs" />
+    <Compile Include="LongLongInteger.cs" />
+    <Compile Include="LongLongInteger.Equality.cs" />
+    <Compile Include="LongLongInteger.Formatters.cs" />
+    <Compile Include="LongLongInteger.Parsers.cs" />
+    <Compile Include="LongLongInteger.Relation.cs" />
+    <Compile Include="LongLongIntegerExtensions.cs" />
     <Compile Include="NativeUnsignedInteger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RationalNumber.Arithmetic.cs" />
+    <Compile Include="RationalNumber.Converter.cs" />
+    <Compile Include="RationalNumber.cs" />
+    <Compile Include="RationalNumber.Equality.cs" />
+    <Compile Include="RationalNumber.Formatters.cs" />
+    <Compile Include="RationalNumber.Parsers.cs" />
+    <Compile Include="RationalNumber.Relation.cs" />
+    <Compile Include="RationalNumberExtensions.cs" />
+    <Compile Include="Round\CeilingModeRationalNumberRounder.cs" />
+    <Compile Include="Round\FloorModeRationalNumberRounder.cs" />
+    <Compile Include="Round\IRoundRationalNumber.cs" />
+    <Compile Include="Round\RationalNumberRounderBase.cs" />
+    <Compile Include="Round\RationalNumberRounderCollection.cs" />
+    <Compile Include="Round\RoundDownModeRationalNumberRounder.cs" />
+    <Compile Include="Round\RoundHalfDownModeRationalNumberRounder.cs" />
+    <Compile Include="Round\RoundHalfEvenModeRationalNumberRounder.cs" />
+    <Compile Include="Round\RoundHalfUpModeRationalNumberRounder.cs" />
+    <Compile Include="Round\RoundingMode.cs" />
+    <Compile Include="Round\RoundUpModeRationalNumberRounder.cs" />
+    <Compile Include="Round\UnnecessaryModeRationalNumberRounder.cs" />
+    <Compile Include="SerializerPlugin\LongLongIntegerSerializer.cs" />
+    <Compile Include="SerializerPlugin\RationalNumberSerializer.cs" />
+    <Compile Include="SerializerPlugin\UnsignedLongLongIntegerSerializer.cs" />
+    <Compile Include="SignType.cs" />
+    <Compile Include="SignTypeExtensions.cs" />
+    <Compile Include="UnsignedLongLongInteger.Arithmetic.cs" />
+    <Compile Include="UnsignedLongLongInteger.Bit.cs" />
+    <Compile Include="UnsignedLongLongInteger.Converters.cs" />
+    <Compile Include="UnsignedLongLongInteger.cs" />
+    <Compile Include="UnsignedLongLongInteger.Equality.cs" />
+    <Compile Include="UnsignedLongLongInteger.Formatters.cs" />
+    <Compile Include="UnsignedLongLongInteger.Parsers.cs" />
+    <Compile Include="UnsignedLongLongInteger.Relation.cs" />
+    <Compile Include="UnsignedLongLongIntegerExtensions.cs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

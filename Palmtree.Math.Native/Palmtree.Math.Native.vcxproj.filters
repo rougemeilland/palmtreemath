@@ -24,6 +24,21 @@
     <ClCompile Include="pmn_multiply.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="pmn_memory.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="pmn_set.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="pmn_bit_count.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="pmn_get.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="pmn_property.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pmn.h">
@@ -40,5 +55,8 @@
     <ResourceCompile Include="Palmtree.Math.Native.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="mative_api.txt" />
   </ItemGroup>
 </Project>
