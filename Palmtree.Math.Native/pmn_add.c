@@ -19,6 +19,8 @@ https://opensource.org/licenses/MIT
 #include "pmn.h"
 #include "pmn_internal.h"
 
+#define AVOID_COMPILER_BUG (0)
+
 #pragma region Add関数
 
 #ifdef _M_IX86
@@ -95,6 +97,9 @@ int Add_ADC32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
 
 int Add_ADX32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
 {
+#if AVOID_COMPILER_BUG
+    return (FALSE);
+#else
 #if _DEBUG
     __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
 #endif // _DEBUG
@@ -162,6 +167,7 @@ int Add_ADX32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
     }
     z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
     return (TRUE);
+#endif
 }
 #endif // _M_IX86
 
@@ -380,6 +386,9 @@ int AddUInt32_ADC32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
 
 int AddUInt32_ADX32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
 {
+#if AVOID_COMPILER_BUG
+    return (FALSE);
+#else
 #if _DEBUG
     __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
 #endif // _DEBUG
@@ -415,6 +424,7 @@ int AddUInt32_ADX32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
     }
     z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
     return (TRUE);
+#endif
 }
 #endif // _M_IX86
 
@@ -587,6 +597,9 @@ int AddUInt64_ADC32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_
 
 int AddUInt64_ADX32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_low, UNIT_BUFFER* z)
 {
+#if AVOID_COMPILER_BUG
+    return (FALSE);
+#else
 #if _DEBUG
     __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
 #endif // _DEBUG
@@ -640,6 +653,7 @@ int AddUInt64_ADX32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_
     }
     z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
     return (TRUE);
+#endif
 }
 #endif // _M_IX86
 
