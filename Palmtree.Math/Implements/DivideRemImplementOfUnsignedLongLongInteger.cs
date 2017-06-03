@@ -8,7 +8,7 @@ namespace Palmtree.Math.Implements
     {
         #region パブリックメソッド
 
-        public ushort DivideRem(ushort x, ushort y, out ushort r)
+        public ushort DivRem(ushort x, ushort y, out ushort r)
         {
             Debug.Assert(x > 0);
             Debug.Assert(y > 0);
@@ -17,7 +17,7 @@ namespace Palmtree.Math.Implements
             return (q);
         }
 
-        public ulong DivideRem(ulong x, ushort y, out ushort r)
+        public ulong DivRem(ulong x, ushort y, out ushort r)
         {
             Debug.Assert(x > 0);
             Debug.Assert(y > 0);
@@ -26,7 +26,7 @@ namespace Palmtree.Math.Implements
             return (q);
         }
 
-        public ulong DivideRem(ulong x, ulong y, out ulong r)
+        public ulong DivRem(ulong x, ulong y, out ulong r)
         {
             Debug.Assert(x > 0);
             Debug.Assert(y > 0);
@@ -35,12 +35,12 @@ namespace Palmtree.Math.Implements
             return (q);
         }
 
-        public ushort[] DivideRem(ushort[] x, ushort y, out ushort r)
+        public ushort[] DivRem(ushort[] x, ushort y, out ushort r)
         {
             Debug.Assert(x.Length > 0);
             Debug.Assert(y > 0);
             if (x.Length == 1)
-                return (UShortToUShortArray(DivideRem(x[0], y, out r)));
+                return (UShortToUShortArray(DivRem(x[0], y, out r)));
             r = 0;
             ushort[] z = new ushort[x.Length];
             for (int index = x.Length - 1; index >= 0; --index)
@@ -52,31 +52,31 @@ namespace Palmtree.Math.Implements
             return (Regularize(z));
         }
 
-        public ushort DivideRem(ushort x, ushort[] y, out ushort r)
+        public ushort DivRem(ushort x, ushort[] y, out ushort r)
         {
             Debug.Assert(x > 0);
             Debug.Assert(y.Length > 0);
             if (y.Length == 1)
-                return (DivideRem(x, y[0], out r));
+                return (DivRem(x, y[0], out r));
             r = x;
             return (0);
         }
 
-        public ushort[] DivideRem(ushort[] x, ushort[] y, out ushort[] r)
+        public ushort[] DivRem(ushort[] x, ushort[] y, out ushort[] r)
         {
             Debug.Assert(x.Length > 0);
             Debug.Assert(y.Length > 0);
             if (x.Length == 1)
             {
                 ushort r2;
-                ushort q2 = DivideRem(x[0], y, out r2);
+                ushort q2 = DivRem(x[0], y, out r2);
                 r = UShortToUShortArray(r2);
                 return (UShortToUShortArray(q2));
             }
             if (y.Length == 1)
             {
                 ushort r2;
-                ushort[] q2 = DivideRem(x, y[0], out r2);
+                ushort[] q2 = DivRem(x, y[0], out r2);
                 r = UShortToUShortArray(r2);
                 return (q2);
             }

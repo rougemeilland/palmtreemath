@@ -13,15 +13,17 @@ https://opensource.org/licenses/MIT
 #include "pmn.h"
 #include "pmn_internal.h"
 
-int GetUint32Value_Imp(const void * buffer, size_t buffer_size, unsigned __int32 *value_buffer)
+int GetUint32Value_Imp(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
         return (FALSE);
-    size_t expected_size = sizeof(__UNIT_TYPE);
-    if (buffer_size > expected_size)
+    size_t maximum_buffer_size = sizeof(__UNIT_TYPE);
+    size_t maximum_unit_count = maximum_buffer_size / sizeof(__UNIT_TYPE);
+    size_t maximum_word_count = maximum_buffer_size / sizeof(unsigned __int32);
+    if (buffer->UNIT_COUNT > maximum_unit_count)
         return (FALSE);
     unsigned __int32* p = (unsigned __int32*)buffer;
-    switch (expected_size / sizeof(unsigned __int32))
+    switch (maximum_word_count)
     {
     case 4:
         if (p[3])
@@ -52,15 +54,17 @@ int GetUint32Value_Imp(const void * buffer, size_t buffer_size, unsigned __int32
     }
 }
 
-int GetUint64Value_Imp_x86(const void * buffer, size_t buffer_size, unsigned __int32 *value_buffer_high, unsigned __int32 *value_buffer_low)
+int GetUint64Value_Imp_x86(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer_high, unsigned __int32 *value_buffer_low)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
         return (FALSE);
-    size_t expected_size = sizeof(__UNIT_TYPE) > sizeof(unsigned __int32) * 2 ? sizeof(__UNIT_TYPE) : sizeof(unsigned __int32) * 2;
-    if (buffer_size > expected_size)
+    size_t maximum_buffer_size = sizeof(__UNIT_TYPE) > sizeof(unsigned __int32) * 2 ? sizeof(__UNIT_TYPE) : sizeof(unsigned __int32) * 2;
+    size_t maximum_unit_count = maximum_buffer_size / sizeof(__UNIT_TYPE);
+    size_t maximum_word_count = maximum_buffer_size / sizeof(unsigned __int32);
+    if (buffer->UNIT_COUNT > maximum_unit_count)
         return (FALSE);
     unsigned __int32* p = (unsigned __int32*)buffer;
-    switch (expected_size / sizeof(unsigned __int32))
+    switch (maximum_word_count)
     {
     case 4:
         if (p[3])
@@ -90,15 +94,17 @@ int GetUint64Value_Imp_x86(const void * buffer, size_t buffer_size, unsigned __i
 }
 
 #ifdef _M_IX64
-int GetUint64Value_Imp_x64(const void * buffer, size_t buffer_size, unsigned __int64 *value_buffer)
+int GetUint64Value_Imp_x64(UNIT_BUFFER* buffer, unsigned __int64 *value_buffer)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int64))
         return (FALSE);
-    size_t expected_size = sizeof(__UNIT_TYPE);
-    if (buffer_size > expected_size)
+    size_t maximum_buffer_size = sizeof(__UNIT_TYPE);
+    size_t maximum_unit_count = maximum_buffer_size / sizeof(__UNIT_TYPE);
+    size_t maximum_word_count = maximum_buffer_size / sizeof(unsigned __int64);
+    if (buffer->UNIT_COUNT > maximum_unit_count)
         return (FALSE);
     unsigned __int64* p = (unsigned __int64*)buffer;
-    switch (expected_size / sizeof(unsigned __int64))
+    switch (maximum_word_count)
     {
     case 4:
         if (p[3])
@@ -130,27 +136,27 @@ int GetUint64Value_Imp_x64(const void * buffer, size_t buffer_size, unsigned __i
 }
 #endif // _M_IX64
 
-__declspec(dllexport) int __stdcall PMN_GetUint32Value(const void* buffer, size_t buffer_size, unsigned __int32 *value_buffer)
+__declspec(dllexport) int __stdcall PMN_GetUint32Value(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer)
 {
+    if (!CheckInputBuffer(buffer))
+        return (FALSE);
     if (value_buffer == NULL)
         return (FALSE);
-    if (!CheckBuffer(buffer, buffer_size))
-        return (FALSE);
-    return (GetUint32Value_Imp(buffer, buffer_size, value_buffer));
+    return (GetUint32Value_Imp(buffer, value_buffer));
 }
 
-__declspec(dllexport) int __stdcall PMN_GetUint64Value(const void* buffer, size_t buffer_size, unsigned __int64 *value_buffer)
+__declspec(dllexport) int __stdcall PMN_GetUint64Value(UNIT_BUFFER* buffer, unsigned __int64 *value_buffer)
 {
+    if (!CheckInputBuffer(buffer))
+        return (FALSE);
     if (value_buffer == NULL)
         return (FALSE);
-    if (!CheckBuffer(buffer, buffer_size))
-        return (FALSE);
 #ifdef _M_IX64
-    return (GetUint64Value_Imp_x64(buffer, buffer_size, value_buffer));
+    return (GetUint64Value_Imp_x64(buffer, value_buffer));
 #else // _M_IX64
     unsigned __int32 value_low;
     unsigned __int32 value_high;
-    if (!GetUint64Value_Imp_x86(buffer, buffer_size, &value_high, &value_low))
+    if (!GetUint64Value_Imp_x86(buffer, &value_high, &value_low))
         return (FALSE);
     *value_buffer = ((unsigned __int64)value_high << 32) | value_low;
     return (TRUE);

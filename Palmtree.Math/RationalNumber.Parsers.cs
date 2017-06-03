@@ -10,6 +10,7 @@
 using System;
 using System.Globalization;
 using Palmtree.Math.Formatter;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math
 {
@@ -194,8 +195,8 @@ namespace Palmtree.Math
             numerator = LongLongInteger.Zero;
             denominator = UnsignedLongLongInteger.One;
             bool negative;
-            ushort[] numerator_imp;
-            ushort[] denominator_imp;
+            NativeUnsignedInteger numerator_imp;
+            NativeUnsignedInteger denominator_imp;
             if (!FormatterCreatorBase.TryParse(s, style, provider, out negative, out numerator_imp, out denominator_imp))
                 return (false);
             UnsignedLongLongInteger numerator_abs = new UnsignedLongLongInteger(numerator_imp);

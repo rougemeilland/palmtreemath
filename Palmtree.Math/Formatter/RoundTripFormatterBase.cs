@@ -9,6 +9,7 @@
 
 using System.Collections.Generic;
 using System.Globalization;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math.Formatter
 {
@@ -34,13 +35,13 @@ namespace Palmtree.Math.Formatter
 
         #region プロテクテッドメソッド
 
-        protected string SimpleFormatter(bool negative, ushort[] value)
+        protected string SimpleFormatter(bool negative, NativeUnsignedInteger value)
         {
             Stack<string> digits = new Stack<string>();
-            while (value.Length > 0)
+            while (!value.IsZero)
             {
-                ushort[] value2;
-                byte digit =  _base_number_info.GetLeastSignificantDigitFromIntegerPart(value, out value2);
+                NativeUnsignedInteger value2;
+                byte digit = _base_number_info.GetLeastSignificantDigitFromIntegerPart(value, out value2);
                 digits.Push(_base_number_info.FormatChar(digit).ToString());
                 value = value2;
             }

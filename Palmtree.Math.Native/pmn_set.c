@@ -13,17 +13,15 @@ https://opensource.org/licenses/MIT
 #include "pmn.h"
 #include "pmn_internal.h"
 
-int SetUint32Value_Imp(void * buffer, size_t * buffer_size, unsigned __int32 value)
+int SetUint32Value_Imp(UNIT_BUFFER * buffer, unsigned __int32 value)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
         return (FALSE);
-    size_t expected_size = sizeof(__UNIT_TYPE);
-    if (*buffer_size < expected_size)
+    if (buffer->UNIT_COUNT < 1)
         return (FALSE);
-    size_t word_count = expected_size / sizeof(unsigned __int32);
-    *buffer_size = expected_size;
+    buffer->UNIT_COUNT = 1;
     unsigned __int32* p = (unsigned __int32*)buffer;
-    switch (word_count)
+    switch (sizeof(__UNIT_TYPE) / sizeof(unsigned __int32))
     {
     case 4:
         p[3] = 0;
@@ -35,24 +33,31 @@ int SetUint32Value_Imp(void * buffer, size_t * buffer_size, unsigned __int32 val
         p[0] = value;
         break;
     default:
-        __stosd((PDWORD)&p[1], 0, word_count - 1);
-        break;
+        // sizeof(__UNIT_TYPE) が  sizeof(unsigned __int32) の4倍を超えている場合はとりあえずエラーにし、必要になってから対応を考える。
+        return (FALSE);
     }
     return (TRUE);
 }
 
-int SetUint64Value_Imp_x86(void * buffer, size_t * buffer_size, unsigned __int32 value_high, unsigned __int32 value_low)
+int SetUint64Value_Imp_x86(UNIT_BUFFER * buffer, unsigned __int32 value_high, unsigned __int32 value_low)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
         return (FALSE);
-    size_t expected_size = sizeof(__UNIT_TYPE) >= sizeof(unsigned __int32)*2 ? sizeof(__UNIT_TYPE) : sizeof(unsigned __int32) * 2;
-    if (*buffer_size < expected_size)
+    if (buffer->UNIT_COUNT < 1)
         return (FALSE);
-    size_t word_count = expected_size / sizeof(unsigned __int32);
-    *buffer_size = expected_size;
+    size_t buffer_size = sizeof(__UNIT_TYPE) >= sizeof(unsigned __int32) * 2 ? sizeof(__UNIT_TYPE)  : sizeof(unsigned __int32)*2;
+    buffer->UNIT_COUNT = buffer_size / sizeof(__UNIT_TYPE);
     unsigned __int32* p = (unsigned __int32*)buffer;
-    switch (word_count)
+    switch (buffer_size / sizeof(unsigned __int32))
     {
+    case 8:
+        p[7] = 0;
+    case 7:
+        p[6] = 0;
+    case 6:
+        p[5] = 0;
+    case 5:
+        p[4] = 0;
     case 4:
         p[3] = 0;
     case 3:
@@ -63,24 +68,22 @@ int SetUint64Value_Imp_x86(void * buffer, size_t * buffer_size, unsigned __int32
         p[0] = value_low;
         break;
     default:
-        __stosd((PDWORD)&p[2], 0, word_count - 2);
-        break;
+        // sizeof(__UNIT_TYPE) が  sizeof(unsigned __int32) の8倍を超えている場合はとりあえずエラーにし、必要になってから対応を考える。
+        return (FALSE);
     }
     return (TRUE);
 }
 
 #ifdef _M_IX64
-int SetUint64Value_Imp_x64(void * buffer, size_t * buffer_size, unsigned __int64 value)
+int SetUint64Value_Imp_x64(UNIT_BUFFER * buffer, unsigned __int64 value)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int64))
         return (FALSE);
-    size_t expected_size = sizeof(__UNIT_TYPE);
-    if (*buffer_size < expected_size)
+    if (buffer->UNIT_COUNT < 1)
         return (FALSE);
-    size_t word_count = expected_size / sizeof(unsigned __int64);
-    *buffer_size = expected_size;
+    buffer->UNIT_COUNT = 1;
     unsigned __int64* p = (unsigned __int64*)buffer;
-    switch (word_count)
+    switch (sizeof(__UNIT_TYPE) / sizeof(unsigned __int64))
     {
     case 4:
         p[3] = 0;
@@ -92,35 +95,29 @@ int SetUint64Value_Imp_x64(void * buffer, size_t * buffer_size, unsigned __int64
         p[0] = value;
         break;
     default:
-        __stosq((PDWORD64)&p[1], 0, word_count - 1);
-        break;
+        // sizeof(__UNIT_TYPE) が  sizeof(unsigned __int64) の4倍を超えている場合はとりあえずエラーにし、必要になってから対応を考える。
+        return (FALSE);
     }
     return (TRUE);
 }
 #endif // _M_IX64
 
-__declspec(dllexport) int __stdcall PMN_SetUint32Value(void* buffer, size_t* buffer_size, unsigned __int32 value)
+__declspec(dllexport) int __stdcall PMN_SetUint32Value(UNIT_BUFFER* buffer, unsigned __int32 value)
 {
-    if (buffer_size == NULL)
+    if (!CheckOutputBuffer(buffer))
         return (FALSE);
-    if (!CheckBuffer(buffer, *buffer_size))
-        return (FALSE);
-    return (SetUint32Value_Imp(buffer, buffer_size, value));
+    return (SetUint32Value_Imp(buffer, value));
 }
 
-__declspec(dllexport) int __stdcall PMN_SetUint64Value(void* buffer, size_t* buffer_size, unsigned __int64 value)
+__declspec(dllexport) int __stdcall PMN_SetUint64Value(UNIT_BUFFER* buffer, unsigned __int64 value)
 {
-    if (buffer_size == NULL)
-        return (FALSE);
-    if (!CheckBuffer(buffer, *buffer_size))
-        return (FALSE);
-    if (value > 0xffffffff)
+    if (!CheckOutputBuffer(buffer))
         return (FALSE);
 #ifdef _M_IX64
-    return (SetUint64Value_Imp_x64(buffer, buffer_size, value));
+    return (SetUint64Value_Imp_x64(buffer, value));
 #else // _M_IX64
     unsigned __int32 value_low = (unsigned __int32)value;
     unsigned __int32 value_high = (unsigned __int32)(value >> 32);
-    return (SetUint64Value_Imp_x86(buffer, buffer_size, value_high, value_low));
+    return (SetUint64Value_Imp_x86(buffer, value_high, value_low));
 #endif // _M_IX64
 }

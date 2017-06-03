@@ -30,13 +30,10 @@
     <ClCompile Include="pmn_set.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="pmn_bit_count.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="pmn_get.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="pmn_property.c">
+    <ClCompile Include="pmn_properties.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

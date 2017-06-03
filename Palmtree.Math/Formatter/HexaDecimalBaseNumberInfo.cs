@@ -8,6 +8,7 @@
 */
 
 using System.Diagnostics;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math.Formatter
 {
@@ -29,7 +30,7 @@ namespace Palmtree.Math.Formatter
         static HexaDecimalBaseNumberInfo()
         {
             _instance_upper = new HexaDecimalBaseNumberInfo(true);
-            _instance_lower = new HexaDecimalBaseNumberInfo(false); 
+            _instance_lower = new HexaDecimalBaseNumberInfo(false);
         }
 
         private HexaDecimalBaseNumberInfo(bool prior_upper_case)
@@ -121,12 +122,9 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 計算結果の値です。
         /// </returns>
-        protected override ushort[] Multiply(ushort[] value)
+        protected override NativeUnsignedInteger Multiply(NativeUnsignedInteger value)
         {
-            if (value.Length == 0)
-                return (new ushort[0]);
-            else
-                return (Imp.Multiply16AndAddQuick(value, 0));
+            return (value.Multiply16AndAddQuick(0));
         }
 
         /// <summary>
@@ -142,17 +140,9 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 計算結果の値です。
         /// </returns>
-        protected override ushort[] MultiplyAndAdd(ushort[] value, byte digit)
+        protected override NativeUnsignedInteger MultiplyAndAdd(NativeUnsignedInteger value, byte digit)
         {
-            if (value.Length == 0)
-            {
-                if (digit == 0)
-                    return (new ushort[0]);
-                else
-                    return (new ushort[] { digit });
-            }
-            else
-                return (Imp.Multiply16AndAddQuick(value, digit));
+            return (value.Multiply16AndAddQuick(digit));
         }
 
         /// <summary>
@@ -167,11 +157,11 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 最下位桁の数字です。( value % 基数 )
         /// </returns>
-        protected override byte GetLeastSignificantDigitFromIntegerPart(ushort[] value, out ushort[] updated_value)
+        protected override byte GetLeastSignificantDigitFromIntegerPart(NativeUnsignedInteger value, out NativeUnsignedInteger updated_value)
         {
-            Debug.Assert(value.Length > 0);
-            byte data = (byte)((uint)value[0] & 0x0fU);
-            updated_value = Imp.RightShift(value, 4);
+            Debug.Assert(!value.IsZero);
+            var data = (byte)value.BitwiseAnd(0x0fU);
+            updated_value = value.RightShift(4);
             return (data);
         }
 
@@ -185,26 +175,10 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 有理数が小数以下有限桁数で表現できると判断可能ならtrue、そうではないのならfalseです。
         /// </returns>
-        protected override bool IsRationalNumberRepresentableByFiniteDigits(ushort[] denominator)
+        protected override bool IsRationalNumberRepresentableByFiniteDigits(NativeUnsignedInteger denominator)
         {
-            Debug.Assert(denominator.Length > 0);
-            for (int index = 0; index < denominator.Length - 1; ++index)
-            {
-                if (denominator[index] != 0)
-                    return (false);
-            }
-            ushort data = denominator[denominator.Length - 1];
-            Debug.Assert(data != 0);
-            if (data >= 0x100)
-            {
-                if ((byte)data != 0)
-                    return (false);
-                data >>= 8;
-            }
-            Debug.Assert(data <= 0xff);
-            while ((data & 1) == 0)
-                data >>= 1;
-            return (data == 1);
+            // denominator が素因数としてが2だけを含むかどうかを調べる
+            return (denominator.IsPowerOfTwo);
         }
 
         #endregion

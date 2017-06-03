@@ -7,7 +7,8 @@
   https://opensource.org/licenses/MIT
 */
 
-using System.Diagnostics;
+using System;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math.Formatter
 {
@@ -27,7 +28,7 @@ namespace Palmtree.Math.Formatter
 
         static DecimalBaseNumberInfo()
         {
-            _instance = new DecimalBaseNumberInfo(); 
+            _instance = new DecimalBaseNumberInfo();
         }
 
         private DecimalBaseNumberInfo()
@@ -74,11 +75,9 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 計算結果の値です。
         /// </returns>
-        protected override ushort[] Multiply(ushort[] value)
+        protected override NativeUnsignedInteger Multiply(NativeUnsignedInteger value)
         {
-            if (value.Length == 0)
-                return (value);
-            return (Imp.Multiply10AndAddQuick(value, 0));
+            return (value.Multiply10AndAddQuick(0));
         }
 
         /// <summary>
@@ -94,17 +93,9 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 計算結果の値です。
         /// </returns>
-        protected override ushort[] MultiplyAndAdd(ushort[] value, byte digit)
+        protected override NativeUnsignedInteger MultiplyAndAdd(NativeUnsignedInteger value, byte digit)
         {
-            if (value.Length == 0)
-            {
-                if (digit == 0)
-                    return (new ushort[0]);
-                else
-                    return (new ushort[] { digit });
-            }
-            else
-                return (Imp.Multiply10AndAddQuick(value, digit));
+            return (value.Multiply10AndAddQuick(digit));
         }
 
         /// <summary>
@@ -117,23 +108,33 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 有理数が小数以下有限桁数で表現できると判断可能ならtrue、そうではないのならfalseです。
         /// </returns>
-        protected override bool IsRationalNumberRepresentableByFiniteDigits(ushort[] denominator)
+        protected override bool IsRationalNumberRepresentableByFiniteDigits(NativeUnsignedInteger denominator)
         {
-            ushort[] d = denominator;
-            Debug.Assert(d.Length > 0);
-            while ((d[0] & 1) == 0)
-                d = Imp.RightShift1Quick(d);
-            Debug.Assert(d.Length > 0);
-            while (d.Length > 1 || d[0] >= 5)
+            // denominator が素因数としてが2と5だけを含むかどうかを調べる
+
+            System.Diagnostics.Debug.Assert(!denominator.IsZero);
+
+            // denominator から素因数2を除去する (偶数である限り2で割り続ける)
+            while (denominator.IsEven)
+                denominator = denominator.RightShift1Quick();
+
+            System.Diagnostics.Debug.Assert(!denominator.IsZero);
+
+            // denominator から素因数5を除去する (5で割り切れる限り5で割り続ける)
+            while (true)
             {
-                Debug.Assert(d.Length > 0);
-                ushort r;
-                d = Imp.DivideRem(d, 5, out r);
+                UInt32 r;
+                var t = denominator.DivRem(5, out r);
                 if (r > 0)
-                   break;
+                    break;
+                denominator = t;
             }
-            Debug.Assert(d.Length > 0);
-            return (d.Length == 1 && d[0] == 1);
+            // この時点で denominator は5で割り切れなくなった最後の値
+
+            System.Diagnostics.Debug.Assert(!denominator.IsZero);
+
+            // この時点で denominator が1なら素因数として2と5以外は含まないので、小数点以下を有限桁数で表現できる。
+            return (denominator.IsOne);
         }
 
         #endregion

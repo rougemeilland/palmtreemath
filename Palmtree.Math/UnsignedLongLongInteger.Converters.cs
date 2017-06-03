@@ -14,6 +14,9 @@ using System;
 // 変換演算子のガイドライン：
 //   http://msdn.microsoft.com/ja-jp/library/ms229033(v=VS.100).aspx
 
+using System.Collections.Generic;
+using Palmtree.Math.Implements;
+
 namespace Palmtree.Math
 {
     partial struct UnsignedLongLongInteger
@@ -657,10 +660,21 @@ namespace Palmtree.Math
         /// </returns>
         public float ToSingle()
         {
-            float result = 0;
-            for (int index = _InternalValue.Length - 1; index >= 0; --index)
-                result = result * 0x10000U + _InternalValue[index];
-            return (result);
+            try
+            {
+                var base_number = 0x80000000U; // UInt32で表現できる最も大きい2のべき乗の値
+                return (ToFloatingPointNUmberImp(_native_value, base_number, 0F, value => value, (value, digit) =>
+                {
+                    var result = value * base_number + digit;
+                    if (float.IsInfinity(result) || float.IsNaN(result))
+                        throw new OverflowException();
+                    return (result);
+                }));
+            }
+            catch (Exception e)
+            {
+                throw (CreateOverflowExceptionObject(typeof(decimal), this, e));
+            }
         }
 
         /// <summary>
@@ -671,10 +685,21 @@ namespace Palmtree.Math
         /// </returns>
         public double ToDouble()
         {
-            double result = 0;
-            for (int index = _InternalValue.Length - 1; index >= 0; --index)
-                result = result * 0x10000U + _InternalValue[index];
-            return (result);
+            try
+            {
+                var base_number = 0x80000000U; // UInt32で表現できる最も大きい2のべき乗の値
+                return (ToFloatingPointNUmberImp(_native_value, base_number, 0D, value => value, (value, digit) =>
+                {
+                    var result = value * base_number + digit;
+                    if (double.IsInfinity(result) || double.IsNaN(result))
+                        throw new OverflowException();
+                    return (result);
+                }));
+            }
+            catch (Exception e)
+            {
+                throw (CreateOverflowExceptionObject(typeof(decimal), this, e));
+            }
         }
 
         /// <summary>
@@ -687,10 +712,8 @@ namespace Palmtree.Math
         {
             try
             {
-                decimal result = 0;
-                for (int index = _InternalValue.Length - 1; index >= 0; --index)
-                    result = result * 0x10000 + _InternalValue[index];
-                return (result);
+                var base_number = 1000000000U; // UInt32で表現できる最も大きい10のべき乗の値
+                return (ToFloatingPointNUmberImp(_native_value, base_number, 0M, value => value, (value, digit) => value * base_number + digit));
             }
             catch (Exception e)
             {
@@ -704,7 +727,7 @@ namespace Palmtree.Math
 
         private bool ToBoolean()
         {
-            return (_InternalValue.Length != 0);
+            return (!_native_value.IsZero);
         }
 
         private char ToChar()
@@ -717,6 +740,50 @@ namespace Palmtree.Math
             ulong value = ToULong(target_type);
             if (value > (ulong)max_value)
                 throw (CreateOverflowExceptionObject(target_type, this));
+            return (value);
+        }
+
+        private static NativeUnsignedInteger FromFloatingPointNUmberImp<SOURCE_T>(SOURCE_T x, UInt32 base_number, Func<SOURCE_T, int> sign_getter, Func<SOURCE_T, Tuple<SOURCE_T, UInt32>> divrem_getter)
+            where SOURCE_T : struct
+        {
+            var sign = sign_getter(x);
+            if (sign < 0)
+                throw (new ArgumentException());
+            else if (sign == 0)
+                return (NativeUnsignedInteger.Zero);
+            else
+            {
+                var digits = new Stack<UInt32>();
+                do
+                {
+                    var t = divrem_getter(x);
+                    x = t.Item1;
+                    digits.Push(t.Item2);
+                }
+                while (sign_getter(x) != 0);
+                var value = new NativeUnsignedInteger(digits.Pop());
+                while (digits.Count > 0)
+                    value = value.Multiply(base_number).Add(digits.Pop());
+                return (value);
+            }
+        }
+
+        private static TARGET_T ToFloatingPointNUmberImp<TARGET_T>(NativeUnsignedInteger x, UInt32 base_number, TARGET_T zero_value, Func<UInt32, TARGET_T> initialize, Func<TARGET_T, UInt32, TARGET_T> progress)
+            where TARGET_T : struct
+        {
+            if (x.IsZero)
+                return (zero_value);
+            var digits = new Stack<UInt32>();
+            do
+            {
+                UInt32 r;
+                x = x.DivRem(base_number, out r);
+                digits.Push(r);
+            }
+            while (!x.IsZero);
+            var value = initialize(digits.Pop());
+            while (digits.Count > 0)
+                value = progress(value, digits.Pop());
             return (value);
         }
 

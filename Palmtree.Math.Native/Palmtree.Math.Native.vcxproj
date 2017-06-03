@@ -20,12 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pmn_add.c" />
-    <ClCompile Include="pmn_bit_count.c" />
     <ClCompile Include="pmn_get.c" />
     <ClCompile Include="pmn_initialize.c" />
     <ClCompile Include="pmn_memory.c" />
     <ClCompile Include="pmn_multiply.c" />
-    <ClCompile Include="pmn_property.c" />
+    <ClCompile Include="pmn_properties.c" />
     <ClCompile Include="pmn_set.c" />
   </ItemGroup>
   <ItemGroup>

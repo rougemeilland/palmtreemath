@@ -19,6 +19,9 @@ https://opensource.org/licenses/MIT
 #include "pmn.h"
 #include "pmn_internal.h"
 
+// EAX=0x01
+#define CPU_FEATURE_FLAG_POPCNT (1U << 23)
+
 // EAX=0x07
 #define CPU_FEATURE_FLAG_BMI1   (1U << 3)
 #define CPU_FEATURE_FLAG_BMI2   (1U << 8)
@@ -34,7 +37,21 @@ __declspec(dllexport) int __stdcall PMN_Initialize()
     feature.PROCESSOR_FEATURE_ADX = FALSE;
     int cpu_id_buffer[4];
     __cpuid(cpu_id_buffer, 0);
-    if (cpu_id_buffer[0] < 7)
+    int max_catagory = cpu_id_buffer[0];
+    if (max_catagory < 1)
+    {
+        feature.PROCESSOR_FEATURE_POPCNT = FALSE;
+    }
+    else
+    {
+        __cpuid(cpu_id_buffer, 7);
+        if (cpu_id_buffer[1] & CPU_FEATURE_FLAG_POPCNT)
+            feature.PROCESSOR_FEATURE_POPCNT = TRUE;
+        else
+            feature.PROCESSOR_FEATURE_POPCNT = FALSE;
+    }
+
+    if (max_catagory < 7)
         feature.PROCESSOR_FEATURE_ADX = FALSE;
     else
     {
@@ -46,7 +63,8 @@ __declspec(dllexport) int __stdcall PMN_Initialize()
     }
 
     __cpuid(cpu_id_buffer, 0x80000000);
-    if (cpu_id_buffer[0] < 0x80000001)
+    int max_ex_category = cpu_id_buffer[0];
+    if (max_ex_category < 0x80000001)
         feature.PROCESSOR_FEATURE_LZCNT = FALSE;
     else
     {
@@ -59,7 +77,7 @@ __declspec(dllexport) int __stdcall PMN_Initialize()
 
     if (!Initialize_Add(&feature))
         return (FALSE);
-    if (!Initialize_GetEffectiveBitCount(&feature))
+    if (!Initialize_Properties(&feature))
         return (FALSE);
 
     return (TRUE);

@@ -7,6 +7,8 @@
   https://opensource.org/licenses/MIT
 */
 
+using Palmtree.Math.Implements;
+
 namespace Palmtree.Math.Formatter
 {
     /// <summary>
@@ -29,7 +31,7 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 計算結果の値です。
         /// </returns>
-        ushort[] Multiply(ushort[] value);
+        NativeUnsignedInteger Multiply(NativeUnsignedInteger value);
 
         /// <summary>
         /// ある整数値に基数をかけ、与えられた値を足した値を得ます。
@@ -44,7 +46,7 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 計算結果の値です。
         /// </returns>
-        ushort[] MultiplyAndAdd(ushort[] value, byte digit);
+        NativeUnsignedInteger MultiplyAndAdd(NativeUnsignedInteger value, byte digit);
 
         /// <summary>
         /// 整数部をあらわす数値から最下位桁の数字を取り出します。
@@ -58,7 +60,7 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 最下位桁の数字です。( value % 基数 )
         /// </returns>
-        byte GetLeastSignificantDigitFromIntegerPart(ushort[] value, out  ushort[] updated_value);
+        byte GetLeastSignificantDigitFromIntegerPart(NativeUnsignedInteger value, out NativeUnsignedInteger updated_value);
 
         /// <summary>
         /// 小数部をあらわす数値から、小数第一位の桁の数字を取り出します。
@@ -89,7 +91,7 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 小数第一位の桁の数字です。
         /// </returns>
-        byte GetMostSignificantDigitFromFractionPart(ushort[] value_numerator, ushort[] value_denominator,  out ushort[] updated_value_numerator);
+        byte GetMostSignificantDigitFromFractionPart(NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, out NativeUnsignedInteger updated_value_numerator);
 
         /// <summary>
         /// 与えられた有理数の分母部分から、有理数が小数以下有限桁数で表現できるかどうかを調べます。
@@ -101,7 +103,7 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 有理数が小数以下有限桁数で表現できると判断可能ならtrue、そうではないのならfalseです。
         /// </returns>
-        bool IsRationalNumberRepresentableByFiniteDigits(ushort[] denominator);
+        bool IsRationalNumberRepresentableByFiniteDigits(NativeUnsignedInteger denominator);
 
         /// <summary>
         /// 数値として有効な文字かどうかを調べます。

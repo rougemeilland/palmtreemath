@@ -10,6 +10,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math.Formatter
 {
@@ -21,7 +22,6 @@ namespace Palmtree.Math.Formatter
     {
         #region プライベートフィールド
 
-        private static ImplementOfUnsignedLongLongInteger _imp;
         private byte _base_number_value;
         private bool _allowed_exponential_form;
         private Dictionary<char, byte> _digits_keyd_by_char;
@@ -30,11 +30,6 @@ namespace Palmtree.Math.Formatter
         #endregion
 
         #region コンストラクタ
-
-        static BaseNumberInfoBase()
-        {
-            _imp = new ImplementOfUnsignedLongLongInteger();
-        }
 
         /// <summary>
         /// コンストラクタです。
@@ -48,7 +43,7 @@ namespace Palmtree.Math.Formatter
         protected BaseNumberInfoBase(byte base_number_value, bool allowed_exponential_form)
         {
             if (base_number_value <= 1)
-                throw (new ArgumentException("基数として使用できない値です。", "base_number_value"));
+                throw (new ArgumentOutOfRangeException("基数として使用できない値です。", "base_number_value"));
             _base_number_value = base_number_value;
             _allowed_exponential_form = allowed_exponential_form;
             _digits_keyd_by_char = new Dictionary<char, byte>();
@@ -85,7 +80,7 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 計算結果の値です。
         /// </returns>
-        protected abstract ushort[] Multiply(ushort[] value);
+        protected abstract NativeUnsignedInteger Multiply(NativeUnsignedInteger value);
 
         /// <summary>
         /// ある整数値に基数をかけ、与えられた値を足した値を得ます。
@@ -100,7 +95,7 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 計算結果の値です。
         /// </returns>
-        protected abstract ushort[] MultiplyAndAdd(ushort[] value, byte digit);
+        protected abstract NativeUnsignedInteger MultiplyAndAdd(NativeUnsignedInteger value, byte digit);
 
         /// <summary>
         /// 整数部をあらわす数値から最下位桁の数字を取り出します。
@@ -114,17 +109,17 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 最下位桁の数字です。( value % 基数 )
         /// </returns>
-        protected virtual byte GetLeastSignificantDigitFromIntegerPart(ushort[] value, out ushort[] updated_value)
+        protected virtual byte GetLeastSignificantDigitFromIntegerPart(NativeUnsignedInteger value, out NativeUnsignedInteger updated_value)
         {
-            if (value.Length == 0)
+            if (value.IsZero)
             {
-                updated_value = new ushort[0];
+                updated_value = NativeUnsignedInteger.Zero;
                 return (0);
             }
             else
             {
-                ushort r;
-                updated_value = _imp.DivideRem(value, _base_number_value, out r);
+                UInt32 r;
+                updated_value = value.DivRem(_base_number_value, out r);
                 Debug.Assert(r < _base_number_value);
                 return ((byte)r);
             }
@@ -140,19 +135,7 @@ namespace Palmtree.Math.Formatter
         /// <returns>
         /// 有理数が小数以下有限桁数で表現できると判断可能ならtrue、そうではないのならfalseです。
         /// </returns>
-        protected abstract bool IsRationalNumberRepresentableByFiniteDigits(ushort[] denominator);
-
-        #endregion
-
-        #region プロテクテッドプロパティ
-
-        protected ImplementOfUnsignedLongLongInteger Imp
-        {
-            get
-            {
-                return (_imp);
-            }
-        }
+        protected abstract bool IsRationalNumberRepresentableByFiniteDigits(NativeUnsignedInteger denominator);
 
         #endregion
 
@@ -166,40 +149,35 @@ namespace Palmtree.Math.Formatter
             }
         }
 
-        ushort[] IBaseNumberInfo.Multiply(ushort[] value)
+        NativeUnsignedInteger IBaseNumberInfo.Multiply(NativeUnsignedInteger value)
         {
             return (Multiply(value));
         }
 
-        ushort[] IBaseNumberInfo.MultiplyAndAdd(ushort[] value, byte digit)
+        NativeUnsignedInteger IBaseNumberInfo.MultiplyAndAdd(NativeUnsignedInteger value, byte digit)
         {
             return (MultiplyAndAdd(value, digit));
         }
 
-        byte IBaseNumberInfo.GetLeastSignificantDigitFromIntegerPart(ushort[] value, out ushort[] updated_value)
+        byte IBaseNumberInfo.GetLeastSignificantDigitFromIntegerPart(NativeUnsignedInteger value, out NativeUnsignedInteger updated_value)
         {
             return (GetLeastSignificantDigitFromIntegerPart(value, out updated_value));
         }
 
-        byte IBaseNumberInfo.GetMostSignificantDigitFromFractionPart(ushort[] value_numerator, ushort[] value_denominator, out ushort[] updated_value_numerator)
+        byte IBaseNumberInfo.GetMostSignificantDigitFromFractionPart(NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, out NativeUnsignedInteger updated_value_numerator)
         {
-            Debug.Assert(value_numerator.Length > 0);
-            Debug.Assert(value_denominator.Length > 0);
-            ushort[] x = _imp.Multiply(value_numerator, _base_number_value);
-            ushort[] r;
-            ushort[] q = _imp.DivideRem(x, value_denominator, out r);
-            Debug.Assert(q.Length <= 1);
+            Debug.Assert(!value_numerator.IsZero);
+            Debug.Assert(!value_denominator.IsZero);
+            var x = value_numerator.Multiply(_base_number_value);
+            NativeUnsignedInteger r;
+            var q = x.DivRem(value_denominator, out r);
             updated_value_numerator = r;
-            if (q.Length == 0)
-                return (0);
-            else
-            {
-                Debug.Assert(q[0] < _base_number_value);
-                return ((byte)q[0]);
-            }
+            var q_uint = q.ToUInt32();
+            Debug.Assert(q_uint < _base_number_value);
+            return ((byte)q_uint);
         }
 
-        bool IBaseNumberInfo.IsRationalNumberRepresentableByFiniteDigits(ushort[] denominator)
+        bool IBaseNumberInfo.IsRationalNumberRepresentableByFiniteDigits(NativeUnsignedInteger denominator)
         {
             return (IsRationalNumberRepresentableByFiniteDigits(denominator));
         }

@@ -36,9 +36,45 @@ namespace Palmtree.Math
         /// xとyが等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
+        public static bool operator ==(uint x, UnsignedLongLongInteger y)
+        {
+            return (y._native_value.Equals(x));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
+        /// </summary>
+        /// <param name="x">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyが等しいならばtrue、そうではないのならfalseです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static bool operator ==(ulong x, UnsignedLongLongInteger y)
         {
-            return (Equals(y, x));
+            return (y._native_value.Equals(x));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
+        /// </summary>
+        /// <param name="x">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyが等しいならばtrue、そうではないのならfalseです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static bool operator ==(UnsignedLongLongInteger x, uint y)
+        {
+            return (x._native_value.Equals(y));
         }
 
         /// <summary>
@@ -56,7 +92,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static bool operator ==(UnsignedLongLongInteger x, ulong y)
         {
-            return (Equals(x, y));
+            return (x._native_value.Equals(y));
         }
 
         /// <summary>
@@ -73,7 +109,7 @@ namespace Palmtree.Math
         /// </returns>
         public static bool operator ==(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            return (Equals(x, y));
+            return (x._native_value.Equals(y._native_value));
         }
 
         #endregion
@@ -93,9 +129,45 @@ namespace Palmtree.Math
         /// xとyが等しくないならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
+        public static bool operator !=(uint x, UnsignedLongLongInteger y)
+        {
+            return (!y._native_value.Equals(x));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
+        /// </summary>
+        /// <param name="x">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyが等しくないならばtrue、そうではないのならfalseです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static bool operator !=(ulong x, UnsignedLongLongInteger y)
         {
-            return (!Equals(y, x));
+            return (!y._native_value.Equals(x));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
+        /// </summary>
+        /// <param name="x">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyが等しくないならばtrue、そうではないのならfalseです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static bool operator !=(UnsignedLongLongInteger x, uint y)
+        {
+            return (!x._native_value.Equals(y));
         }
 
         /// <summary>
@@ -113,7 +185,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static bool operator !=(UnsignedLongLongInteger x, ulong y)
         {
-            return (!Equals(x, y));
+            return (!x._native_value.Equals(y));
         }
 
         /// <summary>
@@ -130,7 +202,7 @@ namespace Palmtree.Math
         /// </returns>
         public static bool operator !=(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            return (!Equals(y, x));
+            return (!x._native_value.Equals(y));
         }
 
         #endregion
@@ -153,9 +225,42 @@ namespace Palmtree.Math
         /// オブジェクトが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
+        public bool Equals(uint o)
+        {
+            return (_native_value.Equals(o));
+        }
+
+        /// <summary>
+        /// オブジェクトが論理的に等しいかどうか調べます。
+        /// </summary>
+        /// <param name="o">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// オブジェクトが論理的に等しいならばtrue、そうではないのならfalseです。
+        /// </returns>
+        [CLSCompliant(false)]
         public bool Equals(ulong o)
         {
-            return (Equals(this, o));
+            return (_native_value.Equals(o));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
+        /// </summary>
+        /// <param name="x">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static bool Equals(uint x, UnsignedLongLongInteger y)
+        {
+            return (y._native_value.Equals(x));
         }
 
         /// <summary>
@@ -173,7 +278,25 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static bool Equals(ulong x, UnsignedLongLongInteger y)
         {
-            return (Equals(y, x));
+            return (y._native_value.Equals(x));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
+        /// </summary>
+        /// <param name="x">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static bool Equals(UnsignedLongLongInteger x, uint y)
+        {
+            return (x._native_value.Equals(y));
         }
 
         /// <summary>
@@ -191,14 +314,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static bool Equals(UnsignedLongLongInteger x, ulong y)
         {
-            if (x._InternalValue.Length == 0)
-                return (y == 0);
-            else if (y == 0)
-                return (false);
-            else if (y <= ushort.MaxValue)
-                return (_imp.Equals(x._InternalValue, (ushort)y));
-            else
-                return (_imp.Equals(x._InternalValue, CreateInternalValue(y)));
+            return (x._native_value.Equals(y));
         }
 
         /// <summary>
@@ -215,12 +331,7 @@ namespace Palmtree.Math
         /// </returns>
         public static bool Equals(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            if (x._InternalValue.Length == 0)
-                return (y._InternalValue.Length == 0);
-            else if (y._InternalValue.Length == 0)
-                return (false);
-            else
-                return (_imp.Equals(x._InternalValue, y._InternalValue));
+            return (x._native_value.Equals(y._native_value));
         }
 
         #endregion

@@ -10,6 +10,7 @@
 using System;
 using System.Globalization;
 using Palmtree.Math.Formatter;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math
 {
@@ -47,7 +48,7 @@ namespace Palmtree.Math
                 }
             }
 
-            protected override INumberFormatter CreateRoundTripFormatter(NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator)
+            protected override INumberFormatter CreateRoundTripFormatter(NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator)
             {
                 return (new IntegerRoundTripFormatter(negative, value_numerator));
             }
@@ -111,7 +112,7 @@ namespace Palmtree.Math
             NumberFormatInfo number_format_info = NumberFormatInfo.GetInstance(culture);
             try
             {
-                INumberFormatter formatter = _formatter_creator.CreateFormatter(format, number_format_info, false, _InternalValue);
+                INumberFormatter formatter = _formatter_creator.CreateFormatter(format, number_format_info, false, _native_value);
                 if (formatter == null)
                     throw (new FormatException(string.Format("書式文字列'{0}'の形式に誤りがあります。", format)));
                 return (formatter.Format());

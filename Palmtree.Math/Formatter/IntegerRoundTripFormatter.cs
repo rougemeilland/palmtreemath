@@ -7,6 +7,8 @@
   https://opensource.org/licenses/MIT
 */
 
+using Palmtree.Math.Implements;
+
 namespace Palmtree.Math.Formatter
 {
     internal class IntegerRoundTripFormatter
@@ -15,13 +17,13 @@ namespace Palmtree.Math.Formatter
         #region プライベートフィールド
 
         private bool _negative;
-        private ushort[] _value;
+        private NativeUnsignedInteger _value;
 
         #endregion
 
         #region コンストラクタ
 
-        public IntegerRoundTripFormatter(bool negative, ushort[] value_numerator)
+        public IntegerRoundTripFormatter(bool negative, NativeUnsignedInteger value_numerator)
         {
             _negative = negative;
             _value = value_numerator;

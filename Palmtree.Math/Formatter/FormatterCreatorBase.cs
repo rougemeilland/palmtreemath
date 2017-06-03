@@ -26,8 +26,8 @@ namespace Palmtree.Math.Formatter
             #region プライベートフィールド
 
             private byte[] _integer_part_digits;
-            private ushort[] _fraction_part_numerator;
-            private ushort[] _fraction_part_denominator;
+            private NativeUnsignedInteger _fraction_part_numerator;
+            private NativeUnsignedInteger _fraction_part_denominator;
             private IBaseNumberInfo _base_number_info;
             private int _integer_part_digits_index;
 
@@ -35,7 +35,7 @@ namespace Palmtree.Math.Formatter
 
             #region コンストラクタ
 
-            public NumberSequence(byte[] integer_part_digits, ushort[] fraction_part_numerator, ushort[] fraction_part_denominator, IBaseNumberInfo base_number_info)
+            public NumberSequence(byte[] integer_part_digits, NativeUnsignedInteger fraction_part_numerator, NativeUnsignedInteger fraction_part_denominator, IBaseNumberInfo base_number_info)
             {
                 _integer_part_digits = integer_part_digits;
                 _fraction_part_numerator = fraction_part_numerator;
@@ -52,7 +52,7 @@ namespace Palmtree.Math.Formatter
             {
                 get
                 {
-                    return (_integer_part_digits_index >= _integer_part_digits.Length && _fraction_part_numerator.Length == 0);
+                    return (_integer_part_digits_index >= _integer_part_digits.Length && _fraction_part_numerator.IsZero);
                 }
             }
 
@@ -66,11 +66,11 @@ namespace Palmtree.Math.Formatter
                 }
                 else
                 {
-                    if (_fraction_part_numerator.Length == 0)
+                    if (_fraction_part_numerator.IsZero)
                         return (0);
                     else
                     {
-                        ushort[] updated_numerator;
+                        NativeUnsignedInteger updated_numerator;
                         byte digit = _base_number_info.GetMostSignificantDigitFromFractionPart(_fraction_part_numerator, _fraction_part_denominator, out updated_numerator);
                         _fraction_part_numerator = updated_numerator;
                         return (digit);
@@ -90,7 +90,6 @@ namespace Palmtree.Math.Formatter
         {
             #region プライベートフィールド
 
-            private static ImplementOfUnsignedLongLongInteger _imp;
             private IBaseNumberInfo _base_number_info;
             private byte[] _digits;
             private byte _most_significant_padding_digit;
@@ -99,12 +98,7 @@ namespace Palmtree.Math.Formatter
 
             #region コンストラクタ
 
-            static ParserOfHexaDecimalInteger()
-            {
-                _imp = new ImplementOfUnsignedLongLongInteger();
-            }
-
-            public ParserOfHexaDecimalInteger(IBaseNumberInfo base_number_info, bool negative, ushort[] value)
+            public ParserOfHexaDecimalInteger(IBaseNumberInfo base_number_info, bool negative, NativeUnsignedInteger value)
             {
                 if (base_number_info.Value != 16)
                     throw (new ArgumentException("ParserOfHexaDecimalIntegerで指定する基数は16でなければなりません。", "base_number_info"));
@@ -112,10 +106,10 @@ namespace Palmtree.Math.Formatter
                 Stack<byte> digits = new Stack<byte>();
                 if (negative)
                 {
-                    value = _imp.Negate(value, value.Length * 16 + 4);
-                    while (value.Length > 0)
+                    value = value.Negate((value.BitCount + 7) / 4 * 4);
+                    while (!value.IsZero)
                     {
-                        ushort[] updated_value;
+                        NativeUnsignedInteger updated_value;
                         byte digit = base_number_info.GetLeastSignificantDigitFromIntegerPart(value, out updated_value);
                         value = updated_value;
                         digits.Push(digit);
@@ -135,9 +129,9 @@ namespace Palmtree.Math.Formatter
                 else
                 {
                     byte most_significant_digit = 0;
-                    while (value.Length > 0)
+                    while (!value.IsZero)
                     {
-                        ushort[] updated_value;
+                        NativeUnsignedInteger updated_value;
                         byte digit = base_number_info.GetLeastSignificantDigitFromIntegerPart(value, out updated_value);
                         value = updated_value;
                         digits.Push(digit);
@@ -212,50 +206,44 @@ namespace Palmtree.Math.Formatter
         {
             #region プライベートフィールド
 
-            private static ImplementOfUnsignedLongLongInteger _imp;
             private IBaseNumberInfo _base_number_info;
             private byte[] _integer_part_digits;
-            private ushort[] _fraction_part_numerator;
-            private ushort[] _fraction_part_denominator;
+            private NativeUnsignedInteger _fraction_part_numerator;
+            private NativeUnsignedInteger _fraction_part_denominator;
 
             #endregion
 
             #region コンストラクタ
 
-            static ParserOfRationalNumber()
-            {
-                _imp = new ImplementOfUnsignedLongLongInteger();
-            }
-
-            public ParserOfRationalNumber(IBaseNumberInfo base_number_info, ushort[] value_numerator, ushort[] value_denominator)
+            public ParserOfRationalNumber(IBaseNumberInfo base_number_info, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator)
             {
                 _base_number_info = base_number_info;
-                if (value_numerator.Length == 0)
+                if (value_numerator.IsZero)
                 {
                     _integer_part_digits = new byte[] { 0 };
-                    _fraction_part_numerator = new ushort[0];
-                    _fraction_part_denominator = new ushort[] { 1 };
+                    _fraction_part_numerator = NativeUnsignedInteger.Zero;
+                    _fraction_part_denominator = NativeUnsignedInteger.One;
                 }
                 else
                 {
-                    ushort[] integer_part;
+                    NativeUnsignedInteger integer_part;
                     if (value_denominator == null)
                     {
                         _integer_part_digits = new byte[] { 0 };
                         integer_part = value_numerator;
-                        _fraction_part_numerator = new ushort[0];
-                        _fraction_part_denominator = new ushort[]{1};
+                        _fraction_part_numerator = NativeUnsignedInteger.Zero;
+                        _fraction_part_denominator = NativeUnsignedInteger.One;
                     }
                     else
                     {
                         _integer_part_digits = new byte[] { 0 };
-                        integer_part = _imp.DivideRem(value_numerator, value_denominator, out _fraction_part_numerator);
+                        integer_part = value_numerator.DivRem(value_denominator, out _fraction_part_numerator);
                         _fraction_part_denominator = value_denominator;
                     }
                     Stack<byte> integer_part_digits = new Stack<byte>();
-                    while (integer_part.Length > 0)
+                    while (!integer_part.IsZero)
                     {
-                        ushort[] updated_integer_part;
+                        NativeUnsignedInteger updated_integer_part;
                         byte digit = _base_number_info.GetLeastSignificantDigitFromIntegerPart(integer_part, out updated_integer_part);
                         integer_part_digits.Push(digit);
                         integer_part = updated_integer_part;
@@ -417,13 +405,12 @@ namespace Palmtree.Math.Formatter
 
         #region FormatterCreatorHandler の定義
 
-        private delegate INumberFormatter FormatterCreatorHandler(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec);
+        private delegate INumberFormatter FormatterCreatorHandler(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec);
 
         #endregion
 
         #region プライベートフィールド
 
-        private static ImplementOfUnsignedLongLongInteger _imp;
         private IFormattingTypeInfo _formatting_type_info;
         private IBaseNumberInfo _decimal_base_number_info;
         private IBaseNumberInfo _upper_case_hexadecimal_base_number_info;
@@ -433,11 +420,6 @@ namespace Palmtree.Math.Formatter
         #endregion
 
         #region コンストラクタ
-
-        static FormatterCreatorBase()
-        {
-            _imp = new ImplementOfUnsignedLongLongInteger();
-        }
 
         public FormatterCreatorBase()
         {
@@ -470,14 +452,14 @@ namespace Palmtree.Math.Formatter
 
         #region パブリックメソッド
 
-        public INumberFormatter CreateFormatter(string format, NumberFormatInfo number_format_info, bool negative, ushort[] value)
+        public INumberFormatter CreateFormatter(string format, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value)
         {
             return (CreateFormatter(format, number_format_info, negative, value, null));
         }
 
-        public INumberFormatter CreateFormatter(string format, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator)
+        public INumberFormatter CreateFormatter(string format, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator)
         {
-            if (value_denominator != null && value_denominator.Length == 1 && value_denominator[0] == 1)
+            if (value_denominator != null && value_denominator.IsOne)
                 value_denominator = null;
             StandardNumericFormatStringInfo format_param = StandardNumericFormatStringInfo.Parse(_formatting_type_info, format);
             if (format_param == null)
@@ -493,15 +475,15 @@ namespace Palmtree.Math.Formatter
             return (result);
         }
 
-        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out bool negative, out ushort[] numerator, out ushort[] denominator)
+        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out bool negative, out NativeUnsignedInteger numerator, out NativeUnsignedInteger denominator)
         {
             negative = false;
             NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
             IParserOfNumber parser = StringParser.CreateInstance(s, style, provider, out negative);
             if (parser == null)
             {
-                numerator = new ushort[0];
-                denominator = new ushort[] { 1 };
+                numerator = NativeUnsignedInteger.Zero;
+                denominator = NativeUnsignedInteger.One;
                 return (false);
             }
             INumberSequence sequence = parser.NumberSequence;
@@ -510,17 +492,17 @@ namespace Palmtree.Math.Formatter
             {
                 if (negative)
                 {
-                    numerator = new ushort[0];
-                    denominator = new ushort[] { 1 };
+                    numerator = NativeUnsignedInteger.Zero;
+                    denominator = NativeUnsignedInteger.One;
                     return (false);
                 }
                 bool msb;
                 int digits;
                 TryParseImp(base_number_info, sequence, parser.Offset, out numerator, out denominator, out msb, out digits);
-                if (msb && numerator.Length > 0)
+                if (msb && !numerator.IsZero)
                 {
                     negative = true;
-                    numerator = _imp.Negate(numerator, digits * 4);
+                    numerator =numerator.Negate(digits * 4);
                 }
                 return (true);
             }
@@ -529,7 +511,7 @@ namespace Palmtree.Math.Formatter
                 bool msb;
                 int digits;
                 TryParseImp(base_number_info, sequence, parser.Offset, out numerator, out denominator, out msb, out digits);
-                if (numerator.Length == 0)
+                if (numerator.IsZero)
                     negative = false;
                 return (true);
             }
@@ -539,7 +521,7 @@ namespace Palmtree.Math.Formatter
 
         #region プロテクテッドメソッド
 
-        protected virtual INumberFormatter CreateRoundTripFormatter(NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator)
+        protected virtual INumberFormatter CreateRoundTripFormatter(NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator)
         {
             return (null);
         }
@@ -555,7 +537,7 @@ namespace Palmtree.Math.Formatter
 
         #region プライベートメソッド
 
-        private INumberFormatter CreateFormatterOfC(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfC(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             if (format_param.IsInfinitePrecision)
                 return (null);
@@ -565,7 +547,7 @@ namespace Palmtree.Math.Formatter
             return (new FixedPointFormFormatter(parser, number_format_info, negative, true, NumberFormatType.Currency));
         }
 
-        private INumberFormatter CreateFormatterOfD(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfD(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             if (format_param.IsInfinitePrecision)
                 return (null);
@@ -577,17 +559,17 @@ namespace Palmtree.Math.Formatter
             return (new FixedPointFormFormatter(parser, number_format_info, negative, false, NumberFormatType.Normal));
         }
 
-        private INumberFormatter CreateFormatterOfE_UpperCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfE_UpperCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             return (CreateFormatterOfE(format_param, number_format_info, negative, value_numerator, value_denominator, formatter_spec | FormatterSpecification.UseUpperCase));
         }
 
-        private INumberFormatter CreateFormatterOfE_LowerCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfE_LowerCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             return (CreateFormatterOfE(format_param, number_format_info, negative, value_numerator, value_denominator, formatter_spec));
         }
 
-        private INumberFormatter CreateFormatterOfE(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfE(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             if (format_param.IsInfinitePrecision)
                 return (null);
@@ -597,7 +579,7 @@ namespace Palmtree.Math.Formatter
             return (new ExponentialFormFormatter(parser, number_format_info, negative, formatter_spec, ExponentialFormFormatter.ExponentialPartDigits.Digits_3));
         }
 
-        private INumberFormatter CreateFormatterOfF(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfF(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             if (format_param.IsInfinitePrecision)
             {
@@ -617,17 +599,17 @@ namespace Palmtree.Math.Formatter
             }
         }
 
-        private INumberFormatter CreateFormatterOfG_UpperCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfG_UpperCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             return (CreateFormatterOfG(format_param, number_format_info, negative, value_numerator, value_denominator, formatter_spec | FormatterSpecification.UseUpperCase));
         }
 
-        private INumberFormatter CreateFormatterOfG_LowerCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfG_LowerCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             return (CreateFormatterOfG(format_param, number_format_info, negative, value_numerator, value_denominator, formatter_spec));
         }
 
-        private INumberFormatter CreateFormatterOfG(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfG(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             if (format_param.IsInfinitePrecision)
                 return (null);
@@ -658,7 +640,7 @@ namespace Palmtree.Math.Formatter
         }
 #endif
 
-        private INumberFormatter CreateFormatterOfN(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfN(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             if (format_param.IsInfinitePrecision)
             {
@@ -689,7 +671,7 @@ namespace Palmtree.Math.Formatter
         }
 #endif
 
-        private INumberFormatter CreateFormatterOfP(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfP(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             if (format_param.IsInfinitePrecision)
                 return (null);
@@ -700,24 +682,24 @@ namespace Palmtree.Math.Formatter
             return (new FixedPointFormFormatter(parser, number_format_info, negative, true, NumberFormatType.Percent));
         }
 
-        private INumberFormatter CreateFormatterOfR(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfR(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             if (format_param.IsInfinitePrecision)
                 return (null);
             return (CreateRoundTripFormatter(number_format_info, negative, value_numerator, value_denominator));
         }
 
-        private INumberFormatter CreateFormatterOfX_UpperCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfX_UpperCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             return (CreateFormatterOfX(format_param, number_format_info, negative, value_numerator, value_denominator, formatter_spec | FormatterSpecification.UseUpperCase));
         }
 
-        private INumberFormatter CreateFormatterOfX_LowerCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfX_LowerCase(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             return (CreateFormatterOfX(format_param, number_format_info, negative, value_numerator, value_denominator, formatter_spec));
         }
 
-        private INumberFormatter CreateFormatterOfX(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator, FormatterSpecification formatter_spec)
+        private INumberFormatter CreateFormatterOfX(StandardNumericFormatStringInfo format_param, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator, FormatterSpecification formatter_spec)
         {
             if (format_param.IsInfinitePrecision)
                 return (null);
@@ -729,15 +711,15 @@ namespace Palmtree.Math.Formatter
             return (new FixedPointFormFormatter(parser, number_format_info, false, false, NumberFormatType.Normal));
         }
 
-        private INumberFormatter CreateCustomFormatter(string format, NumberFormatInfo number_format_info, bool negative, ushort[] value_numerator, ushort[] value_denominator)
+        private INumberFormatter CreateCustomFormatter(string format, NumberFormatInfo number_format_info, bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator)
         {
             throw (new ArgumentException(string.Format("未知の書式指定文字列\"{0}\"が与えられました。", format), "format"));
         }
 
-        private static void TryParseImp(IBaseNumberInfo base_number_info, INumberSequence sequence, int exp, out ushort[] numerator, out ushort[] denominator, out bool msb, out int digits)
+        private static void TryParseImp(IBaseNumberInfo base_number_info, INumberSequence sequence, int exp, out NativeUnsignedInteger numerator, out NativeUnsignedInteger denominator, out bool msb, out int digits)
         {
-            numerator = new ushort[0];
-            denominator = new ushort[] { 1 };
+            numerator = NativeUnsignedInteger.Zero;
+            denominator = NativeUnsignedInteger.One;
             msb = false;
             digits = 0;/*numeratorに返される数値の桁数*/
             int least_ZEROs = 0;
@@ -765,7 +747,7 @@ namespace Palmtree.Math.Formatter
                     ++digits;
                 }
             }
-            if (numerator.Length > 0)
+            if (!numerator.IsZero)
             {
                 int e = exp - digits;
                 while (e > 0)
@@ -782,44 +764,45 @@ namespace Palmtree.Math.Formatter
             }
         }
 
-        private void MultiplyQuick100(ref ushort[] value_numerator, ref ushort[] value_denominator)
+        private void MultiplyQuick100(ref NativeUnsignedInteger value_numerator, ref NativeUnsignedInteger value_denominator)
         {
             if (value_denominator == null)
             {
-                if (value_numerator.Length > 0)
-                    value_numerator = _imp.Multiply(value_numerator, (ushort)100);
+                if (!value_numerator.IsZero)
+                    value_numerator = value_numerator.Multiply(100);
             }
             else
             {
-                Debug.Assert(value_numerator.Length > 0);
-                ushort n = 1;
-                if (value_denominator.Length > 0 && (value_denominator[0] & 1) == 0)
-                {
-                    value_denominator = _imp.RightShift1Quick(value_denominator);
-                    if (value_denominator.Length > 0 && (value_denominator[0] & 1) == 0)
-                        value_denominator = _imp.RightShift1Quick(value_denominator);
-                    else
-                        n *= 2;
-                }
-                else
+                if (value_denominator.IsZero)
+                    throw new ApplicationException();
+                Debug.Assert(!value_numerator.IsZero);
+                uint n = 1;
+                if (!value_denominator.IsEven)
                     n *= 4;
-                ushort r;
-                ushort[] q;
-                q = _imp.DivideRem(value_denominator, (ushort)5, out r);
-                if (r == 0)
+                else
+                {
+                    value_denominator = value_denominator.RightShift1Quick();
+                    if (!value_denominator.IsEven)
+                        n *= 2;
+                    else
+                        value_denominator = value_denominator.RightShift1Quick();
+                }
+                uint r;
+                var q = value_denominator.DivRem(5, out r);
+                if (r != 0)
+                    n *= 25;
+                else
                 {
                     value_denominator = q;
-                    q = _imp.DivideRem(value_denominator, (ushort)5, out r);
-                    if (r == 0)
-                        value_denominator = q;
-                    else
+                    q = value_denominator.DivRem(5, out r);
+                    if (r != 0)
                         n *= 5;
+                    else
+                        value_denominator = q;
                 }
-                else
-                    n *= 25;
                 Debug.Assert(n <= 100);
-                value_numerator = _imp.Multiply(value_numerator, n);
-                if (value_denominator.Length == 1 && value_denominator[0] == 1)
+                value_numerator = value_numerator.Multiply(n);
+                if (value_denominator.IsOne)
                     value_denominator = null;
             }
         }

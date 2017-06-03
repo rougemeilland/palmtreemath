@@ -8,8 +8,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
 using Palmtree.Math.Formatter;
@@ -46,35 +44,11 @@ namespace Palmtree.Math
         #region プライベートフィールド
 
         private static string _member_name = "Value";
-        private static ImplementOfUnsignedLongLongInteger _imp;
         private static IBaseNumberInfo _decimal_base_number_info;
         private static IBaseNumberInfo _upper_case_hexadecimal_base_number_info;
         private static IBaseNumberInfo _lower_case_hexadecimal_base_number_info;
         private static FormatterCreator _formatter_creator;
-        private ushort[] __internal_value;
-        private int? _bit_length_cache;
-        private bool? _is_power_of_two_cache;
-
-        #endregion
-
-        #region プライベートプロパティ
-
-        private ushort[] _InternalValue
-        {
-            get
-            {
-                if (__internal_value == null)
-                    __internal_value = new ushort[0];
-                return (__internal_value);
-            }
-
-            set
-            {
-                if (value == null)
-                    throw (new ArgumentNullException());
-                __internal_value = value;
-            }
-        }
+        private NativeUnsignedInteger _native_value;
 
         #endregion
 
@@ -82,25 +56,14 @@ namespace Palmtree.Math
 
         static UnsignedLongLongInteger()
         {
-            _imp = new ImplementOfUnsignedLongLongInteger();
-            Zero = new UnsignedLongLongInteger();
-            One = new UnsignedLongLongInteger(new ushort[] { 1 });
-            Ten = new UnsignedLongLongInteger(new ushort[] { 10 });
+            Zero = new UnsignedLongLongInteger(NativeUnsignedInteger.Zero);
+            One = new UnsignedLongLongInteger(NativeUnsignedInteger.One);
+            Ten = new UnsignedLongLongInteger(10);
             _decimal_base_number_info = DecimalBaseNumberInfo.DefaultInstance;
             _upper_case_hexadecimal_base_number_info = HexaDecimalBaseNumberInfo.DefaultInstanceUsingUpperCaseDigit;
             _lower_case_hexadecimal_base_number_info = HexaDecimalBaseNumberInfo.DefaultInstanceUsingLowerCaseDigit;
             _formatter_creator = new FormatterCreator();
         }
-
-#if false
-        /// <summary>
-        /// コンストラクタです。
-        /// </summary>
-        public UnsignedLongLongInteger()
-        {
-            _imp = new ushort[0];
-        }
-#endif
 
         /// <summary>
         /// コンストラクタです。
@@ -109,8 +72,13 @@ namespace Palmtree.Math
         /// 初期値となる整数です。
         /// </param>
         public UnsignedLongLongInteger(int value)
-            : this((long)value)
         {
+            if (value < 0)
+                throw (new ArgumentOutOfRangeException(@"UnsignedLongLongIntegerで表現できない値が指定されました。", "value"));
+            if (value == 0)
+                _native_value = NativeUnsignedInteger.Zero;
+            else
+                _native_value = new NativeUnsignedInteger((uint)value);
         }
 
         /// <summary>
@@ -122,30 +90,11 @@ namespace Palmtree.Math
         public UnsignedLongLongInteger(long value)
         {
             if (value < 0)
-                throw (new ArgumentException(@"UnsignedLongLongIntegerで表現できない値が指定されました。", "value"));
+                throw (new ArgumentOutOfRangeException(@"UnsignedLongLongIntegerで表現できない値が指定されました。", "value"));
             if (value == 0)
-                __internal_value = new ushort[0];
-            else if (value <= ushort.MaxValue)
-                __internal_value = new ushort[] { (ushort)value };
+                _native_value = NativeUnsignedInteger.Zero;
             else
-                __internal_value = CreateInternalValue((ulong)value);
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
-        }
-
-        internal UnsignedLongLongInteger(byte value)
-            : this((ushort)value)
-        {
-        }
-
-        internal UnsignedLongLongInteger(ushort value)
-        {
-            if (value == 0)
-                __internal_value = new ushort[0];
-            else
-                __internal_value = new ushort[] { value };
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
+                _native_value = new NativeUnsignedInteger((ulong)value);
         }
 
         /// <summary>
@@ -156,8 +105,11 @@ namespace Palmtree.Math
         /// </param>
         [CLSCompliant(false)]
         public UnsignedLongLongInteger(uint value)
-            : this((ulong)value)
         {
+            if (value == 0)
+                _native_value = NativeUnsignedInteger.Zero;
+            else
+                _native_value = new NativeUnsignedInteger(value);
         }
 
         /// <summary>
@@ -170,13 +122,9 @@ namespace Palmtree.Math
         public UnsignedLongLongInteger(ulong value)
         {
             if (value == 0)
-                __internal_value = new ushort[0];
-            else if (value <= ushort.MaxValue)
-                __internal_value = new ushort[] { (ushort)value };
+                _native_value = NativeUnsignedInteger.Zero;
             else
-                __internal_value = CreateInternalValue(value);
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
+                _native_value = new NativeUnsignedInteger(value);
         }
 
         /// <summary>
@@ -198,9 +146,20 @@ namespace Palmtree.Math
         /// </param>
         public UnsignedLongLongInteger(double value)
         {
-            __internal_value = FromDoubleImp(value);
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
+            try
+            {
+                var base_number = 0x80000000U; // UInt32で表現できる最も大きい2のべき乗の値
+                _native_value = FromFloatingPointNUmberImp(value, base_number, x => x.CompareTo(0D), x =>
+                {
+                    var q = System.Math.Floor(x / base_number);
+                    var r = (UInt32)(x - q * base_number);
+                    return (new Tuple<double, UInt32>(q, r));
+                });
+            }
+            catch
+            {
+                throw (new ArgumentOutOfRangeException("value", value, @"UnsignedLongLongIntegerで表現できない値が指定されました。"));
+            }
         }
 
         /// <summary>
@@ -211,88 +170,35 @@ namespace Palmtree.Math
         /// </param>
         public UnsignedLongLongInteger(decimal value)
         {
-            __internal_value = FromDecimalImp(value);
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
+            try
+            {
+                var base_number = 1000000000U; // UInt32で表現できる最も大きい10のべき乗の値
+                _native_value = FromFloatingPointNUmberImp(value, base_number, x => x.CompareTo(0M), x =>
+                {
+                    var q = System.Math.Floor(x / base_number);
+                    var r = (UInt32)(x - q * base_number);
+                    return (new Tuple<decimal, UInt32>(q, r));
+                });
+            }
+            catch
+            {
+                throw (new ArgumentOutOfRangeException("value", value, @"UnsignedLongLongIntegerで表現できない値が指定されました。"));
+            }
         }
 
         private UnsignedLongLongInteger(SerializationInfo info, StreamingContext context)
         {
             string s = info.GetString(_member_name);
-            ushort[] result;
+            NativeUnsignedInteger result;
             if (!TryParseImp(s, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out result))
                 throw (new FormatException(string.Format("文字列'{0}'はUnsignedLongLongIntegerの形式ではありません。", s)));
-            __internal_value = result;
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
+            _native_value = result;
         }
 
-        internal UnsignedLongLongInteger(ushort[] value)
+        internal UnsignedLongLongInteger(NativeUnsignedInteger value)
         {
-            Debug.Assert(value != null);
-            Debug.Assert(value.Length == 0 || value[value.Length - 1] > 0);
-            __internal_value = value;
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
+            _native_value = value;
         }
-
-        internal UnsignedLongLongInteger(ArraySegment<ushort> data)
-            : this(CreateInternalValue(data))
-        {
-        }
-
-        #endregion
-
-        #region パブリックメソッド
-
-#if DEBUG
-
-        /// <summary>
-        /// テストデータから<see cref="UnsignedLongLongInteger"/>オブジェクトを生成します。
-        /// </summary>
-        /// <param name="data">
-        /// テストデータです。
-        /// </param>
-        /// <returns>
-        /// 生成された<see cref="UnsignedLongLongInteger"/>オブジェクトです。
-        /// </returns>
-        [CLSCompliant(false)]
-        public static UnsignedLongLongInteger FromTestData(ushort[] data)
-        {
-            TestDataReader reader = new TestDataReader(data);
-            ushort header = reader.GetUShortValue();
-            if (header != 0)
-                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
-            ArraySegment<ushort> p = reader.GetSegment();
-            reader.AssertEndOfData();
-            if (p.Count == 0)
-                return (Zero);
-            else
-                return (new UnsignedLongLongInteger(p));
-        }
-
-        /// <summary>
-        /// オブジェクトの内容をテストデータと比較します。
-        /// </summary>
-        /// <param name="data">
-        /// 比較対象のテストデータです。
-        /// </param>
-        /// <returns>
-        /// 一致していればtrue、そうではないのならfalseです。
-        /// </returns>
-        [CLSCompliant(false)]
-        public bool EqualsInternally(ushort[] data)
-        {
-            TestDataReader reader = new TestDataReader(data);
-            ushort header = reader.GetUShortValue();
-            if (header != 0)
-                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
-            ArraySegment<ushort> p = reader.GetSegment();
-            reader.AssertEndOfData();
-            return (EqualsInternally(p));
-        }
-
-#endif
 
         #endregion
 
@@ -305,7 +211,7 @@ namespace Palmtree.Math
         {
             get
             {
-                return (_InternalValue.Length == 0);
+                return (_native_value.IsZero);
             }
         }
 
@@ -316,7 +222,7 @@ namespace Palmtree.Math
         {
             get
             {
-                return ((_InternalValue.Length == 1) && (_InternalValue[0] == 1));
+                return (_native_value.IsOne);
             }
         }
 
@@ -327,10 +233,7 @@ namespace Palmtree.Math
         {
             get
             {
-                if (_InternalValue.Length == 0)
-                    return (true);
-                Debug.Assert(_InternalValue.Length > 0);
-                return ((_InternalValue[0] & 1) == 0);
+                return (_native_value.IsEven);
             }
         }
 
@@ -338,154 +241,21 @@ namespace Palmtree.Math
 
         #region インターナルメソッド
 
-        internal ushort[] GetInternalValue()
+        internal NativeUnsignedInteger GetInternalValue()
         {
-            return (_InternalValue);
+            return (_native_value);
         }
 
         internal ulong ToULong(Type target_type)
         {
-            ushort[] value = _InternalValue;
-            if (value.Length > 4)
+            try
+            {
+                return (_native_value.ToUInt64());
+            }
+            catch
+            {
                 throw (CreateOverflowExceptionObject(target_type, this));
-            return (ToULong(value));
-        }
-
-        internal bool EqualsInternally(ArraySegment<ushort> data)
-        {
-            if (_InternalValue.Length != data.Count)
-                return (false);
-            for (int index = 0; index < data.Count; ++index)
-            {
-                if (_InternalValue[index] != data.Array[index + data.Offset])
-                    return (false);
             }
-            return (true);
-        }
-
-        #endregion
-
-        #region プライベートメソッド
-
-        private static ulong ToULong(ushort[] value)
-        {
-            if (value.Length == 0)
-                return (0);
-            ulong result = value[0];
-            if (value.Length >= 2)
-            {
-                result += ((ulong)value[1] << 16);
-                if (value.Length >= 3)
-                {
-                    result += ((ulong)value[2] << 32);
-                    if (value.Length >= 4)
-                        result += ((ulong)value[3] << 48);
-                }
-            }
-            return (result);
-        }
-
-        private static ushort[] CreateInternalValue(ulong value)
-        {
-            Debug.Assert(value > ushort.MaxValue);
-            if (value <= 0xffffffff)
-                return (new ushort[] { (ushort)value, (ushort)(value >> 16) });
-            else if (value <= 0xffffffffffff)
-                return (new ushort[] { (ushort)value, (ushort)(value >> 16), (ushort)(value >> 32), });
-            else
-                return (new ushort[] { (ushort)value, (ushort)(value >> 16), (ushort)(value >> 32), (ushort)(value >> 48), });
-        }
-
-        private static ushort[] CreateInternalValue(ArraySegment<ushort> data)
-        {
-            ushort[] value = new ushort[data.Count];
-            Array.Copy(data.Array, data.Offset, value, 0, data.Count);
-            return (value);
-        }
-
-        private static ushort[] FromDoubleImp(double value)
-        {
-            if (double.IsInfinity(value) || double.IsNaN(value))
-                throw (new ArgumentException(@"UnsignedLongLongIntegerで表現できない値が指定されました。", "value"));
-            value = System.Math.Truncate(value);
-            if (value < 0)
-                throw (new ArgumentException(@"UnsignedLongLongIntegerで表現できない値が指定されました。", "value"));
-            List<ushort> digits = new List<ushort>();
-            value = System.Math.Round(value);
-            while (value >= 1)
-            {
-                double t = System.Math.Floor(value / 0x10000U);
-                if (double.IsInfinity(t) || double.IsNaN(t))
-                    throw (new ArgumentException(@"UnsignedLongLongIntegerで表現できない値が指定されました。", "value"));
-                double digit = value - t * 0x10000U;
-                if (double.IsInfinity(digit) || double.IsNaN(digit))
-                    throw (new ArgumentException(@"UnsignedLongLongIntegerで表現できない値が指定されました。", "value"));
-                digits.Add((ushort)digit);
-                value = t;
-                if (double.IsInfinity(value) || double.IsNaN(value))
-                    throw (new ArgumentException(@"UnsignedLongLongIntegerで表現できない値が指定されました。", "value"));
-            }
-            return (digits.ToArray());
-        }
-
-        private static ushort[] FromDecimalImp(decimal value)
-        {
-            int[] bits = decimal.GetBits(value);
-            ushort[] mantissa;
-            if (bits[2] == 0)
-            {
-                if (bits[1] == 0)
-                {
-                    if (bits[0] == 0)
-                        mantissa = new ushort[0];
-                    else
-                    {
-                        if ((bits[0] & 0xffff0000) == 0)
-                            mantissa = new ushort[] { (ushort)bits[0] };
-                        else
-                            mantissa = new ushort[] { (ushort)bits[0], (ushort)(bits[0] >> 16) };
-                    }
-                }
-                else
-                {
-                    if ((bits[1] & 0xffff0000) == 0)
-                        mantissa = new ushort[] { (ushort)bits[0], (ushort)(bits[0] >> 16), (ushort)bits[1] };
-                    else
-                        mantissa = new ushort[] { (ushort)bits[0], (ushort)(bits[0] >> 16), (ushort)bits[1], (ushort)(bits[1] >> 16) };
-                }
-            }
-            else
-            {
-                if ((bits[2] & 0xffff0000) == 0)
-                    mantissa = new ushort[] { (ushort)bits[0], (ushort)(bits[0] >> 16), (ushort)bits[1], (ushort)(bits[1] >> 16), (ushort)bits[2] };
-                else
-                    mantissa = new ushort[] { (ushort)bits[0], (ushort)(bits[0] >> 16), (ushort)bits[1], (ushort)(bits[1] >> 16), (ushort)bits[2], (ushort)(bits[2] >> 16) };
-            }
-            if ((bits[3] & 0xffff) != 0)
-                throw (new ArgumentException("与えられたdecimalオブジェクトの形式に誤りがあります。", "value"));
-            int exponent = (bits[3] >> 16) & 0xff;
-            if (exponent < 0 || exponent > 28)
-                throw (new ArgumentException("与えられたdecimalオブジェクトの形式に誤りがあります。", "value"));
-            if ((bits[3] & 0x7f000000) != 0)
-                throw (new ArgumentException("与えられたdecimalオブジェクトの形式に誤りがあります。", "value"));
-            bool negative = (bits[3] & 0x80000000) != 0;
-            while (exponent >= 4 && mantissa.Length > 0)
-            {
-                ushort r;
-                mantissa = _imp.DivideRem(mantissa, (ushort)10000, out r);
-                exponent -= 4;
-            }
-            while (exponent >= 1 && mantissa.Length > 0)
-            {
-                ushort r;
-                mantissa = _imp.DivideRem(mantissa, (ushort)10, out r);
-                --exponent;
-            }
-            if (mantissa.Length == 0)
-                negative = false;
-            if (negative)
-                throw (new ArgumentException(string.Format(@"与えられたdecimalオブジェクト'{0}'がUnsignedLongLongIntegerで表現できません。", value), "value"));
-            return (mantissa);
         }
 
         #endregion
@@ -505,10 +275,12 @@ namespace Palmtree.Math
         {
             if (o == null)
                 return (false);
+            else if (o is uint)
+                return (Equals(this, (uint)o));
             else if (o is ulong)
-                return (UnsignedLongLongInteger.Equals(this, (ulong)o));
+                return (Equals(this, (ulong)o));
             else if (o is UnsignedLongLongInteger)
-                return (UnsignedLongLongInteger.Equals(this, (UnsignedLongLongInteger)o));
+                return (Equals(this, (UnsignedLongLongInteger)o));
             else
                 return (false);
         }
@@ -521,16 +293,7 @@ namespace Palmtree.Math
         /// </returns>
         public override int GetHashCode()
         {
-            uint hash_code = 0;
-            for (int index = 0; index < _InternalValue.Length; ++index)
-            {
-
-                if ((index & 1) == 0)
-                    hash_code |= _InternalValue[index];
-                else
-                    hash_code |= ((uint)_InternalValue[index] << 16);
-            }
-            return ((int)hash_code);
+            return (_native_value.GetHashCode());
         }
 
         /// <summary>

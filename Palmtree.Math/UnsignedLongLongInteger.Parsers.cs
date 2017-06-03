@@ -10,6 +10,7 @@
 using System;
 using System.Globalization;
 using Palmtree.Math.Formatter;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math
 {
@@ -131,7 +132,7 @@ namespace Palmtree.Math
         public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out UnsignedLongLongInteger result)
         {
             result = UnsignedLongLongInteger.Zero;
-            ushort[] imp;
+            NativeUnsignedInteger imp;
             if (!TryParseImp(s, style, provider, out imp))
                 return (false);
             result = new UnsignedLongLongInteger(imp);
@@ -142,17 +143,17 @@ namespace Palmtree.Math
 
         #region プライベートメソッド
 
-        private static bool TryParseImp(string s, NumberStyles style, IFormatProvider provider, out ushort[] result)
+        private static bool TryParseImp(string s, NumberStyles style, IFormatProvider provider, out NativeUnsignedInteger result)
         {
-            result = new ushort[0];
+            result = NativeUnsignedInteger.Zero;
             bool negative;
-            ushort[] numerator_imp;
-            ushort[] denominator_imp;
+            NativeUnsignedInteger numerator_imp;
+            NativeUnsignedInteger denominator_imp;
             if (!FormatterCreatorBase.TryParse(s, style, provider, out negative, out numerator_imp, out denominator_imp))
                 return (false);
             if (negative)
                 return (false);
-            if (denominator_imp.Length != 1 || denominator_imp[0] != 1)
+            if (!denominator_imp.IsOne)
                 return (false);
             result = numerator_imp;
             return (true);

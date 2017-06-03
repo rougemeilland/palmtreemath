@@ -12,45 +12,62 @@ https://opensource.org/licenses/MIT
 #include "pmn_internal.h"
 
 
-__UNIT_TYPE* AllocateBuffer(size_t size)
+UNIT_BUFFER* AllocateBuffer(size_t size)
 {
-    if (size == 0)
-        return ((__UNIT_TYPE*)_aligned_malloc(sizeof(__UNIT_TYPE), __alignof(__UNIT_TYPE)));
-    else
-        return ((__UNIT_TYPE*)_aligned_malloc((size + sizeof(__UNIT_TYPE) - 1) / sizeof(__UNIT_TYPE) * sizeof(__UNIT_TYPE), __alignof(__UNIT_TYPE)));
+    size_t unit_count = (size + sizeof(__UNIT_TYPE) - 1) / sizeof(__UNIT_TYPE);
+    size_t buffer_size = sizeof(UNIT_BUFFER) - sizeof(__UNIT_TYPE) + sizeof(__UNIT_TYPE) * unit_count;
+    UNIT_BUFFER* buffer = (UNIT_BUFFER*)_aligned_malloc(buffer_size, __alignof(UNIT_BUFFER));
+    buffer->UNIT_COUNT = unit_count;
+    return (buffer);
 }
 
-void FreeBuffer(__UNIT_TYPE* buffer)
+void FreeBuffer(UNIT_BUFFER* buffer)
 {
     _aligned_free(buffer);
 }
 
-int CheckBuffer(const void* buffer, size_t size)
+int CheckInputBuffer(UNIT_BUFFER* buffer)
 {
     if (buffer == NULL)
-        return (FALSE);
-    if (size == 0)
         return (FALSE);
     unsigned __int64 addr = (unsigned __int64)buffer;
     if (addr % __alignof(__UNIT_TYPE) != 0)
         return (FALSE);
-    if (size % sizeof(__UNIT_TYPE) != 0)
+    if (buffer->UNIT_COUNT == 0)
+        return (FALSE);
+    if (buffer->UNIT_ARRAY[buffer->UNIT_COUNT - 1] == 0)
         return (FALSE);
     return (TRUE);
 }
 
-size_t NormalizeBufferSize(const void* buffer, size_t size)
+int CheckOutputBuffer(UNIT_BUFFER* buffer)
 {
-#ifdef _M_IX64
-    unsigned __int64* p1 = (unsigned __int64*)buffer;
-    unsigned __int64* p2 = (unsigned __int64*)((unsigned char*)buffer + size);
-#else // _M_IX64
-    unsigned __int32* p1 = (unsigned __int32*)buffer;
-    unsigned __int32* p2 = (unsigned __int32*)((unsigned char*)buffer + size);
-#endif // _M_IX64
-    while (p2 > p1 && *(p2 - 1) == 0)
-        --p2;
-    return ((unsigned char*)p2 - (unsigned char*)p1);
+    if (buffer == NULL)
+        return (FALSE);
+    unsigned __int64 addr = (unsigned __int64)buffer;
+    if (addr % __alignof(__UNIT_TYPE) != 0)
+        return (FALSE);
+    if (buffer->UNIT_COUNT == 0)
+        return (FALSE);
+    return (TRUE);
+}
+
+void NormalizeBuffer(UNIT_BUFFER* buffer)
+{
+    __UNIT_TYPE* p_start = &buffer->UNIT_ARRAY[0];
+    __UNIT_TYPE* p = &buffer->UNIT_ARRAY[buffer->UNIT_COUNT];
+    while (p > p_start)
+    {
+        __UNIT_TYPE* t = p - 1;
+        if (*t != 0)
+        {
+            buffer->UNIT_COUNT = p - p_start;
+            return;
+        }
+        p = t;
+    }
+    buffer->UNIT_COUNT = 0;
+    return;
 }
 
 __declspec(dllexport) void* __stdcall PMN_AllocateBuffer(size_t size)

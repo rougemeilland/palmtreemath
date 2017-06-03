@@ -29,9 +29,9 @@ unsigned short _rotl16(unsigned short _Value, unsigned char _Shift) // 16ƒrƒbƒg
 unsigned int _rotl(_In_ unsigned int _Value, _In_ int _Shift) // 32ƒrƒbƒg®”‚Ì¶ƒ[ƒe[ƒg
 unsigned __int64 _rotl64(_In_ unsigned __int64 _Value, _In_ int _Shift) // 64ƒrƒbƒg®”‚Ì¶ƒ[ƒe[ƒg
 
-unsigned char _rotr8(unsigned char _Value, unsigned char _Shift) // 8ƒrƒbƒg®”‚Ì¶ƒ[ƒe[ƒg
-unsigned short _rotr16(unsigned short _Value, unsigned char _Shift) // 16ƒrƒbƒg®”‚Ì¶ƒ[ƒe[ƒg
-unsigned int _rotr(_In_ unsigned int _Value, _In_ int _Shift) // ƒrƒbƒg®”‚Ì‰Eƒ[ƒe[ƒg
+unsigned char _rotr8(unsigned char _Value, unsigned char _Shift) // 8ƒrƒbƒg®”‚Ì‰Eƒ[ƒe[ƒg
+unsigned short _rotr16(unsigned short _Value, unsigned char _Shift) // 16ƒrƒbƒg®”‚Ì‰Eƒ[ƒe[ƒg
+unsigned int _rotr(_In_ unsigned int _Value, _In_ int _Shift) // 32ƒrƒbƒg®”‚Ì‰Eƒ[ƒe[ƒg
 unsigned __int64 _rotr64(_In_ unsigned __int64 _Value, _In_ int _Shift) // 64ƒrƒbƒg®”‚Ì‰Eƒ[ƒe[ƒg
 
 unsigned long _lrotl(_In_ unsigned long, _In_ int) // 32ƒrƒbƒg®”‚Ì¶ƒ[ƒe[ƒg

@@ -140,36 +140,36 @@ namespace Palmtree.Math.Implements
 
         #endregion
 
-        #region DivideRem のオーバーロード
+        #region DivRem のオーバーロード
 
-        public ushort DivideRem(ushort x, ushort y, out ushort r)
+        public ushort DivRem(ushort x, ushort y, out ushort r)
         {
-            return (_imp_DivideRem.DivideRem(x, y, out r));
+            return (_imp_DivideRem.DivRem(x, y, out r));
         }
 
-        public ulong DivideRem(ulong x, ushort y, out ushort r)
+        public ulong DivRem(ulong x, ushort y, out ushort r)
         {
-            return (_imp_DivideRem.DivideRem(x, y, out r));
+            return (_imp_DivideRem.DivRem(x, y, out r));
         }
 
-        public ulong DivideRem(ulong x, ulong y, out ulong r)
+        public ulong DivRem(ulong x, ulong y, out ulong r)
         {
-            return (_imp_DivideRem.DivideRem(x, y, out r));
+            return (_imp_DivideRem.DivRem(x, y, out r));
         }
 
-        public ushort[] DivideRem(ushort[] x, ushort y, out ushort r)
+        public ushort[] DivRem(ushort[] x, ushort y, out ushort r)
         {
-            return (_imp_DivideRem.DivideRem(x, y, out r));
+            return (_imp_DivideRem.DivRem(x, y, out r));
         }
 
-        public ushort DivideRem(ushort x, ushort[] y, out ushort r)
+        public ushort DivRem(ushort x, ushort[] y, out ushort r)
         {
-            return (_imp_DivideRem.DivideRem(x, y, out r));
+            return (_imp_DivideRem.DivRem(x, y, out r));
         }
 
-        public ushort[] DivideRem(ushort[] x, ushort[] y, out ushort[] r)
+        public ushort[] DivRem(ushort[] x, ushort[] y, out ushort[] r)
         {
-            return (_imp_DivideRem.DivideRem(x, y, out r));
+            return (_imp_DivideRem.DivRem(x, y, out r));
         }
 
         #endregion

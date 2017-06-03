@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CONCEAL_IMPLICIT_OPERATORS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -26,7 +26,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;CONCEAL_IMPLICIT_OPERATORS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -81,6 +81,13 @@
     <None Include="Implements\OrImplementOfUnsignedLongLongInteger.cs" />
     <None Include="Implements\SubstractImplementOfUnsignedLongLongInteger.cs" />
     <None Include="Implements\XorImplementOfUnsignedLongLongInteger.cs" />
+    <Compile Include="Implements\NativeUnsignedInteger.Relation.cs" />
+    <Compile Include="Implements\NativeUnsignedInteger.Equality.cs" />
+    <Compile Include="Implements\NativeUnsignedInteger.Converter.cs" />
+    <Compile Include="Implements\NativeUnsignedInteger.Bit.cs" />
+    <Compile Include="Implements\NativeUnsignedInteger.Arithmetic.cs" />
+    <Compile Include="Implements\NativeUnsignedInteger.NativeMethods.cs" />
+    <Compile Include="Implements\NativeUnsignedIntegerExtensions.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="LongLongInteger.Arithmetic.cs" />
     <Compile Include="LongLongInteger.Bit.cs" />
@@ -91,7 +98,7 @@
     <Compile Include="LongLongInteger.Parsers.cs" />
     <Compile Include="LongLongInteger.Relation.cs" />
     <Compile Include="LongLongIntegerExtensions.cs" />
-    <Compile Include="NativeUnsignedInteger.cs" />
+    <Compile Include="Implements\NativeUnsignedInteger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RationalNumber.Arithmetic.cs" />
     <Compile Include="RationalNumber.Converter.cs" />
@@ -113,9 +120,9 @@
     <Compile Include="Round\RoundingMode.cs" />
     <Compile Include="Round\RoundUpModeRationalNumberRounder.cs" />
     <Compile Include="Round\UnnecessaryModeRationalNumberRounder.cs" />
-    <Compile Include="SerializerPlugin\LongLongIntegerSerializer.cs" />
-    <Compile Include="SerializerPlugin\RationalNumberSerializer.cs" />
-    <Compile Include="SerializerPlugin\UnsignedLongLongIntegerSerializer.cs" />
+    <None Include="SerializerPlugin\LongLongIntegerSerializer.cs" />
+    <None Include="SerializerPlugin\RationalNumberSerializer.cs" />
+    <None Include="SerializerPlugin\UnsignedLongLongIntegerSerializer.cs" />
     <Compile Include="SignType.cs" />
     <Compile Include="SignTypeExtensions.cs" />
     <Compile Include="UnsignedLongLongInteger.Arithmetic.cs" />

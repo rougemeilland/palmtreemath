@@ -31,6 +31,24 @@ namespace Palmtree.Math
         /// xとyを加算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public static UnsignedLongLongInteger Add(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.Add(y, x));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトの加算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyを加算した結果を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static UnsignedLongLongInteger Add(this ulong x, UnsignedLongLongInteger y)
         {
             return (UnsignedLongLongInteger.Add(y, x));
@@ -53,7 +71,25 @@ namespace Palmtree.Math
         /// xからyを減算した結果を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
-        public static UnsignedLongLongInteger Subtract(this ulong x, UnsignedLongLongInteger y)
+        public static uint Subtract(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.Subtract(x, y));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトの減算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xからyを減算した結果を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static ulong Subtract(this ulong x, UnsignedLongLongInteger y)
         {
             return (UnsignedLongLongInteger.Subtract(x, y));
         }
@@ -61,6 +97,24 @@ namespace Palmtree.Math
         #endregion
 
         #region Multiply のオーバーロード
+
+        /// <summary>
+        /// 二つのオブジェクトの乗算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyを乗算した結果を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger Multiply(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.Multiply(y, x));
+        }
 
         /// <summary>
         /// 二つのオブジェクトの乗算を行います。
@@ -97,6 +151,24 @@ namespace Palmtree.Math
         /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public static ulong Divide(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.Divide(x, y));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトの除算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。(被除数)
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。(除数)
+        /// </param>
+        /// <returns>
+        /// 商を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static ulong Divide(this ulong x, UnsignedLongLongInteger y)
         {
             return (UnsignedLongLongInteger.Divide(x, y));
@@ -105,6 +177,25 @@ namespace Palmtree.Math
         #endregion
 
         #region DivideExactly のオーバーロード
+
+        /// <summary>
+        /// 二つのオブジェクトの除算を行います。
+        /// 割り切れない場合には例外が発生します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。(被除数)
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。(除数)
+        /// </param>
+        /// <returns>
+        /// 商を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static ulong DivideExactly(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.DivideExactly(x, y));
+        }
 
         /// <summary>
         /// 二つのオブジェクトの除算を行います。
@@ -167,6 +258,27 @@ namespace Palmtree.Math
         /// 商を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public static uint DivRem(this uint x, UnsignedLongLongInteger y, out uint r)
+        {
+            return (UnsignedLongLongInteger.DivRem(x, y, out r));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトの商と剰余を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。(被除数)
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。(除数)
+        /// </param>
+        /// <param name="r">
+        /// 剰余を表すオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 商を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static ulong DivRem(this ulong x, UnsignedLongLongInteger y, out ulong r)
         {
             return (UnsignedLongLongInteger.DivRem(x, y, out r));
@@ -175,6 +287,24 @@ namespace Palmtree.Math
         #endregion
 
         #region Power のオーバーロード
+
+        /// <summary>
+        /// オブジェクトのべき乗を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// べき乗の基数です。
+        /// </param>
+        /// <param name="exp">
+        /// べき乗の指数です。
+        /// </param>
+        /// <returns>
+        /// べき乗の計算結果を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger Power(this uint x, UnsignedLongLongInteger exp)
+        {
+            return (UnsignedLongLongInteger.Power(x, exp));
+        }
 
         /// <summary>
         /// オブジェクトのべき乗を計算します。
@@ -211,6 +341,24 @@ namespace Palmtree.Math
         /// xとyの最大公約数を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public static UnsignedLongLongInteger GreatestCommonDivisor(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.GreatestCommonDivisor(new UnsignedLongLongInteger(x), y));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトの最大公約数を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyの最大公約数を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static UnsignedLongLongInteger GreatestCommonDivisor(this ulong x, UnsignedLongLongInteger y)
         {
             return (UnsignedLongLongInteger.GreatestCommonDivisor(new UnsignedLongLongInteger(x), y));
@@ -219,6 +367,24 @@ namespace Palmtree.Math
         #endregion
 
         #region Max のオーバーロード
+
+        /// <summary>
+        /// 二つのオブジェクトの最大値を求めます。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 最大値を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger Max(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.Max(y, x));
+        }
 
         /// <summary>
         /// 二つのオブジェクトの最大値を求めます。
@@ -255,6 +421,24 @@ namespace Palmtree.Math
         /// 最小値を表すオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public static uint Min(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.Min(y, x));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトの最小値を求めます。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 最小値を表すオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static ulong Min(this ulong x, UnsignedLongLongInteger y)
         {
             return (UnsignedLongLongInteger.Min(y, x));
@@ -263,6 +447,24 @@ namespace Palmtree.Math
         #endregion
 
         #region Xor のオーバーロード
+
+        /// <summary>
+        /// 二つの整数のビット毎の排他的論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger Xor(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.Xor(x, y));
+        }
 
         /// <summary>
         /// 二つの整数のビット毎の排他的論理和を計算します。
@@ -299,6 +501,24 @@ namespace Palmtree.Math
         /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public static uint BitwiseAnd(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.BitwiseAnd(x, y));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理積を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static ulong BitwiseAnd(this ulong x, UnsignedLongLongInteger y)
         {
             return (UnsignedLongLongInteger.BitwiseAnd(x, y));
@@ -307,6 +527,24 @@ namespace Palmtree.Math
         #endregion
 
         #region BitwiseOr のオーバーロード
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger BitwiseOr(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.BitwiseOr(x, y));
+        }
 
         /// <summary>
         /// 二つの整数のビット毎の論理和を計算します。
@@ -343,6 +581,24 @@ namespace Palmtree.Math
         /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public static uint BitwiseComplementAnd(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.BitwiseComplementAnd(x, y));
+        }
+
+        /// <summary>
+        /// ある整数と、もうひとつの整数の否定の論理積(x &amp; ~y)を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static ulong BitwiseComplementAnd(this ulong x, UnsignedLongLongInteger y)
         {
             return (UnsignedLongLongInteger.BitwiseComplementAnd(x, y));
@@ -365,6 +621,24 @@ namespace Palmtree.Math
         /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
         /// </returns>
         [CLSCompliant(false)]
+        public static bool Equals(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.Equals(x, y));
+        }
+
+        /// <summary>
+        /// 二つのオブジェクトが論理的に等しいかどうか調べます。
+        /// </summary>
+        /// <param name="x">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 比較対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xとyが論理的に等しいならばtrue、そうではないのならfalseです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static bool Equals(this ulong x, UnsignedLongLongInteger y)
         {
             return (UnsignedLongLongInteger.Equals(x, y));
@@ -373,6 +647,24 @@ namespace Palmtree.Math
         #endregion
 
         #region CompareTo のオーバーロード
+
+        /// <summary>
+        /// 二つのオブジェクトの論理的な大小関係を求めます。
+        /// </summary>
+        /// <param name="x">
+        /// 比較するオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 比較するオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// xがyより小さいならば負の数、xがyと等しいならば0、xがyより大きいならば正の数です。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static int CompareTo(this uint x, UnsignedLongLongInteger y)
+        {
+            return (UnsignedLongLongInteger.Compare(x, y));
+        }
 
         /// <summary>
         /// 二つのオブジェクトの論理的な大小関係を求めます。

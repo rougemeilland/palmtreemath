@@ -48,11 +48,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Palmtree.Math\Palmtree.Math.csproj">
-      <Project>{5aebfb2f-7bf9-49c1-ac59-a1c835107f80}</Project>
-      <Name>Palmtree.Math</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

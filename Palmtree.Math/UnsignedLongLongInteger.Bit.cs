@@ -8,6 +8,7 @@
 */
 
 using System;
+using Palmtree.Math.Implements;
 
 // 演算子のオーバーロードに関するガイドライン:
 //   http://msdn.microsoft.com/ja-jp/library/ms229032.aspx
@@ -36,7 +37,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger operator <<(UnsignedLongLongInteger x, int n)
         {
-            return (LeftShift(x, n));
+            return (new UnsignedLongLongInteger(x._native_value.LeftShift(n)));
         }
 
         #endregion
@@ -57,7 +58,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger operator >>(UnsignedLongLongInteger x, int n)
         {
-            return (RightShift(x, n));
+            return (new UnsignedLongLongInteger(x._native_value.RightShift(n)));
         }
 
         #endregion
@@ -77,9 +78,45 @@ namespace Palmtree.Math
         /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public static uint operator &(uint x, UnsignedLongLongInteger y)
+        {
+            return (y._native_value.BitwiseAnd(x));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理積を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static ulong operator &(ulong x, UnsignedLongLongInteger y)
         {
-            return (BitwiseAnd(y, x));
+            return (y._native_value.BitwiseAnd(x));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理積を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static uint operator &(UnsignedLongLongInteger x, uint y)
+        {
+            return (x._native_value.BitwiseAnd(y));
         }
 
         /// <summary>
@@ -97,7 +134,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static ulong operator &(UnsignedLongLongInteger x, ulong y)
         {
-            return (BitwiseAnd(x, y));
+            return (x._native_value.BitwiseAnd(y));
         }
 
         /// <summary>
@@ -114,12 +151,30 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger operator &(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            return (BitwiseAnd(x, y));
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseAnd(y._native_value)));
         }
 
         #endregion
 
-        #region || のオーバーロード
+        #region | のオーバーロード
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger operator |(uint x, UnsignedLongLongInteger y)
+        {
+            return (new UnsignedLongLongInteger(y._native_value.BitwiseOr(x)));
+        }
 
         /// <summary>
         /// 二つの整数のビット毎の論理和を計算します。
@@ -136,7 +191,25 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator |(ulong x, UnsignedLongLongInteger y)
         {
-            return (BitwiseOr(y, x));
+            return (new UnsignedLongLongInteger(y._native_value.BitwiseOr(x)));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger operator |(UnsignedLongLongInteger x, uint y)
+        {
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseOr(y)));
         }
 
         /// <summary>
@@ -154,7 +227,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator |(UnsignedLongLongInteger x, ulong y)
         {
-            return (BitwiseOr(x, y));
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseOr(y)));
         }
 
         /// <summary>
@@ -171,7 +244,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger operator |(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            return (BitwiseOr(x, y));
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseOr(y._native_value)));
         }
 
         #endregion
@@ -191,9 +264,45 @@ namespace Palmtree.Math
         /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public static UnsignedLongLongInteger operator ^(uint x, UnsignedLongLongInteger y)
+        {
+            return (new UnsignedLongLongInteger(y._native_value.Xor(x)));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の排他的論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator ^(ulong x, UnsignedLongLongInteger y)
         {
-            return (Xor(y, x));
+            return (new UnsignedLongLongInteger(y._native_value.Xor(x)));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の排他的論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger operator ^(UnsignedLongLongInteger x, uint y)
+        {
+            return (new UnsignedLongLongInteger(x._native_value.Xor(y)));
         }
 
         /// <summary>
@@ -211,7 +320,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger operator ^(UnsignedLongLongInteger x, ulong y)
         {
-            return (Xor(x, y));
+            return (new UnsignedLongLongInteger(x._native_value.Xor(y)));
         }
 
         /// <summary>
@@ -228,7 +337,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger operator ^(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            return (Xor(x, y));
+            return (new UnsignedLongLongInteger(x._native_value.Xor(y._native_value)));
         }
 
         #endregion
@@ -253,7 +362,7 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger OnesComplement(int n)
         {
-            return (OnesComplement(this, n));
+            return (new UnsignedLongLongInteger(_native_value.OnesComplement(n)));
         }
 
         /// <summary>
@@ -271,12 +380,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger OnesComplement(UnsignedLongLongInteger x, int n)
         {
-            if (n < 0)
-                throw (new ArgumentException("ビットの数は正または0でなくてはなりません。", "n"));
-            if (n == 0)
-                return (Zero);
-            else
-                return (new UnsignedLongLongInteger(_imp.OnesComplement(x._InternalValue, n)));
+            return (new UnsignedLongLongInteger(x._native_value.OnesComplement(n)));
         }
 
         #endregion
@@ -295,7 +399,7 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger Negate(int n)
         {
-            return (Negate(this, n));
+            return (new UnsignedLongLongInteger(_native_value.Negate(n)));
         }
 
         /// <summary>
@@ -313,14 +417,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger Negate(UnsignedLongLongInteger x, int n)
         {
-            if (n < 0)
-                throw (new ArgumentException("ビットの数は正または0でなくてはなりません。", "n"));
-            if (n == 0)
-                return (Zero);
-            else if (x._InternalValue.Length == 0)
-                return (Zero);
-            else
-                return (new UnsignedLongLongInteger(_imp.Negate(x._InternalValue, n)));
+            return (new UnsignedLongLongInteger(x._native_value.Negate(n)));
         }
 
         #endregion
@@ -338,14 +435,7 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger TruncateBit(int n)
         {
-            if (n < 0)
-                throw (new ArgumentException("ビットの数は正または0でなくてはなりません。", "n"));
-            if (n == 0)
-                return (Zero);
-            else if (_InternalValue.Length == 0)
-                return (Zero);
-            else
-                return (new UnsignedLongLongInteger(_imp.Truncate(_InternalValue, n)));
+            return (new UnsignedLongLongInteger(_native_value.Truncate(n)));
         }
 
         #endregion
@@ -364,12 +454,7 @@ namespace Palmtree.Math
         /// </returns>
         public bool TestBit(int pos)
         {
-            if (pos < 0)
-                throw (new ArgumentException("ビットの位置は正または0でなくてはなりません。", "pos"));
-            if (_InternalValue.Length == 0)
-                return (false);
-            else
-                return (_imp.TestBit(_InternalValue, pos));
+            return (_native_value.TestBit(pos));
         }
 
         #endregion
@@ -387,12 +472,7 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger SetBit(int pos)
         {
-            if (pos < 0)
-                throw (new ArgumentException("ビットの位置は正または0でなくてはなりません。", "pos"));
-            if (_InternalValue.Length == 0)
-                return (new UnsignedLongLongInteger(_imp.LeftShift(new ushort[] { 1 }, pos)));
-            else
-                return (new UnsignedLongLongInteger(_imp.SetBit(_InternalValue, pos)));
+            return (new UnsignedLongLongInteger(_native_value.SetBit(pos)));
         }
 
         #endregion
@@ -410,12 +490,7 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger ClearBit(int pos)
         {
-            if (pos < 0)
-                throw (new ArgumentException("ビットの位置は正または0でなくてはなりません。", "pos"));
-            if (_InternalValue.Length == 0)
-                return (Zero);
-            else
-                return (new UnsignedLongLongInteger(_imp.ClearBit(_InternalValue, pos)));
+            return (new UnsignedLongLongInteger(_native_value.ClearBit(pos)));
         }
 
         #endregion
@@ -432,9 +507,24 @@ namespace Palmtree.Math
         /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public UnsignedLongLongInteger Xor(uint x)
+        {
+            return (new UnsignedLongLongInteger(_native_value.Xor(x)));
+        }
+
+        /// <summary>
+        /// 与えられた整数とのビット毎の排他的論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public UnsignedLongLongInteger Xor(ulong x)
         {
-            return (Xor(this, x));
+            return (new UnsignedLongLongInteger(_native_value.Xor(x)));
         }
 
         /// <summary>
@@ -448,7 +538,25 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger Xor(UnsignedLongLongInteger x)
         {
-            return (Xor(this, x));
+            return (new UnsignedLongLongInteger(_native_value.Xor(x._native_value)));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の排他的論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger Xor(uint x, UnsignedLongLongInteger y)
+        {
+            return (new UnsignedLongLongInteger(y._native_value.Xor(x)));
         }
 
         /// <summary>
@@ -466,7 +574,25 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Xor(ulong x, UnsignedLongLongInteger y)
         {
-            return (Xor(y, x));
+            return (new UnsignedLongLongInteger(y._native_value.Xor(x)));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の排他的論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger Xor(UnsignedLongLongInteger x, uint y)
+        {
+            return (new UnsignedLongLongInteger(x._native_value.Xor(y)));
         }
 
         /// <summary>
@@ -484,14 +610,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger Xor(UnsignedLongLongInteger x, ulong y)
         {
-            if (x._InternalValue.Length == 0)
-                return (new UnsignedLongLongInteger(y));
-            else if (y == 0)
-                return (x);
-            else if (y <= ushort.MaxValue)
-                return (new UnsignedLongLongInteger(_imp.Xor(x._InternalValue, (ushort)y)));
-            else
-                return (new UnsignedLongLongInteger(_imp.Xor(x._InternalValue, CreateInternalValue(y))));
+            return (new UnsignedLongLongInteger(x._native_value.Xor(y)));
         }
 
         /// <summary>
@@ -508,12 +627,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger Xor(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            if (x._InternalValue.Length == 0)
-                return (y);
-            else if (y._InternalValue.Length == 0)
-                return (x);
-            else
-                return (new UnsignedLongLongInteger(_imp.Xor(x._InternalValue, y._InternalValue)));
+            return (new UnsignedLongLongInteger(x._native_value.Xor(y._native_value)));
         }
 
         #endregion
@@ -530,9 +644,24 @@ namespace Palmtree.Math
         /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public uint BitwiseAnd(uint x)
+        {
+            return (_native_value.BitwiseAnd(x));
+        }
+
+        /// <summary>
+        /// 与えられた整数とのビット毎の論理積を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public ulong BitwiseAnd(ulong x)
         {
-            return (BitwiseAnd(this, x));
+            return (_native_value.BitwiseAnd(x));
         }
 
         /// <summary>
@@ -546,7 +675,25 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger BitwiseAnd(UnsignedLongLongInteger x)
         {
-            return (BitwiseAnd(this, x));
+            return (new UnsignedLongLongInteger(_native_value.BitwiseAnd(x._native_value)));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理積を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static uint BitwiseAnd(uint x, UnsignedLongLongInteger y)
+        {
+            return (y._native_value.BitwiseAnd(x));
         }
 
         /// <summary>
@@ -564,12 +711,25 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static ulong BitwiseAnd(ulong x, UnsignedLongLongInteger y)
         {
-            if (x == 0 || y._InternalValue.Length == 0)
-                return (0);
-            else if (x <= ushort.MaxValue || y._InternalValue.Length == 1)
-                return (_imp.And((ushort)x, y._InternalValue[0]));
-            else
-                return (_imp.And(x, ToULong(y._InternalValue)));
+            return (y._native_value.BitwiseAnd(x));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理積を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static ulong BitwiseAnd(UnsignedLongLongInteger x, uint y)
+        {
+            return (x._native_value.BitwiseAnd(y));
         }
 
         /// <summary>
@@ -587,12 +747,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static ulong BitwiseAnd(UnsignedLongLongInteger x, ulong y)
         {
-            if (x._InternalValue.Length == 0 || y == 0)
-                return (0);
-            else if (x._InternalValue.Length == 1 || y <= ushort.MaxValue)
-                return (_imp.And(x._InternalValue[0], (ushort)y));
-            else
-                return (_imp.And(ToULong(x._InternalValue), y));
+            return (x._native_value.BitwiseAnd(y));
         }
 
         /// <summary>
@@ -609,12 +764,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger BitwiseAnd(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            if (x._InternalValue.Length == 0 || y._InternalValue.Length == 0)
-                return (Zero);
-            else if (x._InternalValue.Length == 1 || y._InternalValue.Length == 1)
-                return (new UnsignedLongLongInteger(_imp.And(x._InternalValue[0], y._InternalValue[0])));
-            else
-                return (new UnsignedLongLongInteger(_imp.And(x._InternalValue, y._InternalValue)));
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseAnd(y._native_value)));
         }
 
         #endregion
@@ -631,9 +781,24 @@ namespace Palmtree.Math
         /// 計算結果のオブジェクトです。
         /// </returns>
         [CLSCompliant(false)]
+        public UnsignedLongLongInteger BitwiseOr(uint x)
+        {
+            return (new UnsignedLongLongInteger(_native_value.BitwiseOr(x)));
+        }
+
+        /// <summary>
+        /// 与えられた整数とのビット毎の論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
         public UnsignedLongLongInteger BitwiseOr(ulong x)
         {
-            return (BitwiseOr(this, x));
+            return (new UnsignedLongLongInteger(_native_value.BitwiseOr(x)));
         }
 
         /// <summary>
@@ -647,7 +812,25 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger BitwiseOr(UnsignedLongLongInteger x)
         {
-            return (BitwiseOr(this, x));
+            return (new UnsignedLongLongInteger(_native_value.BitwiseOr(x._native_value)));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger BitwiseOr(uint x, UnsignedLongLongInteger y)
+        {
+            return (new UnsignedLongLongInteger(y._native_value.BitwiseOr(x)));
         }
 
         /// <summary>
@@ -665,7 +848,25 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger BitwiseOr(ulong x, UnsignedLongLongInteger y)
         {
-            return (BitwiseOr(y, x));
+            return (new UnsignedLongLongInteger(y._native_value.BitwiseOr(x)));
+        }
+
+        /// <summary>
+        /// 二つの整数のビット毎の論理和を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger BitwiseOr(UnsignedLongLongInteger x, uint y)
+        {
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseOr(y)));
         }
 
         /// <summary>
@@ -683,14 +884,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger BitwiseOr(UnsignedLongLongInteger x, ulong y)
         {
-            if (x._InternalValue.Length == 0)
-                return (new UnsignedLongLongInteger(y));
-            else if (y == 0)
-                return (x);
-            else if (y <= ushort.MaxValue)
-                return (new UnsignedLongLongInteger(_imp.Or(x._InternalValue, (ushort)y)));
-            else
-                return (new UnsignedLongLongInteger(_imp.Or(x._InternalValue, CreateInternalValue(y))));
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseOr(y)));
         }
 
         /// <summary>
@@ -707,12 +901,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger BitwiseOr(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            if (x._InternalValue.Length == 0)
-                return (y);
-            else if (y._InternalValue.Length == 0)
-                return (x);
-            else
-                return (new UnsignedLongLongInteger(_imp.Or(x._InternalValue, y._InternalValue)));
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseOr(y._native_value)));
         }
 
         #endregion
@@ -720,7 +909,22 @@ namespace Palmtree.Math
         #region BitwiseComplementAnd のオーバーロード
 
         /// <summary>
-        /// 与えられた整数の否定との論理積(x &amp; ~y)を計算します。
+        /// 与えられた整数の否定との論理積(this &amp; ~x)を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public UnsignedLongLongInteger BitwiseComplementAnd(uint x)
+        {
+            return (new UnsignedLongLongInteger(_native_value.BitwiseComplementAnd(x)));
+        }
+
+        /// <summary>
+        /// 与えられた整数の否定との論理積(this &amp; ~x)を計算します。
         /// </summary>
         /// <param name="x">
         /// 計算対象のオブジェクトです。
@@ -731,11 +935,11 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public UnsignedLongLongInteger BitwiseComplementAnd(ulong x)
         {
-            return (BitwiseComplementAnd(this, x));
+            return (new UnsignedLongLongInteger(_native_value.BitwiseComplementAnd(x)));
         }
 
         /// <summary>
-        /// 与えられた整数の否定との論理積(x &amp; ~y)を計算します。
+        /// 与えられた整数の否定との論理積(this &amp; ~x)を計算します。
         /// </summary>
         /// <param name="x">
         /// 計算対象のオブジェクトです。
@@ -745,7 +949,25 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger BitwiseComplementAnd(UnsignedLongLongInteger x)
         {
-            return (BitwiseComplementAnd(this, x));
+            return (new UnsignedLongLongInteger(_native_value.BitwiseComplementAnd(x._native_value)));
+        }
+
+        /// <summary>
+        /// ある整数と、もうひとつの整数の否定の論理積(x &amp; ~y)を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static UnsignedLongLongInteger BitwiseComplementAnd(UnsignedLongLongInteger x, uint y)
+        {
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseComplementAnd(y)));
         }
 
         /// <summary>
@@ -763,14 +985,25 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static UnsignedLongLongInteger BitwiseComplementAnd(UnsignedLongLongInteger x, ulong y)
         {
-            if (x._InternalValue.Length == 0)
-                return (Zero);
-            else if (y == 0)
-                return (x);
-            else if (y <= ushort.MaxValue)
-                return (new UnsignedLongLongInteger(_imp.ComplementAnd(x._InternalValue, (ushort)y)));
-            else
-                return (new UnsignedLongLongInteger(_imp.ComplementAnd(x._InternalValue, CreateInternalValue(y))));
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseComplementAnd(y)));
+        }
+
+        /// <summary>
+        /// ある整数と、もうひとつの整数の否定の論理積(x &amp; ~y)を計算します。
+        /// </summary>
+        /// <param name="x">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <param name="y">
+        /// 計算対象のオブジェクトです。
+        /// </param>
+        /// <returns>
+        /// 計算結果のオブジェクトです。
+        /// </returns>
+        [CLSCompliant(false)]
+        public static uint BitwiseComplementAnd(uint x, UnsignedLongLongInteger y)
+        {
+            return (x.BitwiseComplementAnd(y._native_value));
         }
 
         /// <summary>
@@ -788,16 +1021,7 @@ namespace Palmtree.Math
         [CLSCompliant(false)]
         public static ulong BitwiseComplementAnd(ulong x, UnsignedLongLongInteger y)
         {
-            if (x == 0)
-                return (0);
-            else if (y._InternalValue.Length == 0)
-                return (x);
-            else if (x <= ushort.MaxValue)
-                return (_imp.ComplementAnd((ushort)x, y._InternalValue[0]));
-            else if (y._InternalValue.Length == 1)
-                return (_imp.ComplementAnd(x, y._InternalValue[0]));
-            else
-                return (_imp.ComplementAnd(x, ToULong(y._InternalValue)));
+            return (x.BitwiseComplementAnd(y._native_value));
         }
 
         /// <summary>
@@ -814,16 +1038,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger BitwiseComplementAnd(UnsignedLongLongInteger x, UnsignedLongLongInteger y)
         {
-            if (x._InternalValue.Length == 0)
-                return (Zero);
-            else if (y._InternalValue.Length == 0)
-                return (x);
-            else if (x._InternalValue.Length == 1)
-                return (new UnsignedLongLongInteger(_imp.ComplementAnd(x._InternalValue[0], y._InternalValue[0])));
-            else if (y._InternalValue.Length == 1)
-                return (new UnsignedLongLongInteger(_imp.ComplementAnd(x._InternalValue, y._InternalValue[0])));
-            else
-                return (new UnsignedLongLongInteger(_imp.ComplementAnd(x._InternalValue, y._InternalValue)));
+            return (new UnsignedLongLongInteger(x._native_value.BitwiseComplementAnd(y._native_value)));
         }
 
         #endregion
@@ -841,7 +1056,7 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger LeftShift(int n)
         {
-            return (LeftShift(this, n));
+            return (new UnsignedLongLongInteger(_native_value.LeftShift(n)));
         }
 
         /// <summary>
@@ -858,13 +1073,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger LeftShift(UnsignedLongLongInteger x, int n)
         {
-            if (n < 0)
-                throw (new ArgumentException("シフト回数は正または0でなくてはなりません。", "n"));
-            if (n == 0)
-                return (x);
-            if (x._InternalValue.Length == 0)
-                return (Zero);
-            return (new UnsignedLongLongInteger(_imp.LeftShift(x._InternalValue, n)));
+            return (new UnsignedLongLongInteger(x._native_value.LeftShift(n)));
         }
 
         #endregion
@@ -882,7 +1091,7 @@ namespace Palmtree.Math
         /// </returns>
         public UnsignedLongLongInteger RightShift(int n)
         {
-            return (RightShift(this, n));
+            return (new UnsignedLongLongInteger(_native_value.RightShift(n)));
         }
 
         /// <summary>
@@ -899,13 +1108,7 @@ namespace Palmtree.Math
         /// </returns>
         public static UnsignedLongLongInteger RightShift(UnsignedLongLongInteger x, int n)
         {
-            if (n < 0)
-                throw (new ArgumentException("シフト回数は正または0でなくてはなりません。", "n"));
-            if (n == 0)
-                return (x);
-            if (x._InternalValue.Length == 0)
-                return (Zero);
-            return (new UnsignedLongLongInteger(_imp.RightShift(x._InternalValue, n)));
+            return (new UnsignedLongLongInteger(x._native_value.RightShift(n)));
         }
 
         #endregion
@@ -925,9 +1128,7 @@ namespace Palmtree.Math
         {
             get
             {
-                if (!_bit_length_cache.HasValue)
-                    _bit_length_cache = _InternalValue.Length == 0 ? 0 : _imp.GetBitLength(_InternalValue);
-                return (_bit_length_cache.Value);
+                return (_native_value.BitCount);
             }
         }
 
@@ -938,9 +1139,7 @@ namespace Palmtree.Math
         {
             get
             {
-                if (!_is_power_of_two_cache.HasValue)
-                    _is_power_of_two_cache = _InternalValue.Length > 0 && _imp.GetIsPowerOfTwo(_InternalValue);
-                return (_is_power_of_two_cache.Value);
+                return (_native_value.IsPowerOfTwo);
             }
         }
 

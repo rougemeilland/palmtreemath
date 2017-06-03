@@ -545,7 +545,7 @@ namespace Palmtree.Math
         public static LongLongInteger LeftShift(LongLongInteger x, int n)
         {
             if (n < 0)
-                throw (new ArgumentException("シフト回数は正または0でなくてはなりません。", "n"));
+                throw (new ArgumentOutOfRangeException("シフト回数は正または0でなくてはなりません。", "n"));
             if (n == 0)
                 return (x);
             if (x._sign == SignType.Zero)
@@ -587,7 +587,7 @@ namespace Palmtree.Math
         public static LongLongInteger RightShift(LongLongInteger x, int n)
         {
             if (n < 0)
-                throw (new ArgumentException("シフト回数は正または0でなくてはなりません。", "n"));
+                throw (new ArgumentOutOfRangeException("シフト回数は正または0でなくてはなりません。", "n"));
             if (n == 0)
                 return (x);
             if (x._sign == SignType.Zero)
@@ -614,7 +614,7 @@ namespace Palmtree.Math
         public UnsignedLongLongInteger TruncateBit(int n)
         {
             if (n < 0)
-                throw (new ArgumentException("ビットの数は正または0でなくてはなりません。", "n"));
+                throw (new ArgumentOutOfRangeException("ビットの数は正または0でなくてはなりません。", "n"));
             if (n == 0)
                 return (UnsignedLongLongInteger.Zero);
             else if (_sign == SignType.Zero)
@@ -642,7 +642,7 @@ namespace Palmtree.Math
         public bool TestBit(int pos)
         {
             if (pos < 0)
-                throw (new ArgumentException("ビットの位置は正または0でなくてはなりません。", "pos"));
+                throw (new ArgumentOutOfRangeException("ビットの位置は正または0でなくてはなりません。", "pos"));
             if (_sign == SignType.Zero)
                 return (false);
             else if (_sign == SignType.Positive)
@@ -667,7 +667,7 @@ namespace Palmtree.Math
         public LongLongInteger SetBit(int pos)
         {
             if (pos < 0)
-                throw (new ArgumentException("ビットの位置は正または0でなくてはなりません。", "pos"));
+                throw (new ArgumentOutOfRangeException("ビットの位置は正または0でなくてはなりません。", "pos"));
             if (_sign == SignType.Zero)
                 return (UnsignedLongLongInteger.One.LeftShift(pos).ToLongLongInteger());
             else if (_sign == SignType.Positive)
@@ -692,7 +692,7 @@ namespace Palmtree.Math
         public LongLongInteger ClearBit(int pos)
         {
             if (pos < 0)
-                throw (new ArgumentException("ビットの位置は正または0でなくてはなりません。", "pos"));
+                throw (new ArgumentOutOfRangeException("ビットの位置は正または0でなくてはなりません。", "pos"));
             if (_sign == SignType.Zero)
                 return (Zero);
             else if (_sign == SignType.Positive)
@@ -1392,9 +1392,7 @@ namespace Palmtree.Math
         {
             get
             {
-                if (!_bit_length_cache.HasValue)
-                    _bit_length_cache = GetBitLength();
-                return (_bit_length_cache.Value);
+                return (_bit_length);
             }
         }
 
@@ -1405,29 +1403,8 @@ namespace Palmtree.Math
         {
             get
             {
-                if (!_is_power_of_two_cache.HasValue)
-                    _is_power_of_two_cache = GetIsPowerOfTwo();
-                return (_is_power_of_two_cache.Value);
+                return (_is_power_of_two);
             }
-        }
-
-        #endregion
-
-        #region プライベートメソッド
-
-        private int GetBitLength()
-        {
-            if (_sign == SignType.Positive)
-                return (_abs.BitLength);
-            else if (_sign == SignType.Zero)
-                return (0);
-            else
-                return (_abs.Decrement().BitLength);
-        }
-
-        private bool GetIsPowerOfTwo()
-        {
-            return (_sign == SignType.Positive && _abs.IsPowerOfTwo);
         }
 
         #endregion

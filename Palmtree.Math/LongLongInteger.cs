@@ -8,7 +8,6 @@
 */
 
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
 
@@ -47,8 +46,8 @@ namespace Palmtree.Math
         private static FormatterCreator _formatter_creator;
         private SignType _sign;
         private UnsignedLongLongInteger _abs;
-        private int? _bit_length_cache;
-        private bool? _is_power_of_two_cache;
+        private int _bit_length;
+        private bool _is_power_of_two;
 
         #endregion
 
@@ -61,21 +60,9 @@ namespace Palmtree.Math
             MinusOne = new LongLongInteger(SignType.Negative, UnsignedLongLongInteger.One);
             _formatter_creator = new FormatterCreator();
 #if DEBUG
-            Debug.Assert("-" + _nagated_long_min_value.ToString() == long.MinValue.ToString());
+            System.Diagnostics.Debug.Assert("-" + _nagated_long_min_value.ToString() == long.MinValue.ToString());
 #endif
         }
-
-#if false
-        /// <summary>
-        /// コンストラクタです。
-        /// </summary>
-        public LongLongInteger()
-        {
-            _sign = 0;
-            _abs = new UnsignedLongLongInteger();
-            Debug.Assert((_sign == 0 && _abs.IsZero) || (_sign != 0 && !_abs.IsZero));
-        }
-#endif
 
         /// <summary>
         /// コンストラクタです。
@@ -116,9 +103,9 @@ namespace Palmtree.Math
                 _sign = SignType.Negative;
                 _abs = new UnsignedLongLongInteger((ulong)-value);
             }
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
-            Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
+            _bit_length = GetBitLength(_sign, _abs);
+            _is_power_of_two = GetIsPowerOfTwo(_sign, _abs);
+            System.Diagnostics.Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
         }
 
         /// <summary>
@@ -152,9 +139,9 @@ namespace Palmtree.Math
                 _sign = SignType.Zero;
                 _abs = UnsignedLongLongInteger.Zero;
             }
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
-            Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
+            _bit_length = GetBitLength(_sign, _abs);
+            _is_power_of_two = GetIsPowerOfTwo(_sign, _abs);
+            System.Diagnostics.Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
         }
 
         /// <summary>
@@ -175,9 +162,9 @@ namespace Palmtree.Math
                 _sign = SignType.Positive;
                 _abs = value;
             }
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
-            Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
+            _bit_length = GetBitLength(_sign, _abs);
+            _is_power_of_two = GetIsPowerOfTwo(_sign, _abs);
+            System.Diagnostics.Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
         }
 
         /// <summary>
@@ -213,9 +200,9 @@ namespace Palmtree.Math
             }
             if (_abs.IsZero)
                 _sign = SignType.Zero;
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
-            Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
+            _bit_length = GetBitLength(_sign, _abs);
+            _is_power_of_two = GetIsPowerOfTwo(_sign, _abs);
+            System.Diagnostics.Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
         }
 
         /// <summary>
@@ -238,9 +225,9 @@ namespace Palmtree.Math
             }
             if (_abs.IsZero)
                 _sign = SignType.Zero;
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
-            Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
+            _bit_length = GetBitLength(_sign, _abs);
+            _is_power_of_two = GetIsPowerOfTwo(_sign, _abs);
+            System.Diagnostics.Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
         }
 
         private LongLongInteger(SerializationInfo info, StreamingContext context)
@@ -248,84 +235,19 @@ namespace Palmtree.Math
             string s = info.GetString(_member_name);
             if (!TryParseImp(s, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out _sign, out _abs))
                 throw (new FormatException(string.Format("文字列'{0}'はLongLongIntegerの形式ではありません。", s)));
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
-            Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
+            _bit_length = GetBitLength(_sign, _abs);
+            _is_power_of_two = GetIsPowerOfTwo(_sign, _abs);
+            System.Diagnostics.Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
         }
 
         internal LongLongInteger(SignType sign, UnsignedLongLongInteger value)
         {
             _sign = value.IsZero ? SignType.Zero : sign;
             _abs = value;
-            _bit_length_cache = null;
-            _is_power_of_two_cache = null;
-            Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
+            _bit_length = GetBitLength(_sign, _abs);
+            _is_power_of_two = GetIsPowerOfTwo(_sign, _abs);
+            System.Diagnostics.Debug.Assert((_sign == SignType.Zero && _abs.IsZero) || (_sign != SignType.Zero && !_abs.IsZero));
         }
-
-        #endregion
-
-        #region パブリックメソッド
-
-#if DEBUG
-
-        /// <summary>
-        /// テストデータから<see cref="LongLongInteger"/>オブジェクトを生成します。
-        /// </summary>
-        /// <param name="data">
-        /// テストデータです。
-        /// </param>
-        /// <returns>
-        /// 生成された<see cref="LongLongInteger"/>オブジェクトです。
-        /// </returns>
-        [CLSCompliant(false)]
-        public static LongLongInteger FromTestData(ushort[] data)
-        {
-            TestDataReader reader = new TestDataReader(data);
-            ushort header = reader.GetUShortValue();
-            SignType sign;
-            if (header == 1)
-                sign = SignType.Positive;
-            else if (header == 2)
-                sign = SignType.Negative;
-            else
-                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
-            ArraySegment<ushort> p = reader.GetSegment();
-            reader.AssertEndOfData();
-            if (p.Count == 0)
-                return (Zero);
-            else
-                return (new LongLongInteger(sign, new UnsignedLongLongInteger(p)));
-        }
-
-        /// <summary>
-        /// オブジェクトの内容を検査します。
-        /// </summary>
-        /// <param name="data">
-        /// オブジェクトの内容を検査するための比較データです。
-        /// </param>
-        /// <returns>
-        /// 検査に成功すればtrue、そうではないのならfalseです。
-        /// </returns>
-        [CLSCompliant(false)]
-        public bool EqualsInternally(ushort[] data)
-        {
-            TestDataReader reader = new TestDataReader(data);
-            ushort header = reader.GetUShortValue();
-            SignType data_sign;
-            if (header == 1)
-                data_sign = SignType.Positive;
-            else if (header == 2)
-                data_sign = SignType.Negative;
-            else
-                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
-            ArraySegment<ushort> data_abs = reader.GetSegment();
-            reader.AssertEndOfData();
-            if (data_abs.Count == 0)
-                data_sign = SignType.Zero;
-            return (EqualsInternally(data_sign, data_abs));
-        }
-
-#endif
 
         #endregion
 
@@ -390,11 +312,6 @@ namespace Palmtree.Math
 
         #region インターナルメソッド
 
-        internal bool EqualsInternally(SignType data_sign, ArraySegment<ushort> data_abs)
-        {
-            return (_sign == data_sign && _abs.EqualsInternally(data_abs));
-        }
-
         internal long ToLong(Type target_type)
         {
             ulong value = _abs.ToULong(target_type);
@@ -421,6 +338,25 @@ namespace Palmtree.Math
             {
                 return (_sign);
             }
+        }
+
+        #endregion
+
+        #region プライベートメソッド
+
+        private static int GetBitLength(SignType sign, UnsignedLongLongInteger abs)
+        {
+            if (sign == SignType.Positive)
+                return (abs.BitLength);
+            else if (sign == SignType.Zero)
+                return (0);
+            else
+                return (abs.Decrement().BitLength);
+        }
+
+        private static bool GetIsPowerOfTwo(SignType sign, UnsignedLongLongInteger abs)
+        {
+            return (sign == SignType.Positive && abs.IsPowerOfTwo);
         }
 
         #endregion

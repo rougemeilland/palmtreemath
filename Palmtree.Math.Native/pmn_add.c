@@ -19,28 +19,19 @@ https://opensource.org/licenses/MIT
 #include "pmn.h"
 #include "pmn_internal.h"
 
-int Add_ADC32(void* x, size_t x_length, void*  y, size_t y_length, void* z, size_t* z_length)
+#pragma region Add関数
+
+#ifdef _M_IX86
+int Add_ADC32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
 {
 #if _DEBUG
-    if (x == NULL)
-        return (FALSE);
-    if (y == NULL)
-        return (FALSE);
-    if (z == NULL)
-        return (FALSE);
-    if (z_length == NULL)
-        return (FALSE);
-    if (x_length < y_length)
-        return (FALSE);
-    if (*z_length < x_length)
-        return (FALSE);
-    unsigned __int32* z_ptr_limit = (unsigned __int32*)((unsigned char*)z + *z_length);
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
 #endif // _DEBUG
-    unsigned __int32* x_ptr = (unsigned __int32*)x;
-    unsigned __int32* y_ptr = (unsigned __int32*)y;
-    unsigned __int32* z_ptr = (unsigned __int32*)z;
-    size_t count1 = y_length / sizeof(unsigned __int32);
-    size_t count2 = x_length / sizeof(unsigned __int32) - count1;
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* y_ptr = y->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count1 = y->UNIT_COUNT;
+    size_t count2 = x->UNIT_COUNT - count1;
     char carry = 0;
     while (count1 >= 8)
     {
@@ -98,32 +89,20 @@ int Add_ADC32(void* x, size_t x_length, void*  y, size_t y_length, void* z, size
     else
     {
     }
-    *z_length = (unsigned char*)z_ptr - (unsigned char*)z;
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
     return (TRUE);
 }
 
-int Add_ADX32(void* x, size_t x_length, void*  y, size_t y_length, void* z, size_t* z_length)
+int Add_ADX32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
 {
 #if _DEBUG
-    if (x == NULL)
-        return (FALSE);
-    if (y == NULL)
-        return (FALSE);
-    if (z == NULL)
-        return (FALSE);
-    if (z_length == NULL)
-        return (FALSE);
-    if (x_length < y_length)
-        return (FALSE);
-    if (*z_length < x_length)
-        return (FALSE);
-    unsigned __int32* z_ptr_limit = (unsigned __int32*)((unsigned char*)z + *z_length);
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
 #endif // _DEBUG
-    unsigned __int32* x_ptr = (unsigned __int32*)x;
-    unsigned __int32* y_ptr = (unsigned __int32*)y;
-    unsigned __int32* z_ptr = (unsigned __int32*)z;
-    size_t count1 = y_length / sizeof(unsigned __int32);
-    size_t count2 = x_length / sizeof(unsigned __int32) - count1;
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* y_ptr = y->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count1 = y->UNIT_COUNT;
+    size_t count2 = x->UNIT_COUNT - count1;
     char carry = 0;
     while (count1 >= 8)
     {
@@ -181,33 +160,22 @@ int Add_ADX32(void* x, size_t x_length, void*  y, size_t y_length, void* z, size
     else
     {
     }
-    *z_length = (unsigned char*)z_ptr - (unsigned char*)z;
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
     return (TRUE);
 }
+#endif // _M_IX86
 
 #ifdef _M_IX64
-int Add_ADC64(void* x, size_t x_length, void*  y, size_t y_length, void* z, size_t* z_length)
+int Add_ADC64(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
 {
 #if _DEBUG
-    if (x == NULL)
-        return (FALSE);
-    if (y == NULL)
-        return (FALSE);
-    if (z == NULL)
-        return (FALSE);
-    if (z_length == NULL)
-        return (FALSE);
-    if (x_length < y_length)
-        return (FALSE);
-    if (*z_length < x_length)
-        return (FALSE);
-    unsigned __int64* z_ptr_limit = (unsigned __int64*)((unsigned char*)z + *z_length);
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
 #endif // _DEBUG
-    unsigned __int64* x_ptr = (unsigned __int64*)x;
-    unsigned __int64* y_ptr = (unsigned __int64*)y;
-    unsigned __int64* z_ptr = (unsigned __int64*)z;
-    size_t count1 = y_length / sizeof(unsigned __int64);
-    size_t count2 = x_length / sizeof(unsigned __int64) - count1;
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* y_ptr = y->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count1 = y->UNIT_COUNT;
+    size_t count2 = x->UNIT_COUNT - count1;
     char carry = 0;
     while (count1 >= 8)
     {
@@ -265,32 +233,20 @@ int Add_ADC64(void* x, size_t x_length, void*  y, size_t y_length, void* z, size
     else
     {
     }
-    *z_length = (unsigned char*)z_ptr - (unsigned char*)z;
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
     return (TRUE);
 }
 
-int Add_ADX64(void* x, size_t x_length, void*  y, size_t y_length, void* z, size_t* z_length)
+int Add_ADX64(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
 {
 #if _DEBUG
-    if (x == NULL)
-        return (FALSE);
-    if (y == NULL)
-        return (FALSE);
-    if (z == NULL)
-        return (FALSE);
-    if (z_length == NULL)
-        return (FALSE);
-    if (x_length < y_length)
-        return (FALSE);
-    if (*z_length < x_length)
-        return (FALSE);
-    unsigned __int64* z_ptr_limit = (unsigned __int64*)((unsigned char*)z + *z_length);
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
 #endif // _DEBUG
-    unsigned __int64* x_ptr = (unsigned __int64*)x;
-    unsigned __int64* y_ptr = (unsigned __int64*)y;
-    unsigned __int64* z_ptr = (unsigned __int64*)z;
-    size_t count1 = y_length / sizeof(unsigned __int64);
-    size_t count2 = x_length / sizeof(unsigned __int64) - count1;
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* y_ptr = y->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count1 = y->UNIT_COUNT;
+    size_t count2 = x->UNIT_COUNT - count1;
     char carry = 0;
     while (count1 >= 8)
     {
@@ -348,44 +304,494 @@ int Add_ADX64(void* x, size_t x_length, void*  y, size_t y_length, void* z, size
     else
     {
     }
-    *z_length = (unsigned char*)z_ptr - (unsigned char*)z;
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
     return (TRUE);
 }
 #endif
 
-int(*EntryPoint_Add)(void* x, size_t x_length, void*  y, size_t y_length, void* z, size_t* z_length) = Add_ADC32;
+#if defined(_M_IX86)
+int(*EntryPoint_Add)(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z) = Add_ADC32;
+#elif defined(_M_IX64)
+int(*EntryPoint_Add)(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z) = Add_ADC64;
+#else
+#endif
+
+__declspec(dllexport) int __stdcall PMN_Add(UNIT_BUFFER* x, UNIT_BUFFER* y, UNIT_BUFFER* z)
+{
+    if (!CheckInputBuffer(x))
+        return (FALSE);
+    if (!CheckInputBuffer(y))
+        return (FALSE);
+    if (!CheckOutputBuffer(z))
+        return (FALSE);
+    if (z->UNIT_COUNT < x->UNIT_COUNT)
+        return (FALSE);
+    if (x->UNIT_COUNT < y->UNIT_COUNT)
+        return (FALSE);
+    if (!(*EntryPoint_Add)(x, y, z))
+        return (FALSE);
+    NormalizeBuffer(z);
+    return (TRUE);
+}
+
+#pragma endregion
+
+#pragma region AddUInt32関数
+
+#ifdef _M_IX86
+int AddUInt32_ADC32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
+{
+#if _DEBUG
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
+#endif // _DEBUG
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count2 = x->UNIT_COUNT - 1;
+    char carry = _addcarry_u32(0, *x_ptr, y, z_ptr);
+    ++x_ptr;
+    ++z_ptr;
+    while (carry && count2)
+    {
+        carry = _addcarry_u32(carry, *x_ptr, 0, z_ptr);
+        ++x_ptr;
+        ++z_ptr;
+        --count2;
+    }
+    if (carry)
+    {
+#if _DEBUG
+        if (z_ptr >= z_ptr_limit)
+            return (FALSE);
+#endif // _DEBUG
+        *z_ptr = 1;
+        ++z_ptr;
+    }
+    else if (count2)
+    {
+        __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
+        z_ptr += count2;
+    }
+    else
+    {
+    }
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
+    return (TRUE);
+}
+
+int AddUInt32_ADX32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
+{
+#if _DEBUG
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
+#endif // _DEBUG
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count2 = x->UNIT_COUNT - 1;
+    char carry = _addcarryx_u32(0, *x_ptr, y, z_ptr);
+    ++x_ptr;
+    ++z_ptr;
+    while (carry && count2)
+    {
+        carry = _addcarryx_u32(carry, *x_ptr, 0, z_ptr);
+        ++x_ptr;
+        ++z_ptr;
+        --count2;
+    }
+    if (carry)
+    {
+#if _DEBUG
+        if (z_ptr >= z_ptr_limit)
+            return (FALSE);
+#endif // _DEBUG
+        *z_ptr = 1;
+        ++z_ptr;
+    }
+    else if (count2)
+    {
+        __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
+        z_ptr += count2;
+    }
+    else
+    {
+    }
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
+    return (TRUE);
+}
+#endif // _M_IX86
+
+#ifdef _M_IX64
+int AddUInt32_ADC64(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
+{
+#if _DEBUG
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
+#endif // _DEBUG
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count2 = x->UNIT_COUNT - 1;
+    char carry = _addcarry_u64(0, *x_ptr, y, z_ptr);
+    ++x_ptr;
+    ++z_ptr;
+    while (carry && count2)
+    {
+        carry = _addcarry_u64(carry, *x_ptr, 0, z_ptr);
+        ++x_ptr;
+        ++z_ptr;
+        --count2;
+    }
+    if (carry)
+    {
+#if _DEBUG
+        if (z_ptr >= z_ptr_limit)
+            return (FALSE);
+#endif // _DEBUG
+        *z_ptr = 1;
+        ++z_ptr;
+    }
+    else if (count2)
+    {
+        __movsq((PDWORD64)z_ptr, (const DWORD64 *)x_ptr, count2);
+        z_ptr += count2;
+    }
+    else
+    {
+    }
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
+    return (TRUE);
+}
+
+int AddUInt32_ADX64(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
+{
+#if _DEBUG
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
+#endif // _DEBUG
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count2 = x->UNIT_COUNT - 1;
+    char carry = _addcarryx_u64(0, *x_ptr, y, z_ptr);
+    ++x_ptr;
+    ++z_ptr;
+    while (carry && count2)
+    {
+        carry = _addcarryx_u64(carry, *x_ptr, 0, z_ptr);
+        ++x_ptr;
+        ++z_ptr;
+        --count2;
+    }
+    if (carry)
+    {
+#if _DEBUG
+        if (z_ptr >= z_ptr_limit)
+            return (FALSE);
+#endif // _DEBUG
+        *z_ptr = 1;
+        ++z_ptr;
+    }
+    else if (count2)
+    {
+        __movsq((PDWORD64)z_ptr, (const DWORD64 *)x_ptr, count2);
+        z_ptr += count2;
+    }
+    else
+    {
+    }
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
+    return (TRUE);
+}
+#endif
+
+#if defined(_M_IX86)
+int(*EntryPoint_AddUInt32)(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z) = AddUInt32_ADC32;
+#elif defined(_M_IX64)
+int(*EntryPoint_AddUInt32)(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z) = AddUInt32_ADC64;
+#else
+#endif
+
+__declspec(dllexport) int __stdcall PMN_AddUInt32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
+{
+    if (!CheckInputBuffer(x))
+        return (FALSE);
+    if (y == 0)
+        return (FALSE);
+    if (!CheckOutputBuffer(z))
+        return (FALSE);
+    if (z->UNIT_COUNT < x->UNIT_COUNT)
+        return (FALSE);
+    if (z->UNIT_COUNT < (sizeof(unsigned __int32) + sizeof(__UNIT_TYPE) - 1) / sizeof(__UNIT_TYPE))
+        return (FALSE);
+    if (!(*EntryPoint_AddUInt32)(x, y, z))
+        return (FALSE);
+    NormalizeBuffer(z);
+    return (TRUE);
+}
+
+#pragma endregion
+
+#pragma region AddUInt64関数
+
+#ifdef _M_IX86
+int AddUInt64_ADC32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_low, UNIT_BUFFER* z)
+{
+#if _DEBUG
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
+#endif // _DEBUG
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    if (x->UNIT_COUNT < 2)
+    {
+        char carry = 0;
+        carry = _addcarry_u32(carry, *x_ptr, y_low, &z_ptr[0]);
+        carry = _addcarry_u32(carry, 0, y_high, &z_ptr[1]);
+        x_ptr += 1;
+        z_ptr += 2;
+        if (carry)
+        {
+            *z_ptr = 1;
+            z_ptr += 1;
+        }
+    }
+    else
+    {
+        size_t count2 = x->UNIT_COUNT - 2;
+        char carry = 0;
+        carry = _addcarry_u32(carry, x_ptr[0], y_low, &z_ptr[0]);
+        carry = _addcarry_u32(carry, x_ptr[1], y_high, &z_ptr[1]);
+        x_ptr += 2;
+        z_ptr += 2;
+        while (carry && count2)
+        {
+            carry = _addcarry_u32(carry, *x_ptr, 0, z_ptr);
+            ++x_ptr;
+            ++z_ptr;
+            --count2;
+        }
+        if (carry)
+        {
+#if _DEBUG
+            if (z_ptr >= z_ptr_limit)
+                return (FALSE);
+#endif // _DEBUG
+            *z_ptr = 1;
+            ++z_ptr;
+        }
+        else if (count2)
+        {
+            __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
+            z_ptr += count2;
+        }
+        else
+        {
+        }
+    }
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
+    return (TRUE);
+}
+
+int AddUInt64_ADX32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_low, UNIT_BUFFER* z)
+{
+#if _DEBUG
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
+#endif // _DEBUG
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    if (x->UNIT_COUNT < 2)
+    {
+        char carry = 0;
+        carry = _addcarryx_u32(carry, *x_ptr, y_low, &z_ptr[0]);
+        carry = _addcarryx_u32(carry, 0, y_high, &z_ptr[1]);
+        x_ptr += 1;
+        z_ptr += 2;
+        if (carry)
+        {
+            *z_ptr = 1;
+            z_ptr += 1;
+        }
+    }
+    else
+    {
+        size_t count2 = x->UNIT_COUNT - 2;
+        char carry = 0;
+        carry = _addcarryx_u32(carry, x_ptr[0], y_low, &z_ptr[0]);
+        carry = _addcarryx_u32(carry, x_ptr[1], y_high, &z_ptr[1]);
+        x_ptr += 2;
+        z_ptr += 2;
+        while (carry && count2)
+        {
+            carry = _addcarryx_u32(carry, *x_ptr, 0, z_ptr);
+            ++x_ptr;
+            ++z_ptr;
+            --count2;
+        }
+        if (carry)
+        {
+#if _DEBUG
+            if (z_ptr >= z_ptr_limit)
+                return (FALSE);
+#endif // _DEBUG
+            *z_ptr = 1;
+            ++z_ptr;
+        }
+        else if (count2)
+        {
+            __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
+            z_ptr += count2;
+        }
+        else
+        {
+        }
+    }
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
+    return (TRUE);
+}
+#endif // _M_IX86
+
+#ifdef _M_IX64
+int AddUInt64_ADC64(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z)
+{
+#if _DEBUG
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
+#endif // _DEBUG
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count2 = x->UNIT_COUNT - 1;
+    char carry = _addcarry_u64(0, *x_ptr, y, z_ptr);
+    ++x_ptr;
+    ++z_ptr;
+    while (carry && count2)
+    {
+        carry = _addcarry_u64(carry, *x_ptr, 0, z_ptr);
+        ++x_ptr;
+        ++z_ptr;
+        --count2;
+    }
+    if (carry)
+    {
+#if _DEBUG
+        if (z_ptr >= z_ptr_limit)
+            return (FALSE);
+#endif // _DEBUG
+        *z_ptr = 1;
+        ++z_ptr;
+    }
+    else if (count2)
+    {
+        __movsq((PDWORD64)z_ptr, (const DWORD64*)x_ptr, count2);
+        z_ptr += count2;
+    }
+    else
+    {
+    }
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
+    return (TRUE);
+}
+
+int AddUInt64_ADX64(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z)
+{
+#if _DEBUG
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
+#endif // _DEBUG
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count2 = x->UNIT_COUNT - 1;
+    char carry = _addcarryx_u64(0, *x_ptr, y, z_ptr);
+    ++x_ptr;
+    ++z_ptr;
+    while (carry && count2)
+    {
+        carry = _addcarryx_u64(carry, *x_ptr, 0, z_ptr);
+        ++x_ptr;
+        ++z_ptr;
+        --count2;
+    }
+    if (carry)
+    {
+#if _DEBUG
+        if (z_ptr >= z_ptr_limit)
+            return (FALSE);
+#endif // _DEBUG
+        *z_ptr = 1;
+        ++z_ptr;
+    }
+    else if (count2)
+    {
+        __movsq((PDWORD64)z_ptr, (const DWORD64*)x_ptr, count2);
+        z_ptr += count2;
+    }
+    else
+    {
+    }
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
+    return (TRUE);
+}
+#endif
+
+#if defined(_M_IX86)
+int(*EntryPoint_AddUInt64)(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_low, UNIT_BUFFER* z) = AddUInt64_ADC32;
+#elif defined(_M_IX64)
+int(*EntryPoint_AddUInt64)(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z) = AddUInt64_ADC64;
+#else
+#endif
+
+__declspec(dllexport) int __stdcall PMN_AddUInt64(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z)
+{
+    if (!CheckInputBuffer(x))
+        return (FALSE);
+    if (y == 0)
+        return (FALSE);
+    if (!CheckOutputBuffer(z))
+        return (FALSE);
+    if (z->UNIT_COUNT < x->UNIT_COUNT)
+        return (FALSE);
+    if (z->UNIT_COUNT < (sizeof(unsigned __int64) + sizeof(__UNIT_TYPE) - 1) / sizeof(__UNIT_TYPE))
+        return (FALSE);
+#if defined(_M_IX86)
+    if (!(*EntryPoint_AddUInt64)(x, (unsigned __int32)(y >> 32), (unsigned __int32)y, z))
+        return (FALSE);
+#elif defined(_M_IX64)
+    if (!(*EntryPoint_AddUInt64)(x, y, z))
+        return (FALSE);
+#endif // _M_IX86
+    NormalizeBuffer(z);
+    return (TRUE);
+}
+
+#pragma endregion
 
 int Initialize_Add(PROCESSOR_FEATURES *feature)
 {
     if (feature->PROCESSOR_FEATURE_ADX)
     {
-#ifdef _M_IX64
-        EntryPoint_Add = Add_ADX64;
-#else // _M_IX64
+#if defined(_M_IX86)
+        if (sizeof(__UNIT_TYPE) != sizeof(unsigned __int32))
+            return (FALSE);
         EntryPoint_Add = Add_ADX32;
-#endif // _M_IX64
+        EntryPoint_AddUInt32 = AddUInt32_ADX32;
+        EntryPoint_AddUInt64 = AddUInt64_ADX32;
+#elif defined(_M_IX64)
+        if (sizeof(__UNIT_TYPE) != sizeof(unsigned __int64))
+            return (FALSE);
+        EntryPoint_Add = Add_ADX64;
+        EntryPoint_AddUInt32 = AddUInt32_ADX64;
+        EntryPoint_AddUInt64 = AddUInt64_ADX64;
+#else
+        return (FALSE);
+#endif
     }
     else
     {
-#ifdef _M_IX64
-        EntryPoint_Add = Add_ADC64;
-#else // _M_IX64
+#if defined(_M_IX86)
+        if (sizeof(__UNIT_TYPE) != sizeof(unsigned __int32))
+            return (FALSE);
         EntryPoint_Add = Add_ADC32;
-#endif // _M_IX64
+        EntryPoint_AddUInt32 = AddUInt32_ADX32;
+        EntryPoint_AddUInt64 = AddUInt64_ADX32;
+#elif defined(_M_IX64)
+        if (sizeof(__UNIT_TYPE) != sizeof(unsigned __int64))
+            return (FALSE);
+        EntryPoint_Add = Add_ADC64;
+        EntryPoint_AddUInt32 = AddUInt32_ADC64;
+        EntryPoint_AddUInt64 = AddUInt64_ADC64;
+#else
+        return (FALSE);
+#endif
     }
-    return (TRUE);
-}
-
-__declspec(dllexport) int __stdcall PMN_Add(void* x, size_t x_length, void*  y, size_t y_length, void* z, size_t* z_length)
-{
-    if (!CheckBuffer(x, x_length))
-        return (FALSE);
-    if (!CheckBuffer(y, y_length))
-        return (FALSE);
-    if (!CheckBuffer(z, *z_length))
-        return (FALSE);
-    if (!(*EntryPoint_Add)(x, x_length, y, y_length, z, z_length))
-        return (FALSE);
-    *z_length = NormalizeBufferSize(z, *z_length);
     return (TRUE);
 }

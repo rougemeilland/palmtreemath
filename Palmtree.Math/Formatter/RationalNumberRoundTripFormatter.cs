@@ -8,6 +8,7 @@
 */
 
 using System.Text;
+using Palmtree.Math.Implements;
 
 namespace Palmtree.Math.Formatter
 {
@@ -17,14 +18,14 @@ namespace Palmtree.Math.Formatter
         #region プライベートフィールド
 
         private bool _negative;
-        private ushort[] _value_numerator;
-        private ushort[] _value_denominator;
+        private NativeUnsignedInteger _value_numerator;
+        private NativeUnsignedInteger _value_denominator;
 
         #endregion
 
         #region コンストラクタ
 
-        public RationalNumberRoundTripFormatter(bool negative, ushort[] value_numerator, ushort[] value_denominator)
+        public RationalNumberRoundTripFormatter(bool negative, NativeUnsignedInteger value_numerator, NativeUnsignedInteger value_denominator)
         {
             _negative = negative;
             _value_numerator = value_numerator;

@@ -339,7 +339,7 @@ namespace Palmtree.Math
         private RationalNumber(LongLongInteger numerator, UnsignedLongLongInteger denominator)
         {
             if (denominator.IsZero)
-                throw (new ArgumentException("分母として0が与えられました。", "denominator"));
+                throw (new DivideByZeroException("分母として0が与えられました。"));
             __InternalNumerator = numerator;
             __InternalDenominator = denominator;
             Reduce();
@@ -364,69 +364,6 @@ namespace Palmtree.Math
             denominator = _InternalDenominator;
             return (_InternalNumerator);
         }
-
-#if DEBUG
-
-        /// <summary>
-        /// テストデータから<see cref="RationalNumber"/>オブジェクトを生成します。
-        /// </summary>
-        /// <param name="data">
-        /// テストデータです。
-        /// </param>
-        /// <returns>
-        /// 生成された<see cref="RationalNumber"/>オブジェクトです。
-        /// </returns>
-        [CLSCompliant(false)]
-        public static RationalNumber FromTestData(ushort[] data)
-        {
-            TestDataReader reader = new TestDataReader(data);
-            ushort header = reader.GetUShortValue();
-            SignType data_sign;
-            if (header == 3)
-                data_sign = SignType.Positive;
-            else if (header == 4)
-                data_sign = SignType.Negative;
-            else
-                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
-            ArraySegment<ushort> data_numerator = reader.GetSegment();
-            ArraySegment<ushort> data_denominator = reader.GetSegment();
-            reader.AssertEndOfData();
-            if (data_numerator.Count == 0)
-                return (Zero);
-            else
-                return (new RationalNumber(new LongLongInteger(data_sign, new UnsignedLongLongInteger(data_numerator)), new UnsignedLongLongInteger(data_denominator)));
-        }
-
-        /// <summary>
-        /// オブジェクトの内容を検査します。
-        /// </summary>
-        /// <param name="data">
-        /// オブジェクトの内容を検査するための比較データです。
-        /// </param>
-        /// <returns>
-        /// 検査に成功すればtrue、そうではないのならfalseです。
-        /// </returns>
-        [CLSCompliant(false)]
-        public bool EqualsInternally(ushort[] data)
-        {
-            TestDataReader reader = new TestDataReader(data);
-            ushort header = reader.GetUShortValue();
-            SignType data_sign;
-            if (header == 3)
-                data_sign = SignType.Positive;
-            else if (header == 4)
-                data_sign = SignType.Negative;
-            else
-                throw (new ArgumentException("テストデータの形式に誤りがあります。", "data"));
-            ArraySegment<ushort> data_numerator = reader.GetSegment();
-            ArraySegment<ushort> data_denominator = reader.GetSegment();
-            reader.AssertEndOfData();
-            if (data_numerator.Count == 0)
-                data_sign = SignType.Zero;
-            return (_InternalNumerator.EqualsInternally(data_sign, data_numerator) && _InternalDenominator.EqualsInternally(data_denominator));
-        }
-
-#endif
 
         #endregion
 
