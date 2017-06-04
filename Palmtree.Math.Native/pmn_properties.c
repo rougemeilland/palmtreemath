@@ -554,38 +554,20 @@ size_t GetEffectiveBitCount(UNIT_BUFFER* buffer)
 #endif // _M_IX64
 }
 
-#ifdef _M_IX86
 int GetHashCode(UNIT_BUFFER *buffer)
 {
-    unsigned __int32 hash_code = 0;
-    size_t count = buffer->UNIT_COUNT;
-    __UNIT_TYPE *p = &buffer->UNIT_ARRAY[0];
+    unsigned __int32 hash_code = 2166136261;
+    size_t count = buffer->UNIT_COUNT * sizeof(__UNIT_TYPE);
+    unsigned char *p = (unsigned char*)&buffer->UNIT_ARRAY[0];
     while (count > 0)
     {
-        hash_code = _rotl(hash_code, 1) | *p;
+        hash_code ^= *p;
+        hash_code *= 16777619;
         ++p;
         --count;
     }
     return ((int)hash_code);
 }
-#endif // _M_IX86
-
-#ifdef _M_IX64
-int GetHashCode(UNIT_BUFFER *buffer)
-{
-    unsigned __int32 hash_code = 0;
-    size_t count = buffer->UNIT_COUNT;
-    __UNIT_TYPE *p = &buffer->UNIT_ARRAY[0];
-    while (count > 0)
-    {
-        hash_code = _rotl(hash_code, 1) | (unsigned __int32)*p;
-        hash_code = _rotl(hash_code, 1) | (unsigned __int32)(*p >> 32);
-        ++p;
-        --count;
-    }
-    return ((int)hash_code);
-}
-#endif // _M_IX64
 
 int IsOne(UNIT_BUFFER *buffer)
 {

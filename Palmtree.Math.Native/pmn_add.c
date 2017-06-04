@@ -67,12 +67,28 @@ int Add_ADC32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
         z_ptr += 1;
         count1 -= 1;
     }
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarry_u32(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
@@ -141,12 +157,28 @@ int Add_ADX32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
         z_ptr += 1;
         count1 -= 1;
     }
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarryx_u32(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
@@ -215,12 +247,28 @@ int Add_ADC64(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
         z_ptr += 1;
         count1 -= 1;
     }
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarry_u64(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
@@ -286,12 +334,28 @@ int Add_ADX64(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
         z_ptr += 1;
         count1 -= 1;
     }
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarryx_u64(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
@@ -356,12 +420,28 @@ int AddUInt32_ADC32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
     char carry = _addcarry_u32(0, *x_ptr, y, z_ptr);
     ++x_ptr;
     ++z_ptr;
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarry_u32(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
@@ -398,12 +478,28 @@ int AddUInt32_ADX32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
     char carry = _addcarryx_u32(0, *x_ptr, y, z_ptr);
     ++x_ptr;
     ++z_ptr;
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarryx_u32(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
@@ -440,12 +536,28 @@ int AddUInt32_ADC64(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
     char carry = _addcarry_u64(0, *x_ptr, y, z_ptr);
     ++x_ptr;
     ++z_ptr;
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarry_u64(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
@@ -479,12 +591,28 @@ int AddUInt32_ADX64(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
     char carry = _addcarryx_u64(0, *x_ptr, y, z_ptr);
     ++x_ptr;
     ++z_ptr;
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarryx_u64(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
@@ -549,13 +677,18 @@ int AddUInt64_ADC32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_
     {
         char carry = 0;
         carry = _addcarry_u32(carry, *x_ptr, y_low, &z_ptr[0]);
-        carry = _addcarry_u32(carry, 0, y_high, &z_ptr[1]);
-        x_ptr += 1;
-        z_ptr += 2;
-        if (carry)
+        if (y_high == (__UNIT_TYPE)-1)
         {
-            *z_ptr = 1;
-            z_ptr += 1;
+            z_ptr[1] = 0;
+            z_ptr[2] = 1;
+            x_ptr += 1;
+            z_ptr += 3;
+        }
+        else
+        {
+            z_ptr[1] = *x_ptr + 1;
+            x_ptr += 1;
+            z_ptr += 2;
         }
     }
     else
@@ -566,12 +699,28 @@ int AddUInt64_ADC32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_
         carry = _addcarry_u32(carry, x_ptr[1], y_high, &z_ptr[1]);
         x_ptr += 2;
         z_ptr += 2;
-        while (carry && count2)
+        if (carry)
         {
-            carry = _addcarry_u32(carry, *x_ptr, 0, z_ptr);
-            ++x_ptr;
-            ++z_ptr;
-            --count2;
+            while (count2)
+            {
+                if (*x_ptr == (__UNIT_TYPE)-1)
+                {
+                    *z_ptr = 0;
+                    carry = 1;
+                    ++x_ptr;
+                    ++z_ptr;
+                    --count2;
+                }
+                else
+                {
+                    *z_ptr = *x_ptr + 1;
+                    carry = 0;
+                    ++x_ptr;
+                    ++z_ptr;
+                    --count2;
+                    break;
+                }
+            }
         }
         if (carry)
         {
@@ -609,13 +758,18 @@ int AddUInt64_ADX32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_
     {
         char carry = 0;
         carry = _addcarryx_u32(carry, *x_ptr, y_low, &z_ptr[0]);
-        carry = _addcarryx_u32(carry, 0, y_high, &z_ptr[1]);
-        x_ptr += 1;
-        z_ptr += 2;
-        if (carry)
+        if (y_high == (__UNIT_TYPE)-1)
         {
-            *z_ptr = 1;
-            z_ptr += 1;
+            z_ptr[1] = 0;
+            z_ptr[2] = 1;
+            x_ptr += 1;
+            z_ptr += 3;
+        }
+        else
+        {
+            z_ptr[1] = y_high + 1;
+            x_ptr += 1;
+            z_ptr += 2;
         }
     }
     else
@@ -626,12 +780,28 @@ int AddUInt64_ADX32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_
         carry = _addcarryx_u32(carry, x_ptr[1], y_high, &z_ptr[1]);
         x_ptr += 2;
         z_ptr += 2;
-        while (carry && count2)
+        if (carry)
         {
-            carry = _addcarryx_u32(carry, *x_ptr, 0, z_ptr);
-            ++x_ptr;
-            ++z_ptr;
-            --count2;
+            while (count2)
+            {
+                if (*x_ptr == (__UNIT_TYPE)-1)
+                {
+                    *z_ptr = 0;
+                    carry = 1;
+                    ++x_ptr;
+                    ++z_ptr;
+                    --count2;
+                }
+                else
+                {
+                    *z_ptr = *x_ptr + 1;
+                    carry = 0;
+                    ++x_ptr;
+                    ++z_ptr;
+                    --count2;
+                    break;
+                }
+            }
         }
         if (carry)
         {
@@ -669,12 +839,28 @@ int AddUInt64_ADC64(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z)
     char carry = _addcarry_u64(0, *x_ptr, y, z_ptr);
     ++x_ptr;
     ++z_ptr;
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarry_u64(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
@@ -708,12 +894,28 @@ int AddUInt64_ADX64(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z)
     char carry = _addcarryx_u64(0, *x_ptr, y, z_ptr);
     ++x_ptr;
     ++z_ptr;
-    while (carry && count2)
+    if (carry)
     {
-        carry = _addcarryx_u64(carry, *x_ptr, 0, z_ptr);
-        ++x_ptr;
-        ++z_ptr;
-        --count2;
+        while (count2)
+        {
+            if (*x_ptr == (__UNIT_TYPE)-1)
+            {
+                *z_ptr = 0;
+                carry = 1;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+            }
+            else
+            {
+                *z_ptr = *x_ptr + 1;
+                carry = 0;
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
+                break;
+            }
+        }
     }
     if (carry)
     {
