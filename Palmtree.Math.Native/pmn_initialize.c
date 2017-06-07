@@ -45,21 +45,19 @@ __declspec(dllexport) int __stdcall PMN_Initialize()
     else
     {
         __cpuid(cpu_id_buffer, 7);
-        if (cpu_id_buffer[1] & CPU_FEATURE_FLAG_POPCNT)
-            feature.PROCESSOR_FEATURE_POPCNT = TRUE;
-        else
-            feature.PROCESSOR_FEATURE_POPCNT = FALSE;
+        feature.PROCESSOR_FEATURE_POPCNT = (cpu_id_buffer[1] & CPU_FEATURE_FLAG_POPCNT) != 0;
     }
 
     if (max_catagory < 7)
+    {
         feature.PROCESSOR_FEATURE_ADX = FALSE;
+        feature.PROCESSOR_FEATURE_BMI2 = FALSE;
+    }
     else
     {
         __cpuid(cpu_id_buffer, 7);
-        if (cpu_id_buffer[1] & CPU_FEATURE_FLAG_ADX)
-            feature.PROCESSOR_FEATURE_ADX = TRUE;
-        else
-            feature.PROCESSOR_FEATURE_ADX = FALSE;
+        feature.PROCESSOR_FEATURE_ADX = (cpu_id_buffer[1] & CPU_FEATURE_FLAG_ADX) != 0;
+        feature.PROCESSOR_FEATURE_BMI2 = (cpu_id_buffer[1] & CPU_FEATURE_FLAG_BMI2) != 0;
     }
 
     __cpuid(cpu_id_buffer, 0x80000000);
@@ -69,15 +67,20 @@ __declspec(dllexport) int __stdcall PMN_Initialize()
     else
     {
         __cpuid(cpu_id_buffer, 0x80000001);
-        if (cpu_id_buffer[2] & CPU_FEATURE_FLAG_LZCNT)
-            feature.PROCESSOR_FEATURE_LZCNT = TRUE;
-        else
-            feature.PROCESSOR_FEATURE_LZCNT = FALSE;
+        feature.PROCESSOR_FEATURE_LZCNT = (cpu_id_buffer[2] & CPU_FEATURE_FLAG_LZCNT) != 0;
     }
 
     if (!Initialize_Add(&feature))
         return (FALSE);
+    if (!Initialize_Get(&feature))
+        return (FALSE);
+    if (!Initialize_Multiply(&feature))
+        return (FALSE);
     if (!Initialize_Properties(&feature))
+        return (FALSE);
+    if (!Initialize_Set(&feature))
+        return (FALSE);
+    if (!Initialize_Subtract(&feature))
         return (FALSE);
 
     return (TRUE);

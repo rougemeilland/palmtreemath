@@ -36,6 +36,9 @@
     <ClCompile Include="pmn_properties.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="pmn_subtract.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pmn.h">

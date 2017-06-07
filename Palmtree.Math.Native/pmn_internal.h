@@ -25,6 +25,7 @@ typedef struct _tag_PROCESSOR_FEATURES
     unsigned PROCESSOR_FEATURE_POPCNT : 1;
     unsigned PROCESSOR_FEATURE_ADX : 1;
     unsigned PROCESSOR_FEATURE_LZCNT : 1;
+    unsigned PROCESSOR_FEATURE_BMI2 : 1;
 } PROCESSOR_FEATURES;
 
 typedef struct __tag_BUFFER_HEADER
@@ -40,6 +41,10 @@ extern int CheckOutputBuffer(UNIT_BUFFER* buffer);
 extern void NormalizeBuffer(UNIT_BUFFER* buffer);
 
 extern int Initialize_Add(PROCESSOR_FEATURES* feature);
+extern int Initialize_Get(PROCESSOR_FEATURES* feature);
+extern int Initialize_Multiply(PROCESSOR_FEATURES* feature);
 extern int Initialize_Properties(PROCESSOR_FEATURES *feature);
+extern int Initialize_Set(PROCESSOR_FEATURES* feature);
+extern int Initialize_Subtract(PROCESSOR_FEATURES* feature);
 
 #endif // __INCLUDED_PMN_INTERNAL_H

@@ -151,6 +151,36 @@ namespace Palmtree.Math.Implements
         [DllImport("Palmtree.Math.Native.dll")]
         static extern bool PMN_GetUint64Value(IntPtr buffer, out UInt64 value);
 
+        /// <summary>
+        /// 与えられた多倍長整数の下位から32ビットを取得します。
+        /// </summary>
+        /// <param name="buffer">
+        /// 多倍長整数です。
+        /// </param>
+        /// <param name="value">
+        /// 32ビット整数です。
+        /// </param>
+        /// <returns>
+        /// 取得に成功した場合はtrue、そうではないのならfalseです。
+        /// </returns>
+        [DllImport("Palmtree.Math.Native.dll")]
+        static extern bool PMN_GetLeastSignificant32Bit(IntPtr buffer, UInt32 value_buffer);
+
+        /// <summary>
+        /// 与えられた多倍長整数の下位から64ビットを取得します。
+        /// </summary>
+        /// <param name="buffer">
+        /// 多倍長整数です。
+        /// </param>
+        /// <param name="value">
+        /// 64ビット整数です。
+        /// </param>
+        /// <returns>
+        /// 取得に成功した場合はtrue、そうではないのならfalseです。
+        /// </returns>
+        [DllImport("Palmtree.Math.Native.dll")]
+        static extern bool PMN_GetLeastSignificant64Bit(IntPtr buffer, UInt64 value_buffer);
+
         #endregion
 
         #region 値の設定
@@ -202,7 +232,7 @@ namespace Palmtree.Math.Implements
         /// </param>
         /// <param name="z">
         /// 演算結果の多倍長整数を格納する領域です。
-        /// この領域のサイズは演算結果を格納するのに十分でなければなりません。
+        /// この領域のサイズはxのビット長より1ビットだけ長い値を格納するのに十分でなければなりません。
         /// </param>
         /// <returns>
         /// 演算に成功した場合はtrue、そうではない場合はfalseが返ります。
@@ -222,7 +252,7 @@ namespace Palmtree.Math.Implements
         /// </param>
         /// <param name="z">
         /// 演算結果の多倍長整数を格納する領域です。
-        /// この領域のサイズは演算結果を格納するのに十分でなければなりません。
+        /// この領域のサイズはxのビット長より1ビットだけ長い値を格納するのに十分でなければなりません。
         /// </param>
         /// <returns>
         /// 演算に成功した場合はtrue、そうではない場合はfalseが返ります。
@@ -242,7 +272,7 @@ namespace Palmtree.Math.Implements
         /// </param>
         /// <param name="z">
         /// 演算結果の多倍長整数を格納する領域です。
-        /// この領域のサイズは演算結果を格納するのに十分でなければなりません。
+        /// この領域のサイズはxのビット長より1ビットだけ長い値を格納するのに十分でなければなりません。
         /// </param>
         /// <returns>
         /// 演算に成功した場合はtrue、そうではない場合はfalseが返ります。
@@ -250,6 +280,70 @@ namespace Palmtree.Math.Implements
         /// </returns>
         [DllImport("Palmtree.Math.Native.dll")]
         static extern bool PMN_AddUInt64(IntPtr x, UInt64 y, IntPtr z);
+
+        #endregion
+
+        #region 減算
+
+        /// <summary>
+        /// 多倍長整数と多倍長整数の減算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 演算対象の多倍長整数です。
+        /// </param>
+        /// <param name="y">
+        /// 演算対象の多倍長整数です。
+        /// </param>
+        /// <param name="z">
+        /// 演算結果の多倍長整数を格納する領域です。
+        /// この領域のサイズはxと同じビット長の値を格納するのに十分でなければなりません。
+        /// </param>
+        /// <returns>
+        /// 演算に成功した場合はtrue、そうではない場合はfalseが返ります。
+        /// xがyより小さい場合、またはzのサイズが演算結果を格納するのに不十分である場合にもfalseが返ります。
+        /// </returns>
+        [DllImport("Palmtree.Math.Native.dll")]
+        static extern bool PMN_Subtract(IntPtr x, IntPtr y, IntPtr z);
+
+        /// <summary>
+        /// 多倍長整数とUInt32整数の減算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 演算対象の多倍長整数です。
+        /// </param>
+        /// <param name="y">
+        /// 演算対象のUInt32整数です。
+        /// </param>
+        /// <param name="z">
+        /// 演算結果の多倍長整数を格納する領域です。
+        /// この領域のサイズはxと同じビット長の値を格納するのに十分でなければなりません。
+        /// </param>
+        /// <returns>
+        /// 演算に成功した場合はtrue、そうではない場合はfalseが返ります。
+        /// xがyより小さい場合、またはzのサイズが演算結果を格納するのに不十分である場合にもfalseが返ります。
+        /// </returns>
+        [DllImport("Palmtree.Math.Native.dll")]
+        static extern bool PMN_SubtractUInt32(IntPtr x, UInt32 y, IntPtr z);
+
+        /// <summary>
+        /// 多倍長整数とUInt64整数の減算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 演算対象の多倍長整数です。
+        /// </param>
+        /// <param name="y">
+        /// 演算対象のUInt64整数です。
+        /// </param>
+        /// <param name="z">
+        /// 演算結果の多倍長整数を格納する領域です。
+        /// この領域のサイズはxと同じビット長の値を格納するのに十分でなければなりません。
+        /// </param>
+        /// <returns>
+        /// 演算に成功した場合はtrue、そうではない場合はfalseが返ります。
+        /// xがyより小さい場合、またはzのサイズが演算結果を格納するのに不十分である場合にもfalseが返ります。
+        /// </returns>
+        [DllImport("Palmtree.Math.Native.dll")]
+        static extern bool PMN_SubtractUInt64(IntPtr x, UInt64 y, IntPtr z);
 
         #endregion
 
@@ -314,6 +408,80 @@ namespace Palmtree.Math.Implements
         /// </returns>
         [DllImport("Palmtree.Math.Native.dll")]
         static extern bool PMN_MultiplyUInt64(IntPtr x, UInt64 y, IntPtr z);
+
+        #endregion
+
+        #region 除算
+
+        /// <summary>
+        /// 多倍長整数と多倍長整数の除算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 被除数を表す多倍長整数です。
+        /// </param>
+        /// <param name="y">
+        /// 除数を表す多倍長整数です。
+        /// </param>
+        /// <param name="q">
+        /// 商を表す多倍長整数の格納領域です。
+        /// この領域のサイズは商を格納するのに十分でなければなりません。
+        /// </param>
+        /// <param name="r">
+        /// 剰余を表す多倍長整数の格納領域です。
+        /// この領域のサイズは剰余を格納するのに十分でなければなりません。
+        /// </param>
+        /// <returns>
+        /// 演算に成功した場合はtrue、そうではない場合はfalseが返ります。
+        /// <paramref name="q"/>または<paramref name="r"/>のサイズが演算結果を格納するのに不十分である場合にもfalseが返ります。
+        /// </returns>
+        [DllImport("Palmtree.Math.Native.dll")]
+        static extern bool PMN_DivRem(IntPtr x, IntPtr y, IntPtr q, IntPtr r);
+
+        /// <summary>
+        /// 多倍長整数とUInt32整数の除算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 被除数を表す多倍長整数です。
+        /// </param>
+        /// <param name="y">
+        /// 除数を表すUInt32整数です。
+        /// </param>
+        /// <param name="q">
+        /// 商を表す多倍長整数の格納領域です。
+        /// この領域のサイズは商を格納するのに十分でなければなりません。
+        /// </param>
+        /// <param name="r">
+        /// 剰余を表すUInt32整数です。
+        /// </param>
+        /// <returns>
+        /// 演算に成功した場合はtrue、そうではない場合はfalseが返ります。
+        /// <paramref name="q"/>のサイズが演算結果を格納するのに不十分である場合にもfalseが返ります。
+        /// </returns>
+        [DllImport("Palmtree.Math.Native.dll")]
+        static extern bool PMN_DivRemUInt32(IntPtr x, UInt32 y, IntPtr q, out UInt32 r);
+
+        /// <summary>
+        /// 多倍長整数とUInt64整数の除算を行います。
+        /// </summary>
+        /// <param name="x">
+        /// 被除数を表す多倍長整数です。
+        /// </param>
+        /// <param name="y">
+        /// 除数を表すUInt64整数です。
+        /// </param>
+        /// <param name="q">
+        /// 商を表す多倍長整数の格納領域です。
+        /// この領域のサイズは商を格納するのに十分でなければなりません。
+        /// </param>
+        /// <param name="r">
+        /// 剰余を表すUInt64整数です。
+        /// </param>
+        /// <returns>
+        /// 演算に成功した場合はtrue、そうではない場合はfalseが返ります。
+        /// <paramref name="q"/>のサイズが演算結果を格納するのに不十分である場合にもfalseが返ります。
+        /// </returns>
+        [DllImport("Palmtree.Math.Native.dll")]
+        static extern bool PMN_DivRemUInt64(IntPtr x, UInt64 y, IntPtr q, out UInt64 r);
 
         #endregion
 

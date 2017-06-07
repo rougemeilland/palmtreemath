@@ -26,6 +26,7 @@
     <ClCompile Include="pmn_multiply.c" />
     <ClCompile Include="pmn_properties.c" />
     <ClCompile Include="pmn_set.c" />
+    <ClCompile Include="pmn_subtract.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pmn.h" />
@@ -156,6 +157,13 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <AssemblerOutput>All</AssemblerOutput>
       <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <ExpandAttributedSource>true</ExpandAttributedSource>
+      <UseUnicodeForAssemblerListing>
+      </UseUnicodeForAssemblerListing>
+      <OmitDefaultLibName>
+      </OmitDefaultLibName>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <StringPooling>true</StringPooling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -178,6 +186,13 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <AssemblerOutput>All</AssemblerOutput>
       <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <ExpandAttributedSource>true</ExpandAttributedSource>
+      <UseUnicodeForAssemblerListing>
+      </UseUnicodeForAssemblerListing>
+      <OmitDefaultLibName>
+      </OmitDefaultLibName>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <StringPooling>true</StringPooling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

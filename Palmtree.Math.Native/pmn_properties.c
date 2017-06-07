@@ -21,7 +21,7 @@ https://opensource.org/licenses/MIT
 
 #pragma region 有効ビット長の取得
 
-size_t GetUInt32EffectiveBitCount_Imp(unsigned __int32 value)
+static size_t GetUInt32EffectiveBitCount(unsigned __int32 value)
 {
     if (value & 0xffff0000)
     {
@@ -180,7 +180,7 @@ size_t GetUInt32EffectiveBitCount_Imp(unsigned __int32 value)
 }
 
 #ifdef _M_IX64
-size_t GetUInt64EffectiveBitCount_Imp(unsigned __int64  value)
+static size_t GetUInt64EffectiveBitCount(unsigned __int64  value)
 {
     if (value & 0xffffffff00000000)
     {
@@ -500,22 +500,21 @@ size_t GetUInt64EffectiveBitCount_Imp(unsigned __int64  value)
 #endif // _M_IX64
 
 
-size_t GetUInt32EffectiveBitCount_Imp_LZCNT(unsigned __int32 value)
+static size_t GetUInt32EffectiveBitCount_LZCNT(unsigned __int32 value)
 {
     return (32 - _lzcnt_u32(value));
 }
 
 #ifdef _M_IX64
-size_t GetUInt64EffectiveBitCount_Imp_LZCNT(unsigned __int64  value)
+static size_t GetUInt64EffectiveBitCount_LZCNT(unsigned __int64  value)
 {
     return (64 - _lzcnt_u64(value));
 }
 #endif // _M_IX64
 
-
-size_t(*EntryPoint_GetUInt32EffectiveBitCount)(unsigned __int32 value) = GetUInt32EffectiveBitCount_Imp;
+static size_t(*EntryPoint_GetUInt32EffectiveBitCount)(unsigned __int32 value) = GetUInt32EffectiveBitCount;
 #ifdef _M_IX64
-size_t(*EntryPoint_GetUInt64EffectiveBitCount)(unsigned __int64 value) = GetUInt64EffectiveBitCount_Imp;
+static size_t(*EntryPoint_GetUInt64EffectiveBitCount)(unsigned __int64 value) = GetUInt64EffectiveBitCount;
 #endif // _M_IX64
 
 __declspec(dllexport) size_t __stdcall PMN_GetUInt32EffectiveBitCount(unsigned __int32 value)
@@ -531,30 +530,34 @@ __declspec(dllexport) size_t __stdcall PMN_GetUInt64EffectiveBitCount(unsigned _
     if (value == 0)
         return (0);
     return ((*EntryPoint_GetUInt64EffectiveBitCount)(value));
-#else // _M_IX64
+#elif defined(_M_IX86)
     unsigned __int32 value_low = (unsigned __int32)value;
     unsigned __int32 value_high = (unsigned __int32)(value >> 32);
     return (value_high ? (*EntryPoint_GetUInt32EffectiveBitCount)(value_high) + sizeof(value_low) * 8 : value_low ? (*EntryPoint_GetUInt32EffectiveBitCount)(value_low) : 0);
-#endif // _M_IX64
+#else
+    //undefined
+#endif
 }
 
-#pragma endregion
-
-#pragma region プロパティの取得
-
-size_t GetEffectiveBitCount(UNIT_BUFFER* buffer)
+static size_t GetEffectiveBitCount(UNIT_BUFFER* buffer)
 {
     size_t index = buffer->UNIT_COUNT - 1;
     __UNIT_TYPE *p = &buffer->UNIT_ARRAY[index];
     // *pは0ではないはず
 #ifdef _M_IX64
     return ((*EntryPoint_GetUInt64EffectiveBitCount)(*p) + index * sizeof(__UNIT_TYPE) * 8);
-#else // _M_IX64
+#elif defined(_M_IX86)
     return ((*EntryPoint_GetUInt32EffectiveBitCount)(*p) + index * sizeof(__UNIT_TYPE) * 8);
-#endif // _M_IX64
+#else
+    //undefined
+#endif
 }
 
-int GetHashCode(UNIT_BUFFER *buffer)
+#pragma endregion
+
+#pragma region ハッシュコードの計算
+
+static int GetHashCode(UNIT_BUFFER *buffer)
 {
     unsigned __int32 hash_code = 2166136261;
     size_t count = buffer->UNIT_COUNT * sizeof(__UNIT_TYPE);
@@ -569,18 +572,30 @@ int GetHashCode(UNIT_BUFFER *buffer)
     return ((int)hash_code);
 }
 
-int IsOne(UNIT_BUFFER *buffer)
+#pragma endregion
+
+#pragma region _1であるかどうかの判別
+
+static int IsOne(UNIT_BUFFER *buffer)
 {
     return (buffer->UNIT_COUNT == 1 && buffer->UNIT_ARRAY[0] == 1);
 }
 
-int IsEven(UNIT_BUFFER *buffer)
+#pragma endregion
+
+#pragma region 偶数であるかどうかの判別
+
+static int IsEven(UNIT_BUFFER *buffer)
 {
     return (buffer->UNIT_COUNT > 0 && (buffer->UNIT_ARRAY[0] & 1) != 0);
 }
 
+#pragma endregion
+
+#pragma region _2のべき乗であるかどうかの判別
+
 #ifdef _M_IX86
-int IaPowerOfTwo_Imp_x86(unsigned __int32 value)
+static int IaPowerOfTwo(unsigned __int32 value)
 {
     size_t bit_count = 32;
     if (!(value & 0x0000ffffU))
@@ -611,14 +626,12 @@ int IaPowerOfTwo_Imp_x86(unsigned __int32 value)
     return (value == 1);
 }
 
-int IaPowerOfTwo_Imp_x86_POPCNT(unsigned __int32 value)
+static int IaPowerOfTwo_POPCNT(unsigned __int32 value)
 {
     return (__popcnt(value) == 1);
 }
-#endif // _M_IX86
-
-#ifdef _M_IX64
-int IaPowerOfTwo_Imp_x64(unsigned __int64 value)
+#elif defined(_M_IX64)
+static int IaPowerOfTwo(unsigned __int64 value)
 {
     size_t bit_count = 64;
     if (!(value & 0x00000000ffffffffUL))
@@ -654,19 +667,23 @@ int IaPowerOfTwo_Imp_x64(unsigned __int64 value)
     return (value == 1);
 }
 
-int IaPowerOfTwo_Imp_x64_POPCNT(unsigned __int64 value)
+static int IaPowerOfTwo_POPCNT(unsigned __int64 value)
 {
     return (__popcnt64(value) == 1);
 }
-#endif // _M_IX64
+#else
+// undefined
+#endif
 
 #ifdef _M_IX64
-int(*EntryPoint_IsPowerOfTwo)(unsigned __int64 value) = IaPowerOfTwo_Imp_x64;
-#else // _M_IX64
-int(*EntryPoint_IsPowerOfTwo)(unsigned __int32 value) = IaPowerOfTwo_Imp_x86;
-#endif // _M_IX64
+static int(*EntryPoint_IsPowerOfTwo)(unsigned __int64 value) = IaPowerOfTwo;
+#elif defined(_M_IX86)
+static int(*EntryPoint_IsPowerOfTwo)(unsigned __int32 value) = IaPowerOfTwo;
+#else
+// undefined
+#endif
 
-int IsPowerOfTwo(UNIT_BUFFER* buffer)
+static int IsPowerOfTwo(UNIT_BUFFER* buffer)
 {
     size_t index = buffer->UNIT_COUNT - 1;
     __UNIT_TYPE *p = &buffer->UNIT_ARRAY[index];
@@ -682,6 +699,8 @@ int IsPowerOfTwo(UNIT_BUFFER* buffer)
     }
     return (TRUE);
 }
+
+#pragma endregion
 
 __declspec(dllexport) int __stdcall PMN_GetProperties(UNIT_BUFFER *buffer, unsigned __int64* bit_count, __int32* hash_code, unsigned __int32* flags)
 {
@@ -703,38 +722,40 @@ __declspec(dllexport) int __stdcall PMN_GetProperties(UNIT_BUFFER *buffer, unsig
     return (TRUE);
 }
 
-#pragma endregion
-
 int Initialize_Properties(PROCESSOR_FEATURES *feature)
 {
     if (feature->PROCESSOR_FEATURE_POPCNT)
     {
 #ifdef _M_IX64
-        EntryPoint_IsPowerOfTwo = IaPowerOfTwo_Imp_x64_POPCNT;
-#else // _M_IX64
-        EntryPoint_IsPowerOfTwo = IaPowerOfTwo_Imp_x86_POPCNT;
-#endif // _M_IX64
+        EntryPoint_IsPowerOfTwo = IaPowerOfTwo_POPCNT;
+#elif defined(_M_IX86)
+        EntryPoint_IsPowerOfTwo = IaPowerOfTwo_POPCNT;
+#else
+        return (FALSE);
+#endif
     }
     else
     {
 #ifdef _M_IX64
-        EntryPoint_IsPowerOfTwo = IaPowerOfTwo_Imp_x64;
-#else // _M_IX64
-        EntryPoint_IsPowerOfTwo = IaPowerOfTwo_Imp_x86;
-#endif // _M_IX64
+        EntryPoint_IsPowerOfTwo = IaPowerOfTwo;
+#elif defined(_M_IX86)
+        EntryPoint_IsPowerOfTwo = IaPowerOfTwo;
+#else
+        return (FALSE);
+#endif
     }
     if (feature->PROCESSOR_FEATURE_LZCNT)
     {
-        EntryPoint_GetUInt32EffectiveBitCount = GetUInt32EffectiveBitCount_Imp_LZCNT;
+        EntryPoint_GetUInt32EffectiveBitCount = GetUInt32EffectiveBitCount_LZCNT;
 #ifdef _M_IX64
-        EntryPoint_GetUInt64EffectiveBitCount = GetUInt64EffectiveBitCount_Imp_LZCNT;
+        EntryPoint_GetUInt64EffectiveBitCount = GetUInt64EffectiveBitCount_LZCNT;
 #endif // _M_IX64
     }
     else
     {
-        EntryPoint_GetUInt32EffectiveBitCount = GetUInt32EffectiveBitCount_Imp;
+        EntryPoint_GetUInt32EffectiveBitCount = GetUInt32EffectiveBitCount;
 #ifdef _M_IX64
-        EntryPoint_GetUInt64EffectiveBitCount = GetUInt64EffectiveBitCount_Imp;
+        EntryPoint_GetUInt64EffectiveBitCount = GetUInt64EffectiveBitCount;
 #endif // _M_IX64
     }
     return (TRUE);

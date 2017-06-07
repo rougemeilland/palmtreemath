@@ -13,7 +13,9 @@ https://opensource.org/licenses/MIT
 #include "pmn.h"
 #include "pmn_internal.h"
 
-int GetUint32Value_Imp(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer)
+#pragma region GetUint32Value関数
+
+static int GetUint32Value_Imp(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
         return (FALSE);
@@ -54,7 +56,21 @@ int GetUint32Value_Imp(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer)
     }
 }
 
-int GetUint64Value_Imp_x86(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer_high, unsigned __int32 *value_buffer_low)
+__declspec(dllexport) int __stdcall PMN_GetUint32Value(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer)
+{
+    if (!CheckInputBuffer(buffer))
+        return (FALSE);
+    if (value_buffer == NULL)
+        return (FALSE);
+    return (GetUint32Value_Imp(buffer, value_buffer));
+}
+
+#pragma endregion
+
+#pragma region GetUint64Value関数
+
+#ifdef _M_IX86
+static int GetUint64Value(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer_high, unsigned __int32 *value_buffer_low)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
         return (FALSE);
@@ -92,9 +108,8 @@ int GetUint64Value_Imp_x86(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer_h
         return (FALSE);
     }
 }
-
-#ifdef _M_IX64
-int GetUint64Value_Imp_x64(UNIT_BUFFER* buffer, unsigned __int64 *value_buffer)
+#elif defined(_M_IX64)
+static int GetUint64Value(UNIT_BUFFER* buffer, unsigned __int64 *value_buffer)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int64))
         return (FALSE);
@@ -134,16 +149,9 @@ int GetUint64Value_Imp_x64(UNIT_BUFFER* buffer, unsigned __int64 *value_buffer)
         return (FALSE);
     }
 }
-#endif // _M_IX64
-
-__declspec(dllexport) int __stdcall PMN_GetUint32Value(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer)
-{
-    if (!CheckInputBuffer(buffer))
-        return (FALSE);
-    if (value_buffer == NULL)
-        return (FALSE);
-    return (GetUint32Value_Imp(buffer, value_buffer));
-}
+#else
+// undefined
+#endif
 
 __declspec(dllexport) int __stdcall PMN_GetUint64Value(UNIT_BUFFER* buffer, unsigned __int64 *value_buffer)
 {
@@ -152,13 +160,72 @@ __declspec(dllexport) int __stdcall PMN_GetUint64Value(UNIT_BUFFER* buffer, unsi
     if (value_buffer == NULL)
         return (FALSE);
 #ifdef _M_IX64
-    return (GetUint64Value_Imp_x64(buffer, value_buffer));
-#else // _M_IX64
+    return (GetUint64Value(buffer, value_buffer));
+#elif defined(_M_IX86)
     unsigned __int32 value_low;
     unsigned __int32 value_high;
-    if (!GetUint64Value_Imp_x86(buffer, &value_high, &value_low))
+    if (!GetUint64Value(buffer, &value_high, &value_low))
         return (FALSE);
     *value_buffer = ((unsigned __int64)value_high << 32) | value_low;
     return (TRUE);
-#endif // _M_IX64
+#else
+    return (FALSE);
+#endif
+}
+
+#pragma endregion
+
+#pragma region PMN_GetLeastSignificant32Bit関数
+
+__declspec(dllexport) int __stdcall PMN_GetLeastSignificant32Bit(UNIT_BUFFER* buffer, unsigned __int32 *value_buffer)
+{
+    if (!CheckInputBuffer(buffer))
+        return (FALSE);
+    if (value_buffer == NULL)
+        return (FALSE);
+    if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
+        return (FALSE);
+    *value_buffer = (unsigned __int32)buffer->UNIT_ARRAY[0];
+    return (TRUE);
+}
+
+#pragma endregion
+
+#pragma region PMN_GetLeastSignificant64Bit関数
+
+__declspec(dllexport) int __stdcall PMN_GetLeastSignificant64Bit(UNIT_BUFFER* buffer, unsigned __int64 *value_buffer)
+{
+    if (!CheckInputBuffer(buffer))
+        return (FALSE);
+    if (value_buffer == NULL)
+        return (FALSE);
+    if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
+        return (FALSE);
+    if (sizeof(__UNIT_TYPE) >= sizeof(unsigned __int64))
+        *value_buffer = (unsigned __int64)buffer->UNIT_ARRAY[0];
+    else
+    {
+        size_t word_count = sizeof(unsigned __int64) / sizeof(__UNIT_TYPE);
+        unsigned __int64 value;
+        switch (word_count)
+        {
+        case 2:
+            value = buffer->UNIT_ARRAY[0];
+            if (buffer->UNIT_COUNT >= 2)
+                value |= (unsigned __int64)buffer->UNIT_ARRAY[1] << (sizeof(unsigned __int64) / 2 * 8);
+            break;
+        default:
+            value = buffer->UNIT_ARRAY[0];
+            break;
+        }
+        *value_buffer = value;
+    }
+    return (TRUE);
+}
+
+#pragma endregion
+
+int Initialize_Get(PROCESSOR_FEATURES *feature)
+{
+    return (TRUE);
 }

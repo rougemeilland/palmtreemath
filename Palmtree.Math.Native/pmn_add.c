@@ -19,12 +19,31 @@ https://opensource.org/licenses/MIT
 #include "pmn.h"
 #include "pmn_internal.h"
 
-#define AVOID_COMPILER_BUG (0)
+#ifdef _M_IX86
+__inline static char _ADD(char carry, unsigned __int32 x, unsigned __int32 y, unsigned __int32* z)
+{
+    return (_addcarry_u32(carry, x, y, z));
+}
+__inline static void _MEMCPY(unsigned __int32* dst, const unsigned __int32* src, size_t len)
+{
+    __movsd((unsigned long*)dst, (const unsigned long*)src, len);
+}
+#elif defined(_M_IX64)
+__inline static char _ADD(char carry, unsigned __int64 x, unsigned __int64 y, unsigned __int64* z)
+{
+    return (_addcarry_u64(carry, x, y, z));
+}
+__inline static void _MEMCPY(unsigned __int64* dst, const unsigned __int64* src, size_t len)
+{
+    __movsq((PDWORD64)dst, (const DWORD64*)src, len);
+}
+#else
+// not defined
+#endif
 
 #pragma region Add関数
 
-#ifdef _M_IX86
-int Add_ADC32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
+static int Add(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
 {
 #if _DEBUG
     __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
@@ -32,77 +51,73 @@ int Add_ADC32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
     __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
     __UNIT_TYPE* y_ptr = y->UNIT_ARRAY;
     __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    size_t count1 = y->UNIT_COUNT;
-    size_t count2 = x->UNIT_COUNT - count1;
+    size_t part1_count = y->UNIT_COUNT;
+    size_t part2_count = x->UNIT_COUNT - part1_count;
     char carry = 0;
-    while (count1 >= 8)
+    size_t part1_count_8 = part1_count / 8;
+    if (part1_count_8)
     {
-        carry = _addcarry_u32(_addcarry_u32(_addcarry_u32(_addcarry_u32(_addcarry_u32(_addcarry_u32(_addcarry_u32(_addcarry_u32(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3), *(x_ptr + 4), *(y_ptr + 4), z_ptr + 4), *(x_ptr + 5), *(y_ptr + 5), z_ptr + 5), *(x_ptr + 6), *(y_ptr + 6), z_ptr + 6), *(x_ptr + 7), *(y_ptr + 7), z_ptr + 7);
-        x_ptr += 8;
-        y_ptr += 8;
-        z_ptr += 8;
-        count1 -= 8;
+        do
+        {
+            carry = _ADD(_ADD(_ADD(_ADD(_ADD(_ADD(_ADD(_ADD(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3), *(x_ptr + 4), *(y_ptr + 4), z_ptr + 4), *(x_ptr + 5), *(y_ptr + 5), z_ptr + 5), *(x_ptr + 6), *(y_ptr + 6), z_ptr + 6), *(x_ptr + 7), *(y_ptr + 7), z_ptr + 7);
+            x_ptr += 8;
+            y_ptr += 8;
+            z_ptr += 8;
+        } while (--part1_count_8);
     }
-    if (count1 >= 4)
+    if (part1_count & 0x04)
     {
-        carry = _addcarry_u32(_addcarry_u32(_addcarry_u32(_addcarry_u32(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3);
+        carry = _ADD(_ADD(_ADD(_ADD(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3);
         x_ptr += 4;
         y_ptr += 4;
         z_ptr += 4;
-        count1 -= 4;
     }
-    if (count1 >= 2)
+    if (part1_count & 0x02)
     {
-        carry = _addcarry_u32(_addcarry_u32(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1);
+        carry = _ADD(_ADD(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1);
         x_ptr += 2;
         y_ptr += 2;
         z_ptr += 2;
-        count1 -= 2;
     }
-    if (count1)
+    if (part1_count & 0x01)
     {
-        carry = _addcarry_u32(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0);
+        carry = _ADD(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0);
         x_ptr += 1;
         y_ptr += 1;
         z_ptr += 1;
-        count1 -= 1;
     }
     if (carry)
     {
-        while (count2)
+        while (1)
         {
-            if (*x_ptr == (__UNIT_TYPE)-1)
+            if (!part2_count)
             {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
+#if _DEBUG
+                if (z_ptr >= z_ptr_limit)
+                    return (FALSE);
+#endif // _DEBUG
+                *z_ptr++ = 1;
                 break;
             }
+            if (!_ADD(0, *x_ptr, 1, z_ptr))
+            {
+                ++z_ptr;
+                if (--part2_count)
+                {
+                    _MEMCPY(z_ptr, x_ptr+1, part2_count);
+                    z_ptr += part2_count;
+                }
+                break;
+            }
+            ++x_ptr;
+            ++z_ptr;
+            --part2_count;
         }
     }
-    if (carry)
+    else if (part2_count)
     {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
-        ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
-        z_ptr += count2;
+        _MEMCPY(z_ptr, x_ptr, part2_count);
+        z_ptr += part2_count;
     }
     else
     {
@@ -111,280 +126,7 @@ int Add_ADC32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
     return (TRUE);
 }
 
-int Add_ADX32(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
-{
-#if AVOID_COMPILER_BUG
-    return (FALSE);
-#else
-#if _DEBUG
-    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
-#endif // _DEBUG
-    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
-    __UNIT_TYPE* y_ptr = y->UNIT_ARRAY;
-    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    size_t count1 = y->UNIT_COUNT;
-    size_t count2 = x->UNIT_COUNT - count1;
-    char carry = 0;
-    while (count1 >= 8)
-    {
-        carry = _addcarryx_u32(_addcarryx_u32(_addcarryx_u32(_addcarryx_u32(_addcarryx_u32(_addcarryx_u32(_addcarryx_u32(_addcarryx_u32(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3), *(x_ptr + 4), *(y_ptr + 4), z_ptr + 4), *(x_ptr + 5), *(y_ptr + 5), z_ptr + 5), *(x_ptr + 6), *(y_ptr + 6), z_ptr + 6), *(x_ptr + 7), *(y_ptr + 7), z_ptr + 7);
-        x_ptr += 8;
-        y_ptr += 8;
-        z_ptr += 8;
-        count1 -= 8;
-    }
-    if (count1 >= 4)
-    {
-        carry = _addcarryx_u32(_addcarryx_u32(_addcarryx_u32(_addcarryx_u32(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3);
-        x_ptr += 4;
-        y_ptr += 4;
-        z_ptr += 4;
-        count1 -= 4;
-    }
-    if (count1 >= 2)
-    {
-        carry = _addcarryx_u32(_addcarryx_u32(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1);
-        x_ptr += 2;
-        y_ptr += 2;
-        z_ptr += 2;
-        count1 -= 2;
-    }
-    if (count1)
-    {
-        carry = _addcarryx_u32(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0);
-        x_ptr += 1;
-        y_ptr += 1;
-        z_ptr += 1;
-        count1 -= 1;
-    }
-    if (carry)
-    {
-        while (count2)
-        {
-            if (*x_ptr == (__UNIT_TYPE)-1)
-            {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-                break;
-            }
-        }
-    }
-    if (carry)
-    {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
-        ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
-        z_ptr += count2;
-    }
-    else
-    {
-    }
-    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
-    return (TRUE);
-#endif
-}
-#endif // _M_IX86
-
-#ifdef _M_IX64
-int Add_ADC64(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
-{
-#if _DEBUG
-    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
-#endif // _DEBUG
-    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
-    __UNIT_TYPE* y_ptr = y->UNIT_ARRAY;
-    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    size_t count1 = y->UNIT_COUNT;
-    size_t count2 = x->UNIT_COUNT - count1;
-    char carry = 0;
-    while (count1 >= 8)
-    {
-        carry = _addcarry_u64(_addcarry_u64(_addcarry_u64(_addcarry_u64(_addcarry_u64(_addcarry_u64(_addcarry_u64(_addcarry_u64(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3), *(x_ptr + 4), *(y_ptr + 4), z_ptr + 4), *(x_ptr + 5), *(y_ptr + 5), z_ptr + 5), *(x_ptr + 6), *(y_ptr + 6), z_ptr + 6), *(x_ptr + 7), *(y_ptr + 7), z_ptr + 7);
-        x_ptr += 8;
-        y_ptr += 8;
-        z_ptr += 8;
-        count1 -= 8;
-    }
-    if (count1 >= 4)
-    {
-        carry = _addcarry_u64(_addcarry_u64(_addcarry_u64(_addcarry_u64(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3);
-        x_ptr += 4;
-        y_ptr += 4;
-        z_ptr += 4;
-        count1 -= 4;
-    }
-    if (count1 >= 2)
-    {
-        carry = _addcarry_u64(_addcarry_u64(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1);
-        x_ptr += 2;
-        y_ptr += 2;
-        z_ptr += 2;
-        count1 -= 2;
-    }
-    if (count1)
-    {
-        carry = _addcarry_u64(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0);
-        x_ptr += 1;
-        y_ptr += 1;
-        z_ptr += 1;
-        count1 -= 1;
-    }
-    if (carry)
-    {
-        while (count2)
-        {
-            if (*x_ptr == (__UNIT_TYPE)-1)
-            {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-                break;
-            }
-        }
-    }
-    if (carry)
-    {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
-        ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsq((PDWORD64)z_ptr, (const DWORD64*)x_ptr, count2);
-        z_ptr += count2;
-    }
-    else
-    {
-    }
-    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
-    return (TRUE);
-}
-
-int Add_ADX64(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z)
-{
-#if _DEBUG
-    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
-#endif // _DEBUG
-    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
-    __UNIT_TYPE* y_ptr = y->UNIT_ARRAY;
-    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    size_t count1 = y->UNIT_COUNT;
-    size_t count2 = x->UNIT_COUNT - count1;
-    char carry = 0;
-    while (count1 >= 8)
-    {
-        carry = _addcarryx_u64(_addcarryx_u64(_addcarryx_u64(_addcarryx_u64(_addcarryx_u64(_addcarryx_u64(_addcarryx_u64(_addcarryx_u64(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3), *(x_ptr + 4), *(y_ptr + 4), z_ptr + 4), *(x_ptr + 5), *(y_ptr + 5), z_ptr + 5), *(x_ptr + 6), *(y_ptr + 6), z_ptr + 6), *(x_ptr + 7), *(y_ptr + 7), z_ptr + 7);
-        x_ptr += 8;
-        y_ptr += 8;
-        z_ptr += 8;
-        count1 -= 8;
-    }
-    if (count1 >= 4)
-    {
-        carry = _addcarryx_u64(_addcarryx_u64(_addcarryx_u64(_addcarryx_u64(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1), *(x_ptr + 2), *(y_ptr + 2), z_ptr + 2), *(x_ptr + 3), *(y_ptr + 3), z_ptr + 3);
-        x_ptr += 4;
-        y_ptr += 4;
-        z_ptr += 4;
-        count1 -= 4;
-    }
-    if (count1 >= 2)
-    {
-        carry = _addcarryx_u64(_addcarryx_u64(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0), *(x_ptr + 1), *(y_ptr + 1), z_ptr + 1);
-        x_ptr += 2;
-        y_ptr += 2;
-        z_ptr += 2;
-        count1 -= 2;
-    }
-    if (count1)
-    {
-        carry = _addcarryx_u64(carry, *(x_ptr + 0), *(y_ptr + 0), z_ptr + 0);
-        x_ptr += 1;
-        y_ptr += 1;
-        z_ptr += 1;
-        count1 -= 1;
-    }
-    if (carry)
-    {
-        while (count2)
-        {
-            if (*x_ptr == (__UNIT_TYPE)-1)
-            {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-                break;
-            }
-        }
-    }
-    if (carry)
-    {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
-        ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsq((PDWORD64)z_ptr, (const DWORD64*)x_ptr, count2);
-        z_ptr += count2;
-    }
-    else
-    {
-    }
-    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
-    return (TRUE);
-}
-#endif
-
-#if defined(_M_IX86)
-int(*EntryPoint_Add)(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z) = Add_ADC32;
-#elif defined(_M_IX64)
-int(*EntryPoint_Add)(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z) = Add_ADC64;
-#else
-#endif
+static int(*EntryPoint_Add)(UNIT_BUFFER* x, UNIT_BUFFER*  y, UNIT_BUFFER* z) = Add;
 
 __declspec(dllexport) int __stdcall PMN_Add(UNIT_BUFFER* x, UNIT_BUFFER* y, UNIT_BUFFER* z)
 {
@@ -408,8 +150,7 @@ __declspec(dllexport) int __stdcall PMN_Add(UNIT_BUFFER* x, UNIT_BUFFER* y, UNIT
 
 #pragma region AddUInt32関数
 
-#ifdef _M_IX86
-int AddUInt32_ADC32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
+static int AddUInt32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
 {
 #if _DEBUG
     __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
@@ -417,231 +158,50 @@ int AddUInt32_ADC32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
     __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
     __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
     size_t count2 = x->UNIT_COUNT - 1;
-    char carry = _addcarry_u32(0, *x_ptr, y, z_ptr);
-    ++x_ptr;
-    ++z_ptr;
-    if (carry)
+    if (_ADD(0, *x_ptr, y, z_ptr))
     {
+        ++x_ptr;
+        ++z_ptr;
         while (count2)
         {
-            if (*x_ptr == (__UNIT_TYPE)-1)
+            if (!count2)
             {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
+#if _DEBUG
+                if (z_ptr >= z_ptr_limit)
+                    return (FALSE);
+#endif // _DEBUG
+                *z_ptr = 1;
                 ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
                 break;
             }
+            if (!_ADD(0, *x_ptr, 1, z_ptr))
+            {
+                ++z_ptr;
+                if (--count2)
+                {
+                    _MEMCPY(z_ptr, x_ptr+1, count2);
+                    z_ptr += count2;
+                }
+                break;
+            }
+            ++x_ptr;
+            ++z_ptr;
+            --count2;
         }
     }
-    if (carry)
+    else  if (count2)
     {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
         ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
+        _MEMCPY(z_ptr, x_ptr+1, count2);
         z_ptr += count2;
     }
     else
-    {
-    }
+        ++z_ptr;
     z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
     return (TRUE);
 }
 
-int AddUInt32_ADX32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
-{
-#if AVOID_COMPILER_BUG
-    return (FALSE);
-#else
-#if _DEBUG
-    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
-#endif // _DEBUG
-    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
-    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    size_t count2 = x->UNIT_COUNT - 1;
-    char carry = _addcarryx_u32(0, *x_ptr, y, z_ptr);
-    ++x_ptr;
-    ++z_ptr;
-    if (carry)
-    {
-        while (count2)
-        {
-            if (*x_ptr == (__UNIT_TYPE)-1)
-            {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-                break;
-            }
-        }
-    }
-    if (carry)
-    {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
-        ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
-        z_ptr += count2;
-    }
-    else
-    {
-    }
-    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
-    return (TRUE);
-#endif
-}
-#endif // _M_IX86
-
-#ifdef _M_IX64
-int AddUInt32_ADC64(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
-{
-#if _DEBUG
-    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
-#endif // _DEBUG
-    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
-    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    size_t count2 = x->UNIT_COUNT - 1;
-    char carry = _addcarry_u64(0, *x_ptr, y, z_ptr);
-    ++x_ptr;
-    ++z_ptr;
-    if (carry)
-    {
-        while (count2)
-        {
-            if (*x_ptr == (__UNIT_TYPE)-1)
-            {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-                break;
-            }
-        }
-    }
-    if (carry)
-    {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
-        ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsq((PDWORD64)z_ptr, (const DWORD64 *)x_ptr, count2);
-        z_ptr += count2;
-    }
-    else
-    {
-    }
-    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
-    return (TRUE);
-}
-
-int AddUInt32_ADX64(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
-{
-#if _DEBUG
-    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
-#endif // _DEBUG
-    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
-    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    size_t count2 = x->UNIT_COUNT - 1;
-    char carry = _addcarryx_u64(0, *x_ptr, y, z_ptr);
-    ++x_ptr;
-    ++z_ptr;
-    if (carry)
-    {
-        while (count2)
-        {
-            if (*x_ptr == (__UNIT_TYPE)-1)
-            {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-                break;
-            }
-        }
-    }
-    if (carry)
-    {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
-        ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsq((PDWORD64)z_ptr, (const DWORD64 *)x_ptr, count2);
-        z_ptr += count2;
-    }
-    else
-    {
-    }
-    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
-    return (TRUE);
-}
-#endif
-
-#if defined(_M_IX86)
-int(*EntryPoint_AddUInt32)(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z) = AddUInt32_ADC32;
-#elif defined(_M_IX64)
-int(*EntryPoint_AddUInt32)(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z) = AddUInt32_ADC64;
-#else
-#endif
+static int(*EntryPoint_AddUInt32)(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z) = AddUInt32;
 
 __declspec(dllexport) int __stdcall PMN_AddUInt32(UNIT_BUFFER* x, unsigned __int32 y, UNIT_BUFFER* z)
 {
@@ -666,7 +226,7 @@ __declspec(dllexport) int __stdcall PMN_AddUInt32(UNIT_BUFFER* x, unsigned __int
 #pragma region AddUInt64関数
 
 #ifdef _M_IX86
-int AddUInt64_ADC32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_low, UNIT_BUFFER* z)
+static int AddUInt64(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_low, UNIT_BUFFER* z)
 {
 #if _DEBUG
     __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
@@ -675,275 +235,118 @@ int AddUInt64_ADC32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_
     __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
     if (x->UNIT_COUNT < 2)
     {
-        char carry = 0;
-        carry = _addcarry_u32(carry, *x_ptr, y_low, &z_ptr[0]);
-        if (y_high == (__UNIT_TYPE)-1)
+        if (_ADD(_ADD(0, *x_ptr, y_low, &z_ptr[0]), 0, y_high, &z_ptr[1]))
         {
-            z_ptr[1] = 0;
             z_ptr[2] = 1;
-            x_ptr += 1;
-            z_ptr += 3;
+            z_ptr += 1;
         }
-        else
-        {
-            z_ptr[1] = *x_ptr + 1;
-            x_ptr += 1;
-            z_ptr += 2;
-        }
+        z_ptr += 2;
     }
     else
     {
         size_t count2 = x->UNIT_COUNT - 2;
-        char carry = 0;
-        carry = _addcarry_u32(carry, x_ptr[0], y_low, &z_ptr[0]);
-        carry = _addcarry_u32(carry, x_ptr[1], y_high, &z_ptr[1]);
-        x_ptr += 2;
-        z_ptr += 2;
-        if (carry)
+        if (_ADD(_ADD(0, x_ptr[0], y_low, &z_ptr[0]), x_ptr[1], y_high, &z_ptr[1]))
         {
-            while (count2)
+            x_ptr += 2;
+            z_ptr += 2;
+            while (1)
             {
-                if (*x_ptr == (__UNIT_TYPE)-1)
+                if (!count2)
                 {
-                    *z_ptr = 0;
-                    carry = 1;
-                    ++x_ptr;
+#if _DEBUG
+                    if (z_ptr >= z_ptr_limit)
+                        return (FALSE);
+#endif // _DEBUG
+                    *z_ptr = 1;
                     ++z_ptr;
-                    --count2;
-                }
-                else
-                {
-                    *z_ptr = *x_ptr + 1;
-                    carry = 0;
-                    ++x_ptr;
-                    ++z_ptr;
-                    --count2;
                     break;
                 }
+                if (!_ADD(0, *x_ptr, 1, z_ptr))
+                {
+                    ++z_ptr;
+                    if (--count2)
+                    {
+                        _MEMCPY(z_ptr, x_ptr + 1, count2);
+                        z_ptr += count2;
+                    }
+                    break;
+                }
+                ++x_ptr;
+                ++z_ptr;
+                --count2;
             }
-        }
-        if (carry)
-        {
-#if _DEBUG
-            if (z_ptr >= z_ptr_limit)
-                return (FALSE);
-#endif // _DEBUG
-            *z_ptr = 1;
-            ++z_ptr;
         }
         else if (count2)
         {
-            __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
-            z_ptr += count2;
+            _MEMCPY(z_ptr + 2, x_ptr + 2, count2);
+            z_ptr += count2 + 2;
         }
         else
-        {
-        }
+            z_ptr += 2;
     }
     z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
     return (TRUE);
 }
-
-int AddUInt64_ADX32(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_low, UNIT_BUFFER* z)
+#elif defined(_M_IX64)
+static int AddUInt64(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z)
 {
-#if AVOID_COMPILER_BUG
-    return (FALSE);
+#if _DEBUG
+    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
+#endif // _DEBUG
+    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
+    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
+    size_t count2 = x->UNIT_COUNT - 1;
+    if (_ADD(0, *x_ptr, y, z_ptr))
+    {
+        ++x_ptr;
+        ++z_ptr;
+        while (1)
+        {
+            if (!count2)
+            {
+#if _DEBUG
+                if (z_ptr >= z_ptr_limit)
+                    return (FALSE);
+#endif // _DEBUG
+                *z_ptr = 1;
+                ++z_ptr;
+                break;
+            }
+            if (!_ADD(0, *x_ptr, 1, z_ptr))
+            {
+                ++z_ptr;
+                if (--count2)
+                {
+                    _MEMCPY(z_ptr, x_ptr+1, count2);
+                    z_ptr += count2;
+                }
+                break;
+            }
+            ++x_ptr;
+            ++z_ptr;
+            --count2;
+        }
+    }
+    else if (count2)
+    {
+        ++z_ptr;
+        _MEMCPY(z_ptr, x_ptr+1, count2);
+        z_ptr += count2;
+    }
+    else
+        ++z_ptr;
+    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
+    return (TRUE);
+}
 #else
-#if _DEBUG
-    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
-#endif // _DEBUG
-    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
-    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    if (x->UNIT_COUNT < 2)
-    {
-        char carry = 0;
-        carry = _addcarryx_u32(carry, *x_ptr, y_low, &z_ptr[0]);
-        if (y_high == (__UNIT_TYPE)-1)
-        {
-            z_ptr[1] = 0;
-            z_ptr[2] = 1;
-            x_ptr += 1;
-            z_ptr += 3;
-        }
-        else
-        {
-            z_ptr[1] = y_high + 1;
-            x_ptr += 1;
-            z_ptr += 2;
-        }
-    }
-    else
-    {
-        size_t count2 = x->UNIT_COUNT - 2;
-        char carry = 0;
-        carry = _addcarryx_u32(carry, x_ptr[0], y_low, &z_ptr[0]);
-        carry = _addcarryx_u32(carry, x_ptr[1], y_high, &z_ptr[1]);
-        x_ptr += 2;
-        z_ptr += 2;
-        if (carry)
-        {
-            while (count2)
-            {
-                if (*x_ptr == (__UNIT_TYPE)-1)
-                {
-                    *z_ptr = 0;
-                    carry = 1;
-                    ++x_ptr;
-                    ++z_ptr;
-                    --count2;
-                }
-                else
-                {
-                    *z_ptr = *x_ptr + 1;
-                    carry = 0;
-                    ++x_ptr;
-                    ++z_ptr;
-                    --count2;
-                    break;
-                }
-            }
-        }
-        if (carry)
-        {
-#if _DEBUG
-            if (z_ptr >= z_ptr_limit)
-                return (FALSE);
-#endif // _DEBUG
-            *z_ptr = 1;
-            ++z_ptr;
-        }
-        else if (count2)
-        {
-            __movsd((unsigned long*)z_ptr, (const unsigned long*)x_ptr, count2);
-            z_ptr += count2;
-        }
-        else
-        {
-        }
-    }
-    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
-    return (TRUE);
-#endif
-}
-#endif // _M_IX86
-
-#ifdef _M_IX64
-int AddUInt64_ADC64(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z)
-{
-#if _DEBUG
-    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
-#endif // _DEBUG
-    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
-    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    size_t count2 = x->UNIT_COUNT - 1;
-    char carry = _addcarry_u64(0, *x_ptr, y, z_ptr);
-    ++x_ptr;
-    ++z_ptr;
-    if (carry)
-    {
-        while (count2)
-        {
-            if (*x_ptr == (__UNIT_TYPE)-1)
-            {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-                break;
-            }
-        }
-    }
-    if (carry)
-    {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
-        ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsq((PDWORD64)z_ptr, (const DWORD64*)x_ptr, count2);
-        z_ptr += count2;
-    }
-    else
-    {
-    }
-    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
-    return (TRUE);
-}
-
-int AddUInt64_ADX64(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z)
-{
-#if _DEBUG
-    __UNIT_TYPE* z_ptr_limit = &z->UNIT_ARRAY[z->UNIT_COUNT];
-#endif // _DEBUG
-    __UNIT_TYPE* x_ptr = x->UNIT_ARRAY;
-    __UNIT_TYPE* z_ptr = z->UNIT_ARRAY;
-    size_t count2 = x->UNIT_COUNT - 1;
-    char carry = _addcarryx_u64(0, *x_ptr, y, z_ptr);
-    ++x_ptr;
-    ++z_ptr;
-    if (carry)
-    {
-        while (count2)
-        {
-            if (*x_ptr == (__UNIT_TYPE)-1)
-            {
-                *z_ptr = 0;
-                carry = 1;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-            }
-            else
-            {
-                *z_ptr = *x_ptr + 1;
-                carry = 0;
-                ++x_ptr;
-                ++z_ptr;
-                --count2;
-                break;
-            }
-        }
-    }
-    if (carry)
-    {
-#if _DEBUG
-        if (z_ptr >= z_ptr_limit)
-            return (FALSE);
-#endif // _DEBUG
-        *z_ptr = 1;
-        ++z_ptr;
-    }
-    else if (count2)
-    {
-        __movsq((PDWORD64)z_ptr, (const DWORD64*)x_ptr, count2);
-        z_ptr += count2;
-    }
-    else
-    {
-    }
-    z->UNIT_COUNT = z_ptr - z->UNIT_ARRAY;
-    return (TRUE);
-}
 #endif
 
 #if defined(_M_IX86)
-int(*EntryPoint_AddUInt64)(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_low, UNIT_BUFFER* z) = AddUInt64_ADC32;
+static int(*EntryPoint_AddUInt64)(UNIT_BUFFER* x, unsigned __int32 y_high, unsigned __int32 y_low, UNIT_BUFFER* z) = AddUInt64;
 #elif defined(_M_IX64)
-int(*EntryPoint_AddUInt64)(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z) = AddUInt64_ADC64;
+static int(*EntryPoint_AddUInt64)(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z) = AddUInt64;
 #else
+// undefined
 #endif
 
 __declspec(dllexport) int __stdcall PMN_AddUInt64(UNIT_BUFFER* x, unsigned __int64 y, UNIT_BUFFER* z)
@@ -959,55 +362,36 @@ __declspec(dllexport) int __stdcall PMN_AddUInt64(UNIT_BUFFER* x, unsigned __int
     if (z->UNIT_COUNT < (sizeof(unsigned __int64) + sizeof(__UNIT_TYPE) - 1) / sizeof(__UNIT_TYPE))
         return (FALSE);
 #if defined(_M_IX86)
-    if (!(*EntryPoint_AddUInt64)(x, (unsigned __int32)(y >> 32), (unsigned __int32)y, z))
-        return (FALSE);
+    unsigned __int32 y_high = (unsigned __int32)(y >> 32);
+    unsigned __int32 y_low = (unsigned __int32)y;
+    if (y_high == 0)
+    {
+        if (!(*EntryPoint_AddUInt32)(x, y_low, z))
+            return (FALSE);
+    }
+    else
+    {
+        if (!(*EntryPoint_AddUInt64)(x, y_high, y_low, z))
+            return (FALSE);
+    }
+    NormalizeBuffer(z);
+    return (TRUE);
 #elif defined(_M_IX64)
     if (!(*EntryPoint_AddUInt64)(x, y, z))
         return (FALSE);
-#endif // _M_IX86
     NormalizeBuffer(z);
     return (TRUE);
+#else
+    return (FALSE);
+#endif
 }
 
 #pragma endregion
 
 int Initialize_Add(PROCESSOR_FEATURES *feature)
 {
-    if (feature->PROCESSOR_FEATURE_ADX)
-    {
-#if defined(_M_IX86)
-        if (sizeof(__UNIT_TYPE) != sizeof(unsigned __int32))
-            return (FALSE);
-        EntryPoint_Add = Add_ADX32;
-        EntryPoint_AddUInt32 = AddUInt32_ADX32;
-        EntryPoint_AddUInt64 = AddUInt64_ADX32;
-#elif defined(_M_IX64)
-        if (sizeof(__UNIT_TYPE) != sizeof(unsigned __int64))
-            return (FALSE);
-        EntryPoint_Add = Add_ADX64;
-        EntryPoint_AddUInt32 = AddUInt32_ADX64;
-        EntryPoint_AddUInt64 = AddUInt64_ADX64;
-#else
-        return (FALSE);
-#endif
-    }
-    else
-    {
-#if defined(_M_IX86)
-        if (sizeof(__UNIT_TYPE) != sizeof(unsigned __int32))
-            return (FALSE);
-        EntryPoint_Add = Add_ADC32;
-        EntryPoint_AddUInt32 = AddUInt32_ADX32;
-        EntryPoint_AddUInt64 = AddUInt64_ADX32;
-#elif defined(_M_IX64)
-        if (sizeof(__UNIT_TYPE) != sizeof(unsigned __int64))
-            return (FALSE);
-        EntryPoint_Add = Add_ADC64;
-        EntryPoint_AddUInt32 = AddUInt32_ADC64;
-        EntryPoint_AddUInt64 = AddUInt64_ADC64;
-#else
-        return (FALSE);
-#endif
-    }
+    EntryPoint_Add = Add;
+    EntryPoint_AddUInt32 = AddUInt32;
+    EntryPoint_AddUInt64 = AddUInt64;
     return (TRUE);
 }

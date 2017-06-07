@@ -13,7 +13,9 @@ https://opensource.org/licenses/MIT
 #include "pmn.h"
 #include "pmn_internal.h"
 
-int SetUint32Value_Imp(UNIT_BUFFER * buffer, unsigned __int32 value)
+#pragma region SetUint32Value関数
+
+static int SetUint32Value(UNIT_BUFFER * buffer, unsigned __int32 value)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
         return (FALSE);
@@ -39,13 +41,26 @@ int SetUint32Value_Imp(UNIT_BUFFER * buffer, unsigned __int32 value)
     return (TRUE);
 }
 
-int SetUint64Value_Imp_x86(UNIT_BUFFER * buffer, unsigned __int32 value_high, unsigned __int32 value_low)
+__declspec(dllexport) int __stdcall PMN_SetUint32Value(UNIT_BUFFER* buffer, unsigned __int32 value)
+{
+    if (!CheckOutputBuffer(buffer))
+        return (FALSE);
+    return (SetUint32Value(buffer, value));
+}
+
+#pragma endregion
+
+#pragma region MyRegion
+
+#ifdef _M_IX86
+
+static int SetUint64Value(UNIT_BUFFER * buffer, unsigned __int32 value_high, unsigned __int32 value_low)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int32))
         return (FALSE);
     if (buffer->UNIT_COUNT < 1)
         return (FALSE);
-    size_t buffer_size = sizeof(__UNIT_TYPE) >= sizeof(unsigned __int32) * 2 ? sizeof(__UNIT_TYPE)  : sizeof(unsigned __int32)*2;
+    size_t buffer_size = sizeof(__UNIT_TYPE) >= sizeof(unsigned __int32) * 2 ? sizeof(__UNIT_TYPE) : sizeof(unsigned __int32) * 2;
     buffer->UNIT_COUNT = buffer_size / sizeof(__UNIT_TYPE);
     unsigned __int32* p = (unsigned __int32*)buffer;
     switch (buffer_size / sizeof(unsigned __int32))
@@ -73,9 +88,8 @@ int SetUint64Value_Imp_x86(UNIT_BUFFER * buffer, unsigned __int32 value_high, un
     }
     return (TRUE);
 }
-
-#ifdef _M_IX64
-int SetUint64Value_Imp_x64(UNIT_BUFFER * buffer, unsigned __int64 value)
+#elif defined(_M_IX64)
+static int SetUint64Value(UNIT_BUFFER * buffer, unsigned __int64 value)
 {
     if (sizeof(__UNIT_TYPE) < sizeof(unsigned __int64))
         return (FALSE);
@@ -100,24 +114,30 @@ int SetUint64Value_Imp_x64(UNIT_BUFFER * buffer, unsigned __int64 value)
     }
     return (TRUE);
 }
-#endif // _M_IX64
-
-__declspec(dllexport) int __stdcall PMN_SetUint32Value(UNIT_BUFFER* buffer, unsigned __int32 value)
-{
-    if (!CheckOutputBuffer(buffer))
-        return (FALSE);
-    return (SetUint32Value_Imp(buffer, value));
-}
+#else
+#endif
 
 __declspec(dllexport) int __stdcall PMN_SetUint64Value(UNIT_BUFFER* buffer, unsigned __int64 value)
 {
     if (!CheckOutputBuffer(buffer))
         return (FALSE);
 #ifdef _M_IX64
-    return (SetUint64Value_Imp_x64(buffer, value));
-#else // _M_IX64
+    return (SetUint64Value(buffer, value));
+#elif defined(_M_IX86)
     unsigned __int32 value_low = (unsigned __int32)value;
     unsigned __int32 value_high = (unsigned __int32)(value >> 32);
-    return (SetUint64Value_Imp_x86(buffer, value_high, value_low));
-#endif // _M_IX64
+    if (value_high == 0)
+        return (SetUint32Value(buffer, value_low));
+    else
+        return (SetUint64Value(buffer, value_high, value_low));
+#else
+    return (FALSE);
+#endif
+}
+
+#pragma endregion
+
+int Initialize_Set(PROCESSOR_FEATURES *feature)
+{
+    return (TRUE);
 }
